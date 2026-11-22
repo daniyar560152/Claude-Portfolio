@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="-50 -50 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sticker: component"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style><circle class="p" cx="0" cy="0" r="44"/><g transform="translate(0 0) scale(0.9)"><path class="k" d="M0 -30 L13 -17 L0 -4 L-13 -17Z"/><path class="k" d="M17 -13 L30 0 L17 13 L4 0Z"/><path class="k" d="M0 4 L13 17 L0 30 L-13 17Z"/><path class="k" d="M-17 -13 L-4 0 L-17 13 L-30 0Z"/></g></svg>

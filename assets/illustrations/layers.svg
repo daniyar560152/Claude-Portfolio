@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 540 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon character standing on stacked design-system layers holding a v2.0 flag"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style>
+      <g transform="translate(220 412)">
+        <path class="p" d="M-150 0 L0 -60 L150 0 L0 60 Z"/>
+        <path class="k" d="M-150 0 L0 60 L0 78 L-150 18Z"/><path class="p" d="M150 0 L0 60 L0 78 L150 18Z" style="stroke-width:4"/>
+        <path class="t" d="M150 10 L176 10"/><text x="182" y="15" class="tk" style="font-size:14px">Tokens</text>
+      </g><g transform="translate(220 352)">
+        <path class="p" d="M-150 0 L0 -60 L150 0 L0 60 Z"/>
+        <path class="k" d="M-150 0 L0 60 L0 78 L-150 18Z"/><path class="p" d="M150 0 L0 60 L0 78 L150 18Z" style="stroke-width:4"/>
+        <path class="t" d="M150 10 L176 10"/><text x="182" y="15" class="tk" style="font-size:14px">Components</text>
+      </g><g transform="translate(220 292)">
+        <path class="p" d="M-150 0 L0 -60 L150 0 L0 60 Z"/>
+        <path class="k" d="M-150 0 L0 60 L0 78 L-150 18Z"/><path class="p" d="M150 0 L0 60 L0 78 L150 18Z" style="stroke-width:4"/>
+        <path class="t" d="M150 10 L176 10"/><text x="182" y="15" class="tk" style="font-size:14px">Patterns</text>
+      </g>
+      <path class="n" d="M208 270 C206 282 200 290 194 296"/><path class="n" d="M234 270 C236 282 242 290 248 296"/>
+      <g transform="translate(186 298) scale(1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g><g transform="translate(256 298) scale(-1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g>
+      <g transform="translate(220 134) scale(1)">
+      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
+      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
+      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
+    </g>
+      <path class="l" d="M296 40 L296 232" style="stroke-width:6"/>
+      <path class="k" d="M300 42 L380 56 L300 90 Z"/><text x="306" y="70" class="tx" style="font-size:13px">v2.0</text>
+      <path class="n" d="M246 150 C270 160 286 170 296 176"/>
+      <g transform="translate(296 172) rotate(80) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <path class="n" d="M194 150 C164 146 150 124 148 100"/>
+      <g transform="translate(148 86) rotate(-10) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <g transform="translate(118 62) rotate(-40)"><path class="l" d="M0 0 q10 8 8 22"/><path class="l" d="M14 -6 q14 10 12 32"/></g>
+      <g transform="translate(220 92) scale(1 1)">
+      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
+      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
+      <path class="k" d="M-44 -18 C-44 -64 44 -64 44 -18Z"/><path class="k" d="M30 -22 L82 -18 C80 -10 60 -8 30 -10Z"/>
+      <g class="pupil">
+        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
+        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
+      </g>
+      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
+      <path class="k" d="M-25 17 Q0 50 25 17 Q0 27 -25 17Z"/><path class="w" d="M-10 30 Q0 38 10 30 Q0 27 -10 30Z"/>
+      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
+    </g>
+    </svg>

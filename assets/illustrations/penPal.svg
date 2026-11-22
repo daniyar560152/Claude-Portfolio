@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon character drawing a bezier curve with the Figma pen tool"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style>
+      <path class="l" d="M24 330 C110 160 230 380 330 210" style="stroke-width:4"/>
+      <path class="t" d="M24 330 L90 210"/><circle class="p" cx="90" cy="210" r="7" style="stroke-width:3"/>
+      <path class="t" d="M190 300 L130 300 M190 300 L250 300"/><circle class="p" cx="130" cy="300" r="7" style="stroke-width:3"/><circle class="p" cx="250" cy="300" r="7" style="stroke-width:3"/>
+      <rect class="p" x="18" y="324" width="12" height="12" style="stroke-width:3"/><rect class="p" x="184" y="294" width="12" height="12" style="stroke-width:3"/>
+      <rect class="k" x="324" y="204" width="13" height="13"/>
+      <path class="n" d="M356 330 C352 352 340 366 330 378"/>
+      <path class="n" d="M388 330 C392 352 404 366 414 378"/>
+      <g transform="translate(322 384) scale(1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g><g transform="translate(424 384) scale(-1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g>
+      <g transform="translate(372 210) scale(0.9)">
+      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
+      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
+      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
+    </g>
+      <g transform="translate(338 206) rotate(-35)">
+        <path class="p" d="M0 0 L-22 -52 L0 -96 L22 -52 Z"/>
+        <path class="l" d="M0 0 L0 -44" style="stroke-width:3"/><circle class="w" cx="0" cy="-50" r="6" stroke="#111111" stroke-width="3"/>
+        <rect class="k" x="-16" y="-128" width="32" height="34" rx="4"/>
+      </g>
+      <path class="n" d="M348 232 C330 240 318 226 316 200"/>
+      <g transform="translate(318 184) rotate(-30) scale(0.95)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <path class="n" d="M396 232 C420 238 432 214 432 190"/>
+      <g transform="translate(432 176) rotate(10) scale(0.95)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <g transform="translate(372 166) scale(0.95 0.95)">
+      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
+      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
+      <path class="k" d="M-46 -10 C-50 -50 -10 -66 20 -54 C44 -50 54 -30 48 -10 C40 -30 20 -36 0 -30 C-20 -40 -36 -30 -46 -10Z"/>
+      <g class="pupil">
+        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
+        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
+      </g>
+      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
+      <path class="l" d="M-20 18 Q0 36 20 18"/>
+      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
+    </g>
+      <g transform="translate(250 362)">
+      <rect x="0" y="0" width="85.8" height="26" rx="5" class="k" />
+      <text x="10" y="18" class="tx">Pen (P)</text>
+    </g>
+    </svg>

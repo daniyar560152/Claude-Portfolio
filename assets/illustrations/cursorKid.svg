@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 440 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon designer holding a giant Figma cursor"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style>
+      <rect x="70" y="52" width="300" height="382" class="t" style="stroke-width:2"/>
+      <rect class="p" x="64" y="46" width="12" height="12" style="stroke-width:3"/><rect class="p" x="364" y="46" width="12" height="12" style="stroke-width:3"/><rect class="p" x="64" y="428" width="12" height="12" style="stroke-width:3"/><rect class="p" x="364" y="428" width="12" height="12" style="stroke-width:3"/>
+      <g transform="translate(70 18)">
+      <rect x="0" y="0" width="95.2" height="26" rx="5" class="k" />
+      <text x="10" y="18" class="tx">Designer</text>
+    </g>
+      <g transform="translate(176 446)">
+      <rect x="0" y="0" width="104.60000000000001" height="26" rx="5" class="p" style="stroke-width:3"/>
+      <text x="10" y="18" class="tk">300 × Hug</text>
+    </g>
+      <g class="arm-wave" style="transform-origin:250px 232px">
+        <path class="n" d="M250 232 C282 216 300 190 310 156"/>
+        <g transform="translate(314 140) rotate(20) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+        <g transform="translate(336 112) rotate(10)"><path class="l" d="M0 0 q10 8 8 22"/><path class="l" d="M14 -6 q14 10 12 32"/></g>
+      </g>
+      <path class="n" d="M198 346 C194 378 176 396 166 410"/>
+      <path class="n" d="M234 346 C238 378 256 396 268 410"/>
+      <g transform="translate(156 418) scale(1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g><g transform="translate(280 418) scale(-1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g>
+      <g transform="translate(216 214) scale(1)">
+      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
+      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
+      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
+    </g>
+      <path class="n" d="M188 232 C158 220 138 190 134 150"/>
+      <g transform="translate(92 58) rotate(-8) scale(1.25)">
+      <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+    </g>
+      <g transform="translate(134 140) rotate(-15) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <g transform="translate(216 164) scale(1.05 1.05)">
+      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
+      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
+      <path class="k" d="M-50 -14 C-56 -60 46 -74 56 -26 C30 -38 -20 -36 -50 -14Z"/><path class="l" d="M4 -56 l3 -12"/>
+      <g class="pupil">
+        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
+        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
+      </g>
+      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
+      <path class="k" d="M-25 17 Q0 50 25 17 Q0 27 -25 17Z"/><path class="w" d="M-10 30 Q0 38 10 30 Q0 27 -10 30Z"/>
+      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
+    </g>
+      <g transform="translate(360 330) rotate(-10) scale(0.55)">
+      <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+    </g>
+      <g transform="translate(380 370)">
+      <rect x="0" y="0" width="48.2" height="26" rx="5" class="k" />
+      <text x="10" y="18" class="tx">you</text>
+    </g>
+    </svg>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon researcher inspecting a sticky note chart with a magnifying glass"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style>
+      <g transform="rotate(-6 120 300)">
+        <rect class="p" x="30" y="220" width="170" height="170"/>
+        <path class="k" d="M30 220 h170 v18 h-170z"/>
+        <path class="l" d="M54 360 V310 M84 360 V280 M114 360 V330 M144 360 V262 M174 360 V300" style="stroke-width:12;stroke-linecap:butt"/>
+      </g>
+      <path class="n" d="M300 352 C296 384 286 402 276 416"/><path class="n" d="M336 352 C342 384 352 402 362 416"/>
+      <g transform="translate(266 422) scale(1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g><g transform="translate(374 422) scale(-1 1)">
+      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
+      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
+    </g>
+      <g transform="translate(318 220) scale(1)">
+      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
+      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
+      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
+    </g>
+      <g transform="translate(196 210) rotate(-30)">
+        <rect class="k" x="-10" y="60" width="20" height="90" rx="8"/>
+        <circle class="p" cx="0" cy="0" r="62" style="stroke-width:12"/>
+        <path class="l" d="M-30 -30 q14 -14 34 -14" style="stroke-width:6"/>
+      </g>
+      <path class="n" d="M292 238 C266 250 252 268 246 290"/>
+      <g transform="translate(242 300) rotate(-150) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <path class="n" d="M344 238 C372 230 384 206 384 182"/>
+      <g transform="translate(386 168) rotate(15) scale(1)">
+      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
+      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
+      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
+    </g>
+      <g transform="translate(318 170) scale(-1 1)">
+      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
+      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
+      <path class="k" d="M-46 -10 C-50 -50 -10 -66 20 -54 C44 -50 54 -30 48 -10 C40 -30 20 -36 0 -30 C-20 -40 -36 -30 -46 -10Z"/>
+      <g class="pupil">
+        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
+        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
+      </g>
+      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
+      <ellipse class="k" cx="0" cy="26" rx="8" ry="10"/>
+      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
+    </g>
+      <g transform="translate(260.2 30)">
+      <rect x="0" y="0" width="179.8" height="26" rx="5" class="k" />
+      <text x="10" y="18" class="tx">n = 14 interviews</text>
+    </g>
+    </svg>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sticker: NEW!"><style>
+    .k{fill:#111111}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+    .w{fill:#ffffff}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+  </style><path class="p" d="M156.0 80.0 L136.0 95.0 L145.8 118.0 L121.0 121.0 L118.0 145.8 L95.0 136.0 L80.0 156.0 L65.0 136.0 L42.0 145.8 L39.0 121.0 L14.2 118.0 L24.0 95.0 L4.0 80.0 L24.0 65.0 L14.2 42.0 L39.0 39.0 L42.0 14.2 L65.0 24.0 L80.0 4.0 L95.0 24.0 L118.0 14.2 L121.0 39.0 L145.8 42.0 L136.0 65.0 Z"/><text x="80" y="92" text-anchor="middle" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">NEW!</text></svg>
