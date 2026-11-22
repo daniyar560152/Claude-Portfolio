@@ -225,7 +225,7 @@ section { position: relative; }
 /* ---------- marquee ---------- */
 .marquee { overflow: hidden; padding: 28px 0; border-top: 1px solid rgba(17,17,17,.1); border-bottom: 1px solid rgba(17,17,17,.1); background: var(--paper); }
 .marquee__track { display: flex; width: max-content; will-change: transform; }
-.marquee__item { display: inline-flex; align-items: center; gap: 22px; padding-right: 64px; font-size: clamp(26px, 3vw, 40px); color: var(--blue); white-space: nowrap; }
+.marquee__item { display: inline-flex; align-items: center; gap: 22px; padding-right: 22px; font-size: clamp(26px, 3vw, 40px); color: var(--blue); white-space: nowrap; }
 .marquee__item .m1 { font-family: var(--f-display); text-transform: uppercase; }
 .marquee__item .m2 { font-family: var(--f-serif); font-style: italic; }
 .marquee__item .m3 { font-family: var(--f-mono); font-weight: 500; font-size: .7em; letter-spacing: -.02em; }
