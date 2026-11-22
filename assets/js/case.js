@@ -1,11 +1,11 @@
 /*
  * Case-study renderer. Builds every "screen" of a senior-PD style case study
- * from assets/js/projects.js:  case.html?p=<slug>
+ * from assets/js/projects.js:  case.html?p=<slug>  (or a static build page that sets window.CASE_SLUG)
  */
 (function () {
   const PROJECTS = window.PROJECTS || [];
   const params = new URLSearchParams(location.search);
-  const idx = Math.max(0, PROJECTS.findIndex((p) => p.slug === params.get('p')));
+  const idx = Math.max(0, PROJECTS.findIndex((p) => p.slug === (window.CASE_SLUG || params.get('p'))));
   const p = PROJECTS[idx];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -261,7 +261,7 @@
         ${label('07', 'Reflection')}
         <h2 class="display cs-h" data-split="words">What I'd <span class="serif">do again</span></h2>
         <div class="learn" data-stagger>${p.learnings.map((l, i) => `<div><b>0${i + 1}</b><p>${esc(l)}</p></div>`).join('')}</div>
-        <a class="next c-${next.color}" href="case.html?p=${next.slug}" data-cursor="Next">
+        <a class="next c-${next.color}" href="${window.caseUrl(next.slug)}" data-cursor="Next">
           <div class="wcard__frame"><div class="next__inner">
             <div><p class="label">Next case study — ${next.no} · ${esc(next.category)}</p><h2 class="display">${esc(next.title[0])} <span class="serif">${esc(next.title[1])}</span></h2>
             <span class="btn" style="margin-top:20px"><span class="btn__icon">${arrow}</span><span class="btn__text">Read it</span></span></div>

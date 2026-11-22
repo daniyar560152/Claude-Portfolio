@@ -346,5 +346,7 @@
   ];
 
   root.PROJECTS = PROJECTS;
+  // Link to a case study. Static builds (scripts/build-static.js) override this with one file per project.
+  if (!root.caseUrl) root.caseUrl = (slug) => 'case.html?p=' + slug;
   if (typeof module !== 'undefined' && module.exports) module.exports = PROJECTS;
 })(typeof window !== 'undefined' ? window : globalThis);

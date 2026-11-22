@@ -53,6 +53,16 @@ python3 -m http.server 8080
 Then open http://localhost:8080. There is no build step. GSAP 3.12.5 and Lenis 1.1.13 are vendored in `assets/vendor/`,
 and fonts load from Google Fonts (Anton, Instrument Serif, DM Mono, Inter Tight, Yellowtail).
 
+## Static build (one page per case study)
+
+```bash
+node scripts/build-static.js
+```
+
+This writes `dist/` with `case-pocket.html`, `case-orbit.html` and so on instead of `case.html?p=…`, which suits any static host
+(GitHub Pages, Netlify). Add `--fragment` to emit `index.html` without its `<html>`/`<head>`/`<body>` wrapper, for hosts that
+add their own (this is how the claude.ai artifact preview is published).
+
 ## Illustrations as files
 
 ```bash

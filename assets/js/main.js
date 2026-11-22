@@ -33,7 +33,7 @@
     if (!stack || !PROJECTS) return;
     const stickers = ['burst', 'ship', 'star', 'a11y'];
     stack.innerHTML = PROJECTS.map((p, i) => `
-      <a class="wcard c-${p.color}" href="case.html?p=${p.slug}" data-cursor="View" data-transition>
+      <a class="wcard c-${p.color}" href="${window.caseUrl(p.slug)}" data-cursor="View" data-transition>
         <div class="wcard__frame">
           <div class="wcard__inner">
             <div class="wcard__art" data-ill="${p.ill}"></div>
