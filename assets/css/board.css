@@ -215,11 +215,9 @@
 .bd-next__side .bd-ico { transform: rotate(6deg); }
 
 
-/* desktop: everything left-aligned (phones keep the centred stack) */
+/* desktop: sections left-aligned except the hero (phones keep the centred stack) */
 @media (min-width: 801px) {
-  .bd-head, .bd-hero, .bd-hero__title, .bd-center-col { align-items: flex-start; text-align: left; }
-  .bd-head__title, .bd-hero__row, .bd-tags, .bd-flowline, .bd-tilerow, .bd-hero__art { justify-content: flex-start; }
-  .bd-center { text-align: left; }
-  .bd-hero .bd-sticker--a { left: auto; right: 7%; top: 21%; }
-  .bd-hero .bd-sticker--b { right: 22%; top: 47%; }
+  .bd-head, .bd-center-col { align-items: flex-start; text-align: left; }
+  .bd-head__title, .bd-flowline, .bd-tilerow { justify-content: flex-start; }
+  .bd-center-col .bd-center { text-align: left; }
 }
