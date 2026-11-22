@@ -6,6 +6,17 @@
                 WORD | picture | WORD rows, chunky condensed display, rounded colour tiles
    ========================================================= */
 
+/* ---------- self-hosted display fonts with Cyrillic ----------
+   Anton, Instrument Serif, DM Mono and Yellowtail have no Cyrillic. These files keep their
+   original Latin glyphs and add Russian/Kazakh letters built from the same outlines
+   (see assets/fonts/*LICENSE/OFL). Declared under the original family names. */
+@font-face { font-family: 'Anton'; src: url('../fonts/AntonCyr-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('../fonts/InstrumentSerifCyr-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Instrument Serif'; src: url('../fonts/InstrumentSerifCyr-Italic.woff2') format('woff2'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'DM Mono'; src: url('../fonts/DMMonoCyr-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: 'DM Mono'; src: url('../fonts/DMMonoCyr-Medium.woff2') format('woff2'); font-weight: 500 600; font-style: normal; font-display: swap; }
+@font-face { font-family: 'Yellowtail'; src: url('../fonts/YellowtailCyr-Regular.woff2') format('woff2'); font-weight: 400; font-style: normal; font-display: swap; }
+
 :root {
   --blue: #0a24ff;
   --ink: #111111;
