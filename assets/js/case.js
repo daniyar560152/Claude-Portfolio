@@ -16,9 +16,19 @@
   const desk = (url, side, main) => `<div class="desk"><div class="desk__bar"><i></i><i></i><i></i><span>${url}</span></div><div class="desk__body"><div class="desk__side">${side.map((s, i) => `<div class="${i === 0 ? 'on' : ''}">${s}</div>`).join('')}</div><div class="desk__main">${main}</div></div></div>`;
   const annot = (n, text, x, y) => `<span class="annot" style="left:${x}px;top:${y}px" data-annot><b>${n}</b>${text}</span>`;
   const wrap = (device, notes, cap) => `<figure class="screen-wrap" data-inview data-screen>${device}${notes.join('')}<figcaption class="screen-cap">${cap}</figcaption></figure>`;
+  // real exported screen inside the browser frame (used by the Otbasy case)
+  const shot = (url, src, alt, cls = '') => `<div class="desk desk--shot ${cls}"><div class="desk__bar"><i></i><i></i><i></i><span>${url}</span></div><img src="${src}" alt="${alt}" loading="lazy" decoding="async"></div>`;
 
   /* ---------------- mock screens (monochrome UI, hi-fi) ---------------- */
   const MOCKS = {
+    'housing-landing': () => wrap(shot('otbasy.kz', 'assets/img/housing/landing.webp', 'Redesigned Otbasy landing: “Your home starts here” with Join the queue and Check my status actions', 'desk--wide'),
+      [annot(1, 'Two actions: apply or check status', 560, 372)], 'Landing · one entry point for six programmes'),
+    'housing-category': () => wrap(shot('otbasy.kz/apply/category', 'assets/img/housing/category.webp', 'Application step 2: plain-language category checklist with a “Not sure?” quiz'),
+      [annot(2, 'Proofs pulled from State databases', 70, 220), annot(3, '“Not sure?” 3-question quiz', 250, 300)], 'Apply · categories in plain language'),
+    'housing-datacheck': () => wrap(shot('otbasy.kz/apply/data-check', 'assets/img/housing/datacheck.webp', 'Application step 4: live checklist of 11 State databases answering'),
+      [annot(4, 'Each of 11 sources answers live', 90, 250), annot(5, 'Leave safely — SMS when done', 40, 380)], 'Apply · the waiting is designed'),
+    'housing-submitted': () => wrap(shot('otbasy.kz/apply/done', 'assets/img/housing/submitted.webp', 'Application accepted: queue number, category queue, registration date and status'),
+      [annot(6, 'Queue number right away', 140, 290)], 'Done · status before anything else'),
     'phone-onboarding': () => wrap(phone(`
         <div class="ui-sub">Step 2 of 4</div>
         <div class="ui-progress" style="--w:50%"><i></i></div>
@@ -120,8 +130,8 @@
         <div class="cs-cover c-${p.color}">
           <div class="wcard__frame"><div class="cs-cover__inner" data-cursor="Hi!">
             <div data-ill="${p.ill}" data-tilt style="width:min(70%,520px)"></div>
-            <div class="deco-sticker" style="width:130px;left:7%;top:10%;transform:rotate(-12deg)" data-sticker="ship"></div>
-            <div class="deco-sticker" style="width:120px;right:8%;bottom:10%;transform:rotate(10deg)" data-sticker="burst"></div>
+            <div class="deco-sticker" style="width:130px;left:7%;top:10%;transform:rotate(-12deg)" data-sticker="${(p.coverStickers || [])[0] || 'ship'}"></div>
+            <div class="deco-sticker" style="width:120px;right:8%;bottom:10%;transform:rotate(10deg)" data-sticker="${(p.coverStickers || [])[1] || 'burst'}"></div>
           </div></div>
         </div>
         <dl class="meta">

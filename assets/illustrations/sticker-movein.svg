@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 210 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sticker: move in"><style>
+    .k{fill:#111111}
+    .w{fill:#ffffff}
+    .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
+    .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+    .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
+    .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
+    .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
+    .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:#111111}
+  </style><rect class="k" x="4" y="4" width="202" height="82" rx="41"/><text x="105" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">MOVE IN!</text></svg>

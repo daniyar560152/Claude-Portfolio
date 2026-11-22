@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Builds a static copy of the site into dist/ with one HTML file per case study
- * (case-pocket.html, case-orbit.html, …) instead of case.html?p=<slug>.
+ * (case-housing.html, case-orbit.html, …) instead of case.html?p=<slug>.
  * Useful for hosts that don't keep query strings (e.g. claude.ai artifacts) and for
  * plain static hosting such as GitHub Pages.
  *

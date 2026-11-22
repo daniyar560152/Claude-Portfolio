@@ -534,6 +534,11 @@ section { position: relative; }
 .desk__side div.on { background: var(--blue); opacity: 1; }
 .desk__main { padding: 18px; display: flex; flex-direction: column; gap: 14px; background: #fafaf8; }
 @media (max-width: 640px) { .desk__body { grid-template-columns: 1fr; } .desk__side { display: none; } }
+/* real exported screens (Otbasy case) */
+.desk--shot { width: 100%; }
+.desk--shot img { display: block; width: 100%; height: auto; }
+.screen-wrap:has(.desk--shot) { margin: 0; width: min(500px, 100%); }
+.screen-wrap:has(.desk--wide) { width: min(1000px, 100%); }
 
 /* UI atoms used inside mocks */
 .ui-h { font-weight: 800; font-size: 20px; line-height: 1.1; letter-spacing: -.02em; }

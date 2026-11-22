@@ -17,7 +17,7 @@ so every background is **transparent**, and the pixel computer's eyes follow the
 
 - `index.html`: hero, client marquee, scroll word-fill statement, about, selected work (stacking cards),
   services, process, draggable toolbox, pinned horizontal testimonials, contact.
-- `case.html?p=<slug>`: a case study per project (`pocket`, `orbit`, `medly`, `shoply`), structured the way
+- `case.html?p=<slug>`: a case study per project (`housing`, `orbit`, `medly`, `shoply`), structured the way
   senior product designers document their work:
   1. **Overview**: role, timeline, team, platform, deliverables, tools
   2. **TL;DR / Impact**: four headline metrics (animated counters)
@@ -59,7 +59,7 @@ and fonts load from Google Fonts (Anton, Instrument Serif, DM Mono, Inter Tight,
 node scripts/build-static.js
 ```
 
-This writes `dist/` with `case-pocket.html`, `case-orbit.html` and so on instead of `case.html?p=…`, which suits any static host
+This writes `dist/` with `case-housing.html`, `case-orbit.html` and so on instead of `case.html?p=…`, which suits any static host
 (GitHub Pages, Netlify). Add `--fragment` to emit `index.html` without its `<html>`/`<head>`/`<body>` wrapper, for hosts that
 add their own (this is how the claude.ai artifact preview is published).
 

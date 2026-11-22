@@ -360,6 +360,105 @@
       ${sparkle(360, 140, 1)}
     `, 'Pixel-art magnifying glass over a document with a bar chart');
 
+  /* ---------- housing set (Otbasy case): more old-Mac 1-bit icons ---------- */
+  PX.house = () => {
+    const g = new Grid(32, 32);
+    g.shape(rr(22, 3, 4, 9, 0));
+    g.shape(poly([[16, 1], [31.5, 15.5], [0.5, 15.5]]), 'dither');
+    g.shape(rr(4, 14, 24, 17, 0));
+    g.line(1, 15, 30, 15);
+    g.frame(13, 21, 6, 10); g.rect(14, 22, 4, 9, 2); g.set(16.6, 26, 1);
+    g.frame(6, 18, 5, 5); g.line(8, 18, 8, 22); g.line(6, 20, 10, 20);
+    g.frame(21, 18, 5, 5); g.line(23, 18, 23, 22); g.line(21, 20, 25, 20);
+    g.line(0, 31, 31, 31);
+    return g;
+  };
+  PX.key = () => {
+    const g = new Grid(38, 18);
+    g.shape(ell(8, 9, 7.5), 'ink'); g.shape(ell(8, 9, 5.2), 'paper'); g.shape(ell(8, 9, 2.4), 'ink'); g.shape(ell(8, 9, 1.2), 'clear');
+    g.shape(rr(15, 7, 22, 4, 0)); g.shape(rr(27, 10, 3, 6, 0)); g.shape(rr(32, 10, 3, 4, 0));
+    return g;
+  };
+  PX.idCard = () => {
+    const g = new Grid(40, 28);
+    g.shape(rr(0, 0, 40, 28, 2)); g.shape(rr(3, 5, 12, 15, 0));
+    g.shape(ell(9, 10, 3), 'ink'); g.shape(rr(5, 15, 8, 5, 2), 'ink');
+    g.rect(18, 6, 18, 2); g.rect(18, 11, 13, 2); g.rect(18, 16, 16, 2);
+    g.shape(rr(1, 22, 38, 5, 0), 'dither'); g.rect(3, 2, 8, 1);
+    return g;
+  };
+  PX.stamp = () => {
+    const g = new Grid(26, 26);
+    g.shape(ell(13, 13, 12.5), 'ink'); g.shape(ell(13, 13, 10), 'paper'); g.shape(ell(13, 13, 8.5), 'ink'); g.shape(ell(13, 13, 7), 'paper');
+    g.line(8, 13, 11, 16).line(11, 16, 18, 9).line(8, 14, 11, 17).line(11, 17, 18, 10);
+    return g;
+  };
+  PX.alert = () => {
+    const g = new Grid(46, 32);
+    g.rect(1, 1, 46, 32, 1); g.shape(rr(0, 0, 45, 31, 0)); g.frame(2, 2, 41, 27);
+    g.shape(poly([[11, 5], [20, 20], [2, 20]])); g.rect(10, 9, 2, 6); g.rect(10, 16, 2, 2);
+    g.rect(23, 7, 17, 2); g.rect(23, 11, 13, 2); g.rect(23, 15, 15, 2);
+    g.shape(rr(25, 19, 18, 10, 4), 'ink'); g.shape(rr(27, 21, 14, 6, 2), 'paper');
+    g.frame(29, 22, 4, 4); g.line(35, 22, 35, 25); g.line(36, 23, 38, 22); g.line(36, 24, 38, 25);
+    return g;
+  };
+  PX.ticket = () => {
+    const g = new Grid(42, 24);
+    g.shape(rr(0, 0, 42, 24, 1));
+    g.shape(ell(0, 12, 4.5), 'ink'); g.shape(ell(0, 12, 3), 'clear'); g.shape(ell(42, 12, 4.5), 'ink'); g.shape(ell(42, 12, 3), 'clear');
+    for (let y = 2; y < 22; y += 3) g.set(30, y, 1);
+    g.rect(6, 5, 20, 4); g.rect(6, 11, 8, 1); g.rect(6, 13, 18, 3); g.rect(6, 18, 12, 2);
+    g.shape(poly([[36, 6], [37.5, 10], [41, 10], [38, 12.5], [39, 16.5], [36, 14], [33, 16.5], [34, 12.5], [31, 10], [34.5, 10]]), 'ink');
+    return g;
+  };
+  PX.macHome = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    g.line(11, 12, 16, 8).line(16, 8, 21, 12); g.frame(12, 12, 9, 6); g.rect(15, 14, 3, 4);
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+
+  // Otbasy: a classic Mac showing a house — the queue lives in one cabinet
+  ILL.macHome = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, 'queue #1284')}
+      ${PX.macHome().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'PM', false)}
+    `, 'Pixel-art classic computer showing a house, tagged queue number 1284');
+
+  // A pixel house selected as a Figma frame
+  ILL.houseFrame = () => svg('0 0 440 430', `
+      ${selection(60, 66, 300, 306)}
+      ${nameTag(60, 30, 'Home 01')}
+      ${nameTag(150, 384, '240 × 240', false)}
+      ${PX.house().svg(90, 100, 7.5)}
+      ${sparkle(400, 90, 1.1)}${sparkle(28, 320, .8)}
+      ${cursor(332, 300, 0.55, -10)}
+      ${nameTag(356, 342, 'you', true)}
+    `, 'Pixel-art house inside a Figma selection box');
+
+  // ID card with an approval stamp
+  ILL.idCheck = () => svg('0 0 460 420', `
+      <g transform="rotate(-5 200 230)">${PX.idCard().svg(30, 110, 8.5)}</g>
+      ${PX.stamp().svg(290, 230, 6.5)}
+      ${nameTag(230, 40, 'IIN ✓ verified')}
+      ${sparkle(60, 70, 1)}
+      ${cursor(400, 330, 0.5, -10)}
+    `, 'Pixel-art ID card with a round approval stamp');
+
+  // Classic Mac alert: all set
+  ILL.allSet = () => svg('0 0 460 400', `
+      ${PX.alert().svg(20, 50, 9)}
+      <text x="120" y="38" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">ALL SET!</text>
+      ${cursor(318, 250, 0.6, -10)}
+      ${sparkle(420, 60, 1.1)}${sparkle(40, 360, .8)}
+    `, 'Pixel-art classic Mac alert dialog with the cursor on OK');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -390,9 +489,15 @@
     bomb: () => pxSticker(PX.bomb(), 34, 34, 5, 'Sticker: bomb', 'bug!'),
     hand: () => pxSticker(PX.hand(), 32, 38, 5, 'Sticker: pointing hand'),
     folder: () => pxSticker(PX.folder(), 36, 28, 5, 'Sticker: folder', 'v2_final'),
+    // housing set
+    house: () => pxSticker(PX.house(), 32, 32, 5, 'Sticker: pixel house'),
+    keys: () => st('-12 -12 236 150', `<g transform="rotate(-4 105 62)"><rect class="p" x="0" y="0" width="210" height="124" rx="16"/>${PX.key().svg(10, 12, 5.2)}<text x="105" y="112" text-anchor="middle" class="tk" style="font-size:18px">your keys</text></g>`, 'Sticker: your keys'),
+    ticket: () => pxSticker(PX.ticket(), 42, 24, 5, 'Sticker: queue ticket', '#1284'),
+    movein: () => st('0 0 210 90', `<rect class="k" x="4" y="4" width="202" height="82" rx="41"/><text x="105" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">MOVE IN!</text>`, 'Sticker: move in'),
+    zoom: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="76" text-anchor="middle" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">200%</text><text x="75" y="102" text-anchor="middle" class="tk" style="font-size:15px">ZOOM ✓</text>`, 'Sticker: zoom 200%'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;
