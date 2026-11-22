@@ -41,8 +41,8 @@
       <div class="bd-art" style="--w:300px;--r:-4deg" data-tilt>${ill('idCheck')}</div>
     </div>
     <span class="bd-label bd-swipe" aria-hidden="true">swipe →</span>
-    <div class="bd-sticker" style="--w:185px;left:7%;top:44%;--r:-8deg">${stk('keys')}</div>
-    <div class="bd-sticker" style="--w:150px;right:9%;top:46%;--r:10deg">${stk('movein')}</div>
+    <div class="bd-sticker bd-sticker--a" style="--w:185px;--r:-8deg">${stk('keys')}</div>
+    <div class="bd-sticker bd-sticker--b" style="--w:150px;--r:10deg">${stk('movein')}</div>
   </section>`;
 
   /* ---------- 02 Overview ---------- */

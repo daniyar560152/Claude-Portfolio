@@ -81,6 +81,8 @@
 .bd-hero__art { display: flex; align-items: flex-end; justify-content: center; gap: 40px; flex-wrap: wrap; }
 .bd-art { width: var(--w); max-width: 80vw; transform: rotate(var(--r, 0deg)); }
 .bd-sticker { position: absolute; width: var(--w); transform: rotate(var(--r, 0deg)); filter: drop-shadow(0 8px 10px rgba(0,0,0,.18)); }
+.bd-sticker--a { left: 7%; top: 44%; }
+.bd-sticker--b { right: 9%; top: 46%; }
 @media (max-width: 900px) { .bd-sticker { display: none; } }
 
 /* ---------- overview ---------- */
@@ -126,7 +128,7 @@
 .bd-card.is-wide .bd-card__sticker { width: 130px; bottom: -40px; }
 .bd-grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-self: stretch; }
 .bd-grid2 .bd-win { max-width: 530px; }
-.bd-win--status { max-width: 840px; }
+.bd-win--status { max-width: 840px; width: 100%; align-self: center; }
 
 /* ---------- research ---------- */
 .bd-metric { display: flex; flex-direction: column; gap: 6px; padding-top: 10px; border-top: 1.5px solid var(--ink); }
@@ -211,3 +213,13 @@
 .bd-next__side { display: flex; align-items: center; gap: 20px; }
 .bd-next__side .bd-tag { color: var(--ink); }
 .bd-next__side .bd-ico { transform: rotate(6deg); }
+
+
+/* desktop: everything left-aligned (phones keep the centred stack) */
+@media (min-width: 801px) {
+  .bd-head, .bd-hero, .bd-hero__title, .bd-center-col { align-items: flex-start; text-align: left; }
+  .bd-head__title, .bd-hero__row, .bd-tags, .bd-flowline, .bd-tilerow, .bd-hero__art { justify-content: flex-start; }
+  .bd-center { text-align: left; }
+  .bd-hero .bd-sticker--a { left: auto; right: 7%; top: 21%; }
+  .bd-hero .bd-sticker--b { right: 22%; top: 47%; }
+}
