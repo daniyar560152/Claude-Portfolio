@@ -215,9 +215,8 @@
 .bd-next__side .bd-ico { transform: rotate(6deg); }
 
 
-/* desktop: sections left-aligned except the hero (phones keep the centred stack) */
+/* desktop: section headings left-aligned, except the hero, How it works and User flow (phones keep the centred stack) */
 @media (min-width: 801px) {
-  .bd-head, .bd-center-col { align-items: flex-start; text-align: left; }
-  .bd-head__title, .bd-flowline, .bd-tilerow { justify-content: flex-start; }
-  .bd-center-col .bd-center { text-align: left; }
+  .bd-sec:not(.bd-center-col) > .bd-head { align-items: flex-start; text-align: left; }
+  .bd-sec:not(.bd-center-col) > .bd-head .bd-head__title { justify-content: flex-start; }
 }

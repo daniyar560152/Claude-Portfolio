@@ -113,7 +113,9 @@
     ['06', 'SUBMITTED', 'accepted', 'yellow', 'envelope', 'my apl/main · 1434×1833', 'The application with its number, time and "Принято" status; documents can be downloaded.', '06-submitted'],
     ['07', 'CABINET', 'status: active', 'blue', 'key', 'my apl/main · 1434×1339', 'After the process: registration date, subcategory, region and the "Актуален" status, then FAQ.', '07-cabinet'],
   ];
-  const shot = (file, alt) => `<img src="assets/img/housing/real/${file}.webp" alt="${esc(alt)}" loading="lazy" decoding="async">`;
+  // real pixel sizes, so the page doesn't shift (and scroll positions stay right) while images load
+  const SIZES = { '01-main': [1080, 675], '02-start': [1076, 875], '03-category': [1076, 1200], '04-consent': [1076, 675], '05-family': [1076, 1230], '06-submitted': [1076, 1375], '07-cabinet': [1076, 1005], 'status-check': [1076, 675] };
+  const shot = (file, alt) => `<img src="assets/img/housing/real/${file}.webp" alt="${esc(alt)}" width="${SIZES[file][0]}" height="${SIZES[file][1]}" loading="lazy" decoding="async">`;
   const card = ({ no, word, serif, frame, sticker, sz, text, body, wide }) => `
     <article class="bd-card bd-frame--${frame}${wide ? ' is-wide' : ''}" data-reveal>
       <div class="bd-card__inner">

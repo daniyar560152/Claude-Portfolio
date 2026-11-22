@@ -295,10 +295,23 @@
     // reading progress
     gsap.to('.cs-progress', { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.3 } });
 
+    // re-measure scroll positions when late images change the page height
+    let refreshT;
+    $$('#case img').forEach((img) => { if (!img.complete) img.addEventListener('load', () => { clearTimeout(refreshT); refreshT = setTimeout(() => ScrollTrigger.refresh(), 150); }, { once: true }); });
+
+    // section menu tucks away while reading down, comes back when scrolling up
+    const tocBar = $('.cs-toc');
+    if (tocBar) ScrollTrigger.create({ start: 0, end: 'max', onUpdate: (s) => tocBar.classList.toggle('is-tucked', s.direction === 1 && s.scroll() > innerHeight * 0.6 && s.progress < 0.98) });
+
     // table of contents
     $$('.cs-toc a').forEach((a) => {
       const sec = $(a.getAttribute('href'));
-      if (sec) ScrollTrigger.create({ trigger: sec, start: 'top 50%', end: 'bottom 50%', onToggle: (s) => a.classList.toggle('is-active', s.isActive) });
+      if (sec) ScrollTrigger.create({ trigger: sec, start: 'top 50%', end: 'bottom 50%', onToggle: (s) => {
+        a.classList.toggle('is-active', s.isActive);
+        // keep the active chip visible when the menu is narrower than its items
+        const bar = a.parentElement;
+        if (s.isActive && bar && bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: a.offsetLeft - (bar.clientWidth - a.offsetWidth) / 2, behavior: 'smooth' });
+      } });
     });
 
     // cover zoom
