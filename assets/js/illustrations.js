@@ -420,6 +420,61 @@
     return g;
   };
 
+  PX.stampDoc = () => {
+    const g = new Grid(32, 38);
+    g.shape(poly([[0.5, 0.5], [22.5, 0.5], [29.5, 7.5], [29.5, 37.5], [0.5, 37.5]]));
+    g.line(22, 0, 22, 7).line(22, 7, 29, 7);
+    g.rect(4, 6, 14, 1); g.rect(4, 9, 18, 1); g.rect(4, 12, 12, 1); g.rect(4, 15, 20, 1); g.rect(4, 18, 10, 1);
+    g.shape(ell(21, 28, 9), 'ink'); g.shape(ell(21, 28, 7), 'paper');
+    g.line(17, 28, 20, 31).line(20, 31, 25, 24).line(17, 29, 20, 32).line(20, 32, 25, 25);
+    return g;
+  };
+  PX.checklist = () => {
+    const g = new Grid(46, 40);
+    g.rect(1, 1, 45, 39, 1); g.shape(rr(0, 0, 44, 38, 0));
+    for (let y = 2; y <= 6; y += 2) g.line(2, y, 41, y);
+    g.rect(15, 2, 14, 5, 2); g.rect(3, 2, 5, 5, 2); g.frame(3, 2, 5, 5); g.line(0, 8, 43, 8);
+    for (let i = 0; i < 3; i++) { const y = 12 + i * 8; g.frame(4, y, 7, 7); if (i < 2) { g.line(5, y + 3, 7, y + 5); g.line(7, y + 5, 10, y + 1); } g.rect(14, y + 2, 24 - i * 5, 3); }
+    return g;
+  };
+  PX.hourglass = () => {
+    const g = new Grid(26, 38);
+    g.shape(any(poly([[3, 3], [23, 3], [14, 18], [12, 18]]), poly([[12, 20], [14, 20], [23, 35], [3, 35]]), rr(11, 16, 4, 6, 0)));
+    g.shape(rr(0, 0, 26, 4, 1), 'ink'); g.shape(rr(0, 34, 26, 4, 1), 'ink');
+    g.shape(poly([[7, 7], [19, 7], [13, 15]]), 'dither'); g.shape(poly([[6, 34], [20, 34], [13, 27]]), 'ink'); g.line(13, 17, 13, 28);
+    return g;
+  };
+  PX.envelope = () => {
+    const g = new Grid(38, 26);
+    g.rect(1, 1, 38, 26, 1); g.shape(rr(0, 0, 37, 25, 1));
+    g.line(1, 1, 18, 13); g.line(18, 13, 35, 1); g.line(1, 24, 14, 13); g.line(35, 24, 23, 13);
+    g.shape(rr(27, 3, 7, 6, 0), 'dither');
+    return g;
+  };
+  PX.family = () => {
+    const g = new Grid(42, 32);
+    const person = (cx, top, r, w, h) => { g.shape(ell(cx, top + r, r)); g.shape(rr(cx - w / 2, top + 2 * r + 1, w, h, 4)); g.set(cx - 2, top + r - 1, 1); g.set(cx + 2, top + r - 1, 1); g.line(cx - 1, top + r + 2, cx + 1, top + r + 2); };
+    person(9, 1, 5, 14, 17); person(33, 1, 5, 14, 17); person(21, 11, 4, 12, 11); g.line(0, 31, 41, 31);
+    return g;
+  };
+  PX.database = () => {
+    const g = new Grid(32, 38);
+    for (let i = 2; i >= 0; i--) { const y = i * 11; g.shape(any(rr(1, 4 + y, 30, 9, 0), ell(16, 13 + y, 15, 3.5))); g.shape(ell(16, 4 + y, 15, 3.5)); g.set(25, 9 + y, 1); g.set(27, 9 + y, 1); }
+    return g;
+  };
+  PX.chart = () => {
+    const g = new Grid(42, 36);
+    g.line(3, 1, 3, 33); g.line(3, 33, 41, 33);
+    [[7, 22], [15, 17], [23, 11], [31, 5]].forEach(([x, t]) => g.shape(rr(x, t, 6, 33 - t, 0), 'dither'));
+    g.line(6, 19, 36, 2); g.line(36, 2, 31, 2); g.line(36, 2, 36, 7); g.line(7, 19, 37, 2);
+    return g;
+  };
+  // any pixel icon as a standalone transparent svg, optionally with a name tag under it
+  ILL.icon = (name, tag = '') => {
+    const g = PX[name](), s = 5;
+    return svg(`-8 -8 ${g.w * s + 16} ${g.h * s + 16 + (tag ? 30 : 0)}`, `${g.svg(0, 0, s)}${tag ? nameTag(0, g.h * s + 8, tag, true) : ''}`, `Pixel-art ${name} icon`);
+  };
+
   // Otbasy: a classic Mac showing a house — the queue lives in one cabinet
   ILL.macHome = () => svg('0 0 440 480', `
       ${nameTag(70, 20, 'queue #1284')}

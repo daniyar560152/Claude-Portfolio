@@ -21,14 +21,6 @@
 
   /* ---------------- mock screens (monochrome UI, hi-fi) ---------------- */
   const MOCKS = {
-    'housing-landing': () => wrap(shot('otbasy.kz', 'assets/img/housing/landing.webp', 'Redesigned Otbasy landing: “Your home starts here” with Join the queue and Check my status actions', 'desk--wide'),
-      [annot(1, 'Two actions: apply or check status', 560, 372)], 'Landing · one entry point for six programmes'),
-    'housing-category': () => wrap(shot('otbasy.kz/apply/category', 'assets/img/housing/category.webp', 'Application step 2: plain-language category checklist with a “Not sure?” quiz'),
-      [annot(2, 'Proofs pulled from State databases', 70, 220), annot(3, '“Not sure?” 3-question quiz', 250, 300)], 'Apply · categories in plain language'),
-    'housing-datacheck': () => wrap(shot('otbasy.kz/apply/data-check', 'assets/img/housing/datacheck.webp', 'Application step 4: live checklist of 11 State databases answering'),
-      [annot(4, 'Each of 11 sources answers live', 90, 250), annot(5, 'Leave safely — SMS when done', 40, 380)], 'Apply · the waiting is designed'),
-    'housing-submitted': () => wrap(shot('otbasy.kz/apply/done', 'assets/img/housing/submitted.webp', 'Application accepted: queue number, category queue, registration date and status'),
-      [annot(6, 'Queue number right away', 140, 290)], 'Done · status before anything else'),
     'phone-onboarding': () => wrap(phone(`
         <div class="ui-sub">Step 2 of 4</div>
         <div class="ui-progress" style="--w:50%"><i></i></div>
@@ -286,8 +278,15 @@
     if (!p) return;
     document.title = `${p.client} — ${p.short} · Daniyar`;
     const main = document.getElementById('case');
-    main.innerHTML = hero() + impact() + problem() + research() + process() + solution() + results() + learnings();
     const toc = document.querySelector('.cs-toc');
+    const board = p.board && window.BOARDS && window.BOARDS[p.board];
+    if (board) {
+      // this case is the Figma case board rebuilt as a page (assets/js/board-*.js)
+      main.innerHTML = board.render(p, next);
+      if (toc) toc.innerHTML = board.toc.map(([id, t]) => `<a href="#${id}">${t}</a>`).join('');
+      return;
+    }
+    main.innerHTML = hero() + impact() + problem() + research() + process() + solution() + results() + learnings();
     if (toc) toc.innerHTML = [['overview', 'Overview'], ['impact', 'Impact'], ['problem', 'Problem'], ['research', 'Research'], ['process', 'Process'], ['solution', 'Solution'], ['results', 'Results'], ['learnings', 'Learnings']].map(([id, t]) => `<a href="#${id}">${t}</a>`).join('');
   };
 

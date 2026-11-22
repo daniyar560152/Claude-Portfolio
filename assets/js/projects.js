@@ -15,6 +15,7 @@
       short: 'Redesigning the state housing-queue service',
       color: 'blue',
       ill: 'macHome',
+      board: 'housing', // rendered from the Figma case board (assets/js/board-housing.js)
       coverStickers: ['movein', 'keys'],
       year: '2025',
       summary:
@@ -75,7 +76,7 @@
         { title: 'A cabinet built around status', text: 'Queue number, date and region come first; everything else is secondary.' },
         { title: 'Status without signing in', text: 'A public IIN check answers the #1 call-centre question in 10 seconds.' },
       ],
-      screens: ['housing-landing', 'housing-category', 'housing-datacheck', 'housing-submitted'],
+      screens: [],
       results: [
         { metric: 'Time to submit', before: '18 min', after: '9.7 min', delta: '−46%' },
         { metric: 'Completed applications', before: '34%', after: '45%', delta: '+31%' },
