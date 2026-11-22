@@ -40,6 +40,7 @@
       <div class="bd-art" style="--w:310px" data-tilt>${ill('macHome')}</div>
       <div class="bd-art" style="--w:300px;--r:-4deg" data-tilt>${ill('idCheck')}</div>
     </div>
+    <span class="bd-label bd-swipe" aria-hidden="true">swipe →</span>
     <div class="bd-sticker" style="--w:185px;left:7%;top:44%;--r:-8deg">${stk('keys')}</div>
     <div class="bd-sticker" style="--w:150px;right:9%;top:46%;--r:10deg">${stk('movein')}</div>
   </section>`;
@@ -187,6 +188,7 @@
   <section class="bd-sec bd-ink-bg" id="solution" data-theme="dark">
     <h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">THE</span><span class="bd-serif-l" data-split="words">solution</span></h2>
     <div class="bd-flowicons" data-stagger>${flowIcons.map(([ic, l], i) => `<div class="bd-flowicon"><span class="bd-ico" style="--w:90px">${icon(ic)}</span><span class="bd-label">${l}</span></div>${i < 4 ? '<span class="bd-display-s bd-arrow">→</span>' : ''}`).join('')}</div>
+    <span class="bd-label bd-swipe" aria-hidden="true">swipe →</span>
     <div class="bd-decisions" data-stagger>${decisions.map(([t, d], i) => `<div class="bd-decision"><b class="bd-h1">0${i + 1}</b><div><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div></div>`).join('')}</div>
     <a class="bd-label" href="#flow">→ The real product, frame by frame, is in the user flow above: 01 Main · 02–06 Application · 07 Cabinet · status check.</a>
   </section>`;
