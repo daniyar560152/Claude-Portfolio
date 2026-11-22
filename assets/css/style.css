@@ -183,6 +183,15 @@ section { position: relative; }
 .hero__word .row { display: block; }
 .hero__ill { position: relative; width: 100%; max-width: 480px; justify-self: center; }
 .hero__ill .ill { width: 100%; height: auto; overflow: visible; }
+/* hero Mac picture wrapped in Figma selection UI */
+.hero__mac { width: auto; max-width: none; display: flex; justify-content: center; padding: 34px 0 40px; }
+.mac-sel { position: relative; padding: 16px; border: 1.5px solid var(--ink); }
+.mac-img { display: block; height: min(54vh, 500px); width: auto; filter: drop-shadow(0 28px 34px rgba(0,0,0,.16)); }
+.mac-h { position: absolute; width: 12px; height: 12px; background: var(--white); border: 1.5px solid var(--ink); }
+.mac-tag { position: absolute; left: -1.5px; top: -32px; background: var(--ink); color: var(--white); font: 500 13px/1 var(--f-mono); padding: 6px 9px; border-radius: 5px; }
+.mac-size { position: absolute; left: 50%; bottom: -36px; transform: translateX(-50%); background: var(--white); border: 1.5px solid var(--ink); border-radius: 5px; font: 500 12px/1 var(--f-mono); padding: 5px 8px; white-space: nowrap; }
+.mac-cursor { position: absolute; right: -54px; bottom: 18%; width: 86px; pointer-events: none; }
+.mac-cursor .ill { width: 100%; height: auto; }
 .hero__ctas { display: grid; grid-template-columns: 1fr minmax(260px, 34vw) 1fr; gap: 2vw; margin-top: 28px; align-items: center; }
 .hero__ctas > * { justify-self: center; }
 .hero__ground { height: 2px; width: min(380px, 70%); background: var(--ink); margin: 0 auto; transform-origin: center; }
@@ -191,6 +200,9 @@ section { position: relative; }
 @media (max-width: 820px) {
   .hero__grid, .hero__ctas { grid-template-columns: 1fr; }
   .hero__ill { order: -1; max-width: 300px; }
+  .hero__mac { max-width: none; }
+  .mac-img { height: 330px; }
+  .mac-cursor { right: -30px; width: 64px; }
   .hero__word { font-size: clamp(64px, 19vw, 130px); }
   .hero__word .row { display: inline; margin: 0 .1em; }
 }
@@ -242,7 +254,7 @@ section { position: relative; }
 /* ---------- selected work (Extrafazant dark + colour frames, stacking) ---------- */
 .work { padding-bottom: clamp(90px, 10vw, 160px); }
 .work__stack { position: relative; max-width: 1060px; margin: 0 auto; }
-.wcard { position: sticky; top: 13vh; margin-bottom: 9vh; display: block; transform-origin: 50% 0; }
+.wcard { position: sticky; top: 13vh; margin-bottom: 9vh; display: block; transform-origin: 50% 0; user-select: none; -webkit-user-select: none; }
 .wcard__frame { padding: clamp(10px, 1.4vw, 18px); background: var(--c, var(--blue)); }
 .wcard__inner { background: var(--paper); color: var(--ink); display: grid; grid-template-columns: 1fr 1.1fr; min-height: min(62vh, 560px); overflow: hidden; position: relative; }
 .wcard__art { display: grid; place-items: center; padding: 30px; background: var(--c-soft, var(--lilac)); position: relative; overflow: hidden; }

@@ -1,64 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 460 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon researcher inspecting a sticky note chart with a magnifying glass"><style>
+<svg viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pixel-art magnifying glass over a document with a bar chart"><style>
     .k{fill:#111111}
+    .w{fill:#ffffff}
     .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
     .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
     .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
     .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
-    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-    .w{fill:#ffffff}
     .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
     .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:#111111}
   </style>
-      <g transform="rotate(-6 120 300)">
-        <rect class="p" x="30" y="220" width="170" height="170"/>
-        <path class="k" d="M30 220 h170 v18 h-170z"/>
-        <path class="l" d="M54 360 V310 M84 360 V280 M114 360 V330 M144 360 V262 M174 360 V300" style="stroke-width:12;stroke-linecap:butt"/>
-      </g>
-      <path class="n" d="M300 352 C296 384 286 402 276 416"/><path class="n" d="M336 352 C342 384 352 402 362 416"/>
-      <g transform="translate(266 422) scale(1 1)">
-      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
-      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
-    </g><g transform="translate(374 422) scale(-1 1)">
-      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
-      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
-    </g>
-      <g transform="translate(318 220) scale(1)">
-      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
-      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
-      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
-    </g>
-      <g transform="translate(196 210) rotate(-30)">
-        <rect class="k" x="-10" y="60" width="20" height="90" rx="8"/>
-        <circle class="p" cx="0" cy="0" r="62" style="stroke-width:12"/>
-        <path class="l" d="M-30 -30 q14 -14 34 -14" style="stroke-width:6"/>
-      </g>
-      <path class="n" d="M292 238 C266 250 252 268 246 290"/>
-      <g transform="translate(242 300) rotate(-150) scale(1)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>
-      <path class="n" d="M344 238 C372 230 384 206 384 182"/>
-      <g transform="translate(386 168) rotate(15) scale(1)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>
-      <g transform="translate(318 170) scale(-1 1)">
-      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
-      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
-      <path class="k" d="M-46 -10 C-50 -50 -10 -66 20 -54 C44 -50 54 -30 48 -10 C40 -30 20 -36 0 -30 C-20 -40 -36 -30 -46 -10Z"/>
-      <g class="pupil">
-        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
-        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
-      </g>
-      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
-      <ellipse class="k" cx="0" cy="26" rx="8" ry="10"/>
-      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
-    </g>
+      <g transform="rotate(-6 140 290)"><g transform="translate(40 170) scale(7)" shape-rendering="crispEdges"><path class="w" d="M1 1h18v1h-18zM1 2h18v1h-18zM1 3h18v1h-18zM20 3h1v1h-1zM1 4h18v1h-18zM20 4h2v1h-2zM1 5h3v1h-3zM15 5h4v1h-4zM20 5h3v1h-3zM1 6h18v1h-18zM20 6h4v1h-4zM1 7h18v1h-18zM20 7h5v1h-5zM1 8h3v1h-3zM12 8h7v1h-7zM1 9h16v1h-16zM20 9h6v1h-6zM1 10h16v1h-16zM20 10h6v1h-6zM1 11h16v1h-16zM20 11h6v1h-6zM1 12h8v1h-8zM12 12h5v1h-5zM20 12h6v1h-6zM1 13h8v1h-8zM12 13h5v1h-5zM20 13h6v1h-6zM1 14h8v1h-8zM12 14h5v1h-5zM20 14h6v1h-6zM1 15h8v1h-8zM12 15h5v1h-5zM20 15h1v1h-1zM24 15h2v1h-2zM1 16h8v1h-8zM12 16h5v1h-5zM20 16h1v1h-1zM24 16h2v1h-2zM1 17h8v1h-8zM12 17h5v1h-5zM20 17h1v1h-1zM24 17h2v1h-2zM1 18h4v1h-4zM8 18h1v1h-1zM12 18h5v1h-5zM20 18h1v1h-1zM24 18h2v1h-2zM1 19h4v1h-4zM8 19h1v1h-1zM12 19h5v1h-5zM20 19h1v1h-1zM24 19h2v1h-2zM1 20h4v1h-4zM8 20h1v1h-1zM12 20h1v1h-1zM16 20h1v1h-1zM20 20h1v1h-1zM24 20h2v1h-2zM1 21h4v1h-4zM8 21h1v1h-1zM12 21h1v1h-1zM16 21h1v1h-1zM20 21h1v1h-1zM24 21h2v1h-2zM1 22h4v1h-4zM8 22h1v1h-1zM12 22h1v1h-1zM16 22h1v1h-1zM20 22h1v1h-1zM24 22h2v1h-2zM1 23h4v1h-4zM8 23h1v1h-1zM12 23h1v1h-1zM16 23h1v1h-1zM20 23h1v1h-1zM24 23h2v1h-2zM1 24h4v1h-4zM8 24h1v1h-1zM12 24h1v1h-1zM16 24h1v1h-1zM20 24h1v1h-1zM24 24h2v1h-2zM1 25h4v1h-4zM8 25h1v1h-1zM12 25h1v1h-1zM16 25h1v1h-1zM20 25h1v1h-1zM24 25h2v1h-2zM1 26h4v1h-4zM8 26h1v1h-1zM12 26h1v1h-1zM16 26h1v1h-1zM20 26h1v1h-1zM24 26h2v1h-2zM1 27h4v1h-4zM8 27h1v1h-1zM12 27h1v1h-1zM16 27h1v1h-1zM20 27h1v1h-1zM24 27h2v1h-2zM1 28h4v1h-4zM8 28h1v1h-1zM12 28h1v1h-1zM16 28h1v1h-1zM20 28h1v1h-1zM24 28h2v1h-2zM1 29h4v1h-4zM8 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM20 29h1v1h-1zM24 29h2v1h-2zM1 30h2v1h-2zM1 31h25v1h-25z"/><path class="k" d="M0 0h20v1h-20zM0 1h1v1h-1zM19 1h1v1h-1zM0 2h1v1h-1zM19 2h2v1h-2zM0 3h1v1h-1zM19 3h1v1h-1zM21 3h1v1h-1zM0 4h1v1h-1zM19 4h1v1h-1zM22 4h1v1h-1zM0 5h1v1h-1zM4 5h11v1h-11zM19 5h1v1h-1zM23 5h1v1h-1zM0 6h1v1h-1zM19 6h1v1h-1zM24 6h1v1h-1zM0 7h1v1h-1zM19 7h1v1h-1zM25 7h1v1h-1zM0 8h1v1h-1zM4 8h8v1h-8zM19 8h9v1h-9zM0 9h1v1h-1zM17 9h3v1h-3zM26 9h1v1h-1zM0 10h1v1h-1zM17 10h3v1h-3zM26 10h1v1h-1zM0 11h1v1h-1zM17 11h3v1h-3zM26 11h1v1h-1zM0 12h1v1h-1zM9 12h3v1h-3zM17 12h3v1h-3zM26 12h1v1h-1zM0 13h1v1h-1zM9 13h3v1h-3zM17 13h3v1h-3zM26 13h1v1h-1zM0 14h1v1h-1zM9 14h3v1h-3zM17 14h3v1h-3zM26 14h1v1h-1zM0 15h1v1h-1zM9 15h3v1h-3zM17 15h3v1h-3zM21 15h3v1h-3zM26 15h1v1h-1zM0 16h1v1h-1zM9 16h3v1h-3zM17 16h3v1h-3zM21 16h3v1h-3zM26 16h1v1h-1zM0 17h1v1h-1zM9 17h3v1h-3zM17 17h3v1h-3zM21 17h3v1h-3zM26 17h1v1h-1zM0 18h1v1h-1zM5 18h3v1h-3zM9 18h3v1h-3zM17 18h3v1h-3zM21 18h3v1h-3zM26 18h1v1h-1zM0 19h1v1h-1zM5 19h3v1h-3zM9 19h3v1h-3zM17 19h3v1h-3zM21 19h3v1h-3zM26 19h1v1h-1zM0 20h1v1h-1zM5 20h3v1h-3zM9 20h3v1h-3zM13 20h3v1h-3zM17 20h3v1h-3zM21 20h3v1h-3zM26 20h1v1h-1zM0 21h1v1h-1zM5 21h3v1h-3zM9 21h3v1h-3zM13 21h3v1h-3zM17 21h3v1h-3zM21 21h3v1h-3zM26 21h1v1h-1zM0 22h1v1h-1zM5 22h3v1h-3zM9 22h3v1h-3zM13 22h3v1h-3zM17 22h3v1h-3zM21 22h3v1h-3zM26 22h1v1h-1zM0 23h1v1h-1zM5 23h3v1h-3zM9 23h3v1h-3zM13 23h3v1h-3zM17 23h3v1h-3zM21 23h3v1h-3zM26 23h1v1h-1zM0 24h1v1h-1zM5 24h3v1h-3zM9 24h3v1h-3zM13 24h3v1h-3zM17 24h3v1h-3zM21 24h3v1h-3zM26 24h1v1h-1zM0 25h1v1h-1zM5 25h3v1h-3zM9 25h3v1h-3zM13 25h3v1h-3zM17 25h3v1h-3zM21 25h3v1h-3zM26 25h1v1h-1zM0 26h1v1h-1zM5 26h3v1h-3zM9 26h3v1h-3zM13 26h3v1h-3zM17 26h3v1h-3zM21 26h3v1h-3zM26 26h1v1h-1zM0 27h1v1h-1zM5 27h3v1h-3zM9 27h3v1h-3zM13 27h3v1h-3zM17 27h3v1h-3zM21 27h3v1h-3zM26 27h1v1h-1zM0 28h1v1h-1zM5 28h3v1h-3zM9 28h3v1h-3zM13 28h3v1h-3zM17 28h3v1h-3zM21 28h3v1h-3zM26 28h1v1h-1zM0 29h1v1h-1zM5 29h3v1h-3zM9 29h3v1h-3zM13 29h3v1h-3zM17 29h3v1h-3zM21 29h3v1h-3zM26 29h1v1h-1zM0 30h1v1h-1zM3 30h24v1h-24zM0 31h1v1h-1zM26 31h1v1h-1zM0 32h27v1h-27z"/></g></g>
+      <g transform="translate(139 209) scale(7)" shape-rendering="crispEdges"><path class="k" d="M8 1h10v1h-10zM6 2h14v1h-14zM5 3h16v1h-16zM4 4h5v1h-5zM17 4h5v1h-5zM3 5h4v1h-4zM11 5h1v1h-1zM19 5h4v1h-4zM2 6h4v1h-4zM9 6h2v1h-2zM20 6h4v1h-4zM2 7h3v1h-3zM8 7h1v1h-1zM21 7h3v1h-3zM1 8h4v1h-4zM21 8h4v1h-4zM1 9h3v1h-3zM6 9h1v1h-1zM22 9h3v1h-3zM1 10h3v1h-3zM6 10h1v1h-1zM22 10h3v1h-3zM1 11h3v1h-3zM22 11h3v1h-3zM1 12h3v1h-3zM22 12h3v1h-3zM1 13h3v1h-3zM22 13h3v1h-3zM1 14h3v1h-3zM22 14h3v1h-3zM1 15h3v1h-3zM22 15h3v1h-3zM1 16h3v1h-3zM22 16h3v1h-3zM1 17h4v1h-4zM21 17h4v1h-4zM2 18h3v1h-3zM21 18h3v1h-3zM2 19h4v1h-4zM20 19h4v1h-4zM3 20h4v1h-4zM19 20h4v1h-4zM4 21h5v1h-5zM17 21h7v1h-7zM5 22h20v1h-20zM6 23h20v1h-20zM8 24h10v1h-10zM21 24h6v1h-6zM22 25h6v1h-6zM23 26h6v1h-6zM24 27h6v1h-6zM25 28h6v1h-6zM26 29h6v1h-6zM27 30h5v1h-5zM28 31h3v1h-3zM29 32h1v1h-1z"/></g>
       <g transform="translate(260.2 30)">
       <rect x="0" y="0" width="179.8" height="26" rx="5" class="k" />
       <text x="10" y="18" class="tx">n = 14 interviews</text>
     </g>
+      <g transform="translate(380 300) rotate(-10) scale(0.5)">
+      <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+    </g>
+      <path class="k" transform="translate(360 140) scale(1)" d="M0 -14 L3 -3 L14 0 L3 3 L0 14 L-3 3 L-14 0 L-3 -3Z"/>
     </svg>

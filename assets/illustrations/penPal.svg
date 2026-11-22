@@ -1,65 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon character drawing a bezier curve with the Figma pen tool"><style>
+<svg viewBox="0 0 460 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pixel-art pencil drawing a bezier curve with Figma anchor points"><style>
     .k{fill:#111111}
+    .w{fill:#ffffff}
     .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
     .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
     .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
     .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
-    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-    .w{fill:#ffffff}
     .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
     .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:#111111}
   </style>
-      <path class="l" d="M24 330 C110 160 230 380 330 210" style="stroke-width:4"/>
+      <path class="l" d="M24 330 C110 160 190 380 253 271" style="stroke-width:4"/>
       <path class="t" d="M24 330 L90 210"/><circle class="p" cx="90" cy="210" r="7" style="stroke-width:3"/>
-      <path class="t" d="M190 300 L130 300 M190 300 L250 300"/><circle class="p" cx="130" cy="300" r="7" style="stroke-width:3"/><circle class="p" cx="250" cy="300" r="7" style="stroke-width:3"/>
-      <rect class="p" x="18" y="324" width="12" height="12" style="stroke-width:3"/><rect class="p" x="184" y="294" width="12" height="12" style="stroke-width:3"/>
-      <rect class="k" x="324" y="204" width="13" height="13"/>
-      <path class="n" d="M356 330 C352 352 340 366 330 378"/>
-      <path class="n" d="M388 330 C392 352 404 366 414 378"/>
-      <g transform="translate(322 384) scale(1 1)">
-      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
-      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
-    </g><g transform="translate(424 384) scale(-1 1)">
-      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
-      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
-    </g>
-      <g transform="translate(372 210) scale(0.9)">
-      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
-      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
-      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
-    </g>
-      <g transform="translate(338 206) rotate(-35)">
-        <path class="p" d="M0 0 L-22 -52 L0 -96 L22 -52 Z"/>
-        <path class="l" d="M0 0 L0 -44" style="stroke-width:3"/><circle class="w" cx="0" cy="-50" r="6" stroke="#111111" stroke-width="3"/>
-        <rect class="k" x="-16" y="-128" width="32" height="34" rx="4"/>
-      </g>
-      <path class="n" d="M348 232 C330 240 318 226 316 200"/>
-      <g transform="translate(318 184) rotate(-30) scale(0.95)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>
-      <path class="n" d="M396 232 C420 238 432 214 432 190"/>
-      <g transform="translate(432 176) rotate(10) scale(0.95)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>
-      <g transform="translate(372 166) scale(0.95 0.95)">
-      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
-      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
-      <path class="k" d="M-46 -10 C-50 -50 -10 -66 20 -54 C44 -50 54 -30 48 -10 C40 -30 20 -36 0 -30 C-20 -40 -36 -30 -46 -10Z"/>
-      <g class="pupil">
-        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
-        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
-      </g>
-      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
-      <path class="l" d="M-20 18 Q0 36 20 18"/>
-      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
-    </g>
-      <g transform="translate(250 362)">
+      <path class="t" d="M160 296 L110 296 M160 296 L210 296"/><circle class="p" cx="110" cy="296" r="7" style="stroke-width:3"/><circle class="p" cx="210" cy="296" r="7" style="stroke-width:3"/>
+      <rect class="p" x="18" y="324" width="12" height="12" style="stroke-width:3"/><rect class="p" x="154" y="290" width="12" height="12" style="stroke-width:3"/>
+      <g transform="translate(232 40) scale(6)" shape-rendering="crispEdges"><path class="w" d="M29 2h1v1h-1zM28 3h1v1h-1zM30 3h1v1h-1zM27 4h1v1h-1zM29 4h1v1h-1zM31 4h1v1h-1zM26 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM32 5h1v1h-1zM27 6h1v1h-1zM29 6h1v1h-1zM31 6h1v1h-1zM33 6h1v1h-1zM24 7h1v1h-1zM28 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM34 7h1v1h-1zM23 8h1v1h-1zM25 8h1v1h-1zM29 8h1v1h-1zM31 8h1v1h-1zM33 8h1v1h-1zM35 8h1v1h-1zM23 9h2v1h-2zM26 9h1v1h-1zM30 9h1v1h-1zM32 9h1v1h-1zM34 9h1v1h-1zM21 10h1v1h-1zM24 10h2v1h-2zM27 10h1v1h-1zM31 10h1v1h-1zM33 10h1v1h-1zM20 11h3v1h-3zM25 11h2v1h-2zM28 11h1v1h-1zM32 11h1v1h-1zM19 12h5v1h-5zM26 12h2v1h-2zM29 12h1v1h-1zM18 13h7v1h-7zM27 13h2v1h-2zM30 13h1v1h-1zM17 14h8v1h-8zM28 14h2v1h-2zM16 15h8v1h-8zM25 15h2v1h-2zM29 15h1v1h-1zM15 16h8v1h-8zM24 16h4v1h-4zM14 17h8v1h-8zM23 17h5v1h-5zM13 18h8v1h-8zM22 18h5v1h-5zM12 19h8v1h-8zM21 19h5v1h-5zM11 20h8v1h-8zM20 20h5v1h-5zM10 21h8v1h-8zM19 21h5v1h-5zM9 22h8v1h-8zM18 22h5v1h-5zM8 23h8v1h-8zM17 23h5v1h-5zM7 24h8v1h-8zM16 24h5v1h-5zM6 25h8v1h-8zM15 25h5v1h-5zM6 26h7v1h-7zM14 26h5v1h-5zM7 27h5v1h-5zM13 27h5v1h-5zM5 28h1v1h-1zM8 28h3v1h-3zM12 28h5v1h-5zM5 29h2v1h-2zM9 29h1v1h-1zM11 29h5v1h-5zM5 30h3v1h-3zM10 30h5v1h-5zM5 31h4v1h-4zM11 31h3v1h-3zM4 32h6v1h-6zM12 32h1v1h-1zM4 33h7v1h-7zM4 34h5v1h-5zM5 35h1v1h-1z"/><path class="k" d="M29 1h1v1h-1zM28 2h1v1h-1zM30 2h1v1h-1zM27 3h1v1h-1zM29 3h1v1h-1zM31 3h1v1h-1zM26 4h1v1h-1zM28 4h1v1h-1zM30 4h1v1h-1zM32 4h1v1h-1zM25 5h1v1h-1zM27 5h1v1h-1zM29 5h1v1h-1zM31 5h1v1h-1zM33 5h1v1h-1zM24 6h3v1h-3zM28 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM34 6h1v1h-1zM23 7h1v1h-1zM25 7h3v1h-3zM29 7h1v1h-1zM31 7h1v1h-1zM33 7h1v1h-1zM35 7h1v1h-1zM22 8h1v1h-1zM24 8h1v1h-1zM26 8h3v1h-3zM30 8h1v1h-1zM32 8h1v1h-1zM34 8h1v1h-1zM36 8h1v1h-1zM21 9h2v1h-2zM25 9h1v1h-1zM27 9h3v1h-3zM31 9h1v1h-1zM33 9h1v1h-1zM35 9h2v1h-2zM20 10h1v1h-1zM22 10h2v1h-2zM26 10h1v1h-1zM28 10h3v1h-3zM32 10h1v1h-1zM34 10h2v1h-2zM19 11h1v1h-1zM23 11h2v1h-2zM27 11h1v1h-1zM29 11h3v1h-3zM33 11h2v1h-2zM18 12h1v1h-1zM24 12h2v1h-2zM28 12h1v1h-1zM30 12h4v1h-4zM17 13h1v1h-1zM25 13h2v1h-2zM29 13h1v1h-1zM31 13h2v1h-2zM16 14h1v1h-1zM25 14h3v1h-3zM30 14h2v1h-2zM15 15h1v1h-1zM24 15h1v1h-1zM27 15h2v1h-2zM30 15h2v1h-2zM14 16h1v1h-1zM23 16h1v1h-1zM28 16h2v1h-2zM13 17h1v1h-1zM22 17h1v1h-1zM28 17h1v1h-1zM12 18h1v1h-1zM21 18h1v1h-1zM27 18h1v1h-1zM11 19h1v1h-1zM20 19h1v1h-1zM26 19h1v1h-1zM10 20h1v1h-1zM19 20h1v1h-1zM25 20h1v1h-1zM9 21h1v1h-1zM18 21h1v1h-1zM24 21h1v1h-1zM8 22h1v1h-1zM17 22h1v1h-1zM23 22h1v1h-1zM7 23h1v1h-1zM16 23h1v1h-1zM22 23h1v1h-1zM6 24h1v1h-1zM15 24h1v1h-1zM21 24h1v1h-1zM5 25h1v1h-1zM14 25h1v1h-1zM20 25h1v1h-1zM5 26h1v1h-1zM13 26h1v1h-1zM19 26h1v1h-1zM5 27h2v1h-2zM12 27h1v1h-1zM18 27h1v1h-1zM4 28h1v1h-1zM6 28h2v1h-2zM11 28h1v1h-1zM17 28h1v1h-1zM4 29h1v1h-1zM7 29h2v1h-2zM10 29h1v1h-1zM16 29h1v1h-1zM4 30h1v1h-1zM8 30h2v1h-2zM15 30h1v1h-1zM4 31h1v1h-1zM9 31h2v1h-2zM14 31h1v1h-1zM3 32h1v1h-1zM10 32h2v1h-2zM13 32h1v1h-1zM3 33h1v1h-1zM11 33h2v1h-2zM2 34h2v1h-2zM9 34h3v1h-3zM2 35h3v1h-3zM6 35h3v1h-3zM2 36h4v1h-4zM1 37h4v1h-4zM1 38h1v1h-1z"/></g>
+      <g transform="translate(300 330)">
       <rect x="0" y="0" width="85.8" height="26" rx="5" class="k" />
       <text x="10" y="18" class="tx">Pen (P)</text>
     </g>
+      <path class="k" transform="translate(410 60) scale(1)" d="M0 -14 L3 -3 L14 0 L3 3 L0 14 L-3 3 L-14 0 L-3 -3Z"/>
     </svg>

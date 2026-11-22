@@ -1,89 +1,249 @@
 /*
- * Monochrome retro "rubber-hose" cartoon characters holding Figma UI props.
- * Every illustration is an inline SVG with NO background -> fully transparent.
+ * Old-Mac style 1-bit pixel icons combined with Figma UI (selection boxes, tags,
+ * cursors, bezier handles, frames, components).
+ * Every illustration is an inline SVG with NO background, so it is fully transparent.
  * Colours come from CSS custom properties so they can be re-themed:
- *   --ill-ink   (default #111)   lines & solid fills
- *   --ill-paper (default #fff)   faces, gloves, UI surfaces
- * Pupils are wrapped in <g class="pupil"> so main.js can make them follow the cursor.
+ *   --ill-ink   (default #111)   pixels, outlines, solid fills
+ *   --ill-paper (default #fff)   icon interiors, UI surfaces
+ * Eyes on the little computer are wrapped in <g class="pupil"> so main.js can make them follow the cursor.
+ *
+ * Pixel icons are not hand-placed: a tiny rasteriser fills shapes (rounded rects, ellipses,
+ * polygons) on a grid and outlines them automatically, the way classic 32×32 icons were drawn.
  */
 (function (root) {
   const STYLE = `<style>
     .k{fill:var(--ill-ink,#111)}
+    .w{fill:var(--ill-paper,#fff)}
     .p{fill:var(--ill-paper,#fff);stroke:var(--ill-ink,#111);stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
     .l{fill:none;stroke:var(--ill-ink,#111);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
     .t{fill:none;stroke:var(--ill-ink,#111);stroke-width:2.5;stroke-linecap:round}
     .d{fill:none;stroke:var(--ill-ink,#111);stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
-    .n{fill:none;stroke:var(--ill-ink,#111);stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-    .w{fill:var(--ill-paper,#fff)}
     .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:var(--ill-paper,#fff);letter-spacing:.02em}
     .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:var(--ill-ink,#111);letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:var(--ill-ink,#111)}
   </style>`;
 
   const svg = (vb, body, label) =>
     `<svg class="ill" viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${label}">${STYLE}${body}</svg>`;
 
-  /* ---------- reusable body parts (local coordinates) ---------- */
-
-  // Head centred at 0,0. mood: 'grin' | 'smile' | 'o'
-  function head(x, y, s = 1, { mood = 'grin', hat = 'beret', flip = false } = {}) {
-    const mouth = {
-      grin: `<path class="k" d="M-25 17 Q0 50 25 17 Q0 27 -25 17Z"/><path class="w" d="M-10 30 Q0 38 10 30 Q0 27 -10 30Z"/>`,
-      smile: `<path class="l" d="M-20 18 Q0 36 20 18"/>`,
-      o: `<ellipse class="k" cx="0" cy="26" rx="8" ry="10"/>`,
-    }[mood];
-    const hats = {
-      beret: `<path class="k" d="M-50 -14 C-56 -60 46 -74 56 -26 C30 -38 -20 -36 -50 -14Z"/><path class="l" d="M4 -56 l3 -12"/>`,
-      cap: `<path class="k" d="M-44 -18 C-44 -64 44 -64 44 -18Z"/><path class="k" d="M30 -22 L82 -18 C80 -10 60 -8 30 -10Z"/>`,
-      hair: `<path class="k" d="M-46 -10 C-50 -50 -10 -66 20 -54 C44 -50 54 -30 48 -10 C40 -30 20 -36 0 -30 C-20 -40 -36 -30 -46 -10Z"/>`,
-      none: '',
-    }[hat];
-    return `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})">
-      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
-      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
-      ${hats}
-      <g class="pupil">
-        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
-        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
-      </g>
-      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
-      ${mouth}
-      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
-    </g>`;
+  /* =========================================================
+     1-bit pixel rasteriser
+     0 = transparent, 1 = ink, 2 = paper
+     ========================================================= */
+  function Grid(w, h) {
+    this.w = w; this.h = h; this.c = new Uint8Array(w * h);
   }
+  Grid.prototype.set = function (x, y, v) {
+    x = Math.round(x); y = Math.round(y);
+    if (x >= 0 && y >= 0 && x < this.w && y < this.h) this.c[y * this.w + x] = v;
+  };
+  Grid.prototype.get = function (x, y) { return x < 0 || y < 0 || x >= this.w || y >= this.h ? 0 : this.c[y * this.w + x]; };
+  // fill a shape; mode 'blob' = paper inside with 1px ink outline, 'ink' = solid ink, 'paper' = solid paper, 'dither' = 50% checker
+  Grid.prototype.shape = function (inside, mode = 'blob') {
+    const m = [];
+    for (let y = 0; y < this.h; y++) for (let x = 0; x < this.w; x++) m[y * this.w + x] = inside(x + 0.5, y + 0.5);
+    const at = (x, y) => x >= 0 && y >= 0 && x < this.w && y < this.h && m[y * this.w + x];
+    for (let y = 0; y < this.h; y++) for (let x = 0; x < this.w; x++) {
+      if (!m[y * this.w + x]) continue;
+      const edge = !at(x - 1, y) || !at(x + 1, y) || !at(x, y - 1) || !at(x, y + 1);
+      let v;
+      if (mode === 'clear') v = 0;
+      else if (mode === 'ink') v = 1;
+      else if (mode === 'paper') v = 2;
+      else if (mode === 'dither') v = edge || (x + y) % 2 === 0 ? 1 : 2;
+      else v = edge ? 1 : 2;
+      this.c[y * this.w + x] = v;
+    }
+    return this;
+  };
+  Grid.prototype.line = function (x0, y0, x1, y1, v = 1) {
+    const dx = Math.abs(x1 - x0), dy = Math.abs(y1 - y0), sx = x0 < x1 ? 1 : -1, sy = y0 < y1 ? 1 : -1;
+    let err = dx - dy;
+    for (;;) {
+      this.set(x0, y0, v);
+      if (x0 === x1 && y0 === y1) break;
+      const e2 = 2 * err;
+      if (e2 > -dy) { err -= dy; x0 += sx; }
+      if (e2 < dx) { err += dx; y0 += sy; }
+    }
+    return this;
+  };
+  Grid.prototype.rect = function (x, y, w, h, v = 1) { for (let j = y; j < y + h; j++) for (let i = x; i < x + w; i++) this.set(i, j, v); return this; };
+  Grid.prototype.frame = function (x, y, w, h, v = 1) { this.line(x, y, x + w - 1, y, v); this.line(x, y + h - 1, x + w - 1, y + h - 1, v); this.line(x, y, x, y + h - 1, v); this.line(x + w - 1, y, x + w - 1, y + h - 1, v); return this; };
+  // render as two run-length paths (ink + paper)
+  Grid.prototype.svg = function (x, y, s, extra = '') {
+    let ink = '', paper = '';
+    for (let j = 0; j < this.h; j++) {
+      let i = 0;
+      while (i < this.w) {
+        const v = this.c[j * this.w + i];
+        let k = i;
+        while (k < this.w && this.c[j * this.w + k] === v) k++;
+        if (v) { const d = `M${i} ${j}h${k - i}v1h-${k - i}z`; if (v === 1) ink += d; else paper += d; }
+        i = k;
+      }
+    }
+    return `<g transform="translate(${x} ${y}) scale(${s})" shape-rendering="crispEdges">${paper ? `<path class="w" d="${paper}"/>` : ''}<path class="k" d="${ink}"/>${extra}</g>`;
+  };
 
-  // Torso + classic shorts; neck at x,y.
-  function torso(x, y, s = 1) {
-    return `<g transform="translate(${x} ${y}) scale(${s})">
-      <path class="p" d="M-30 2 C-50 40 -46 96 -24 106 L26 106 C48 96 50 40 30 2 Z"/>
-      <path class="k" d="M-30 94 L30 94 L38 136 L9 136 L0 118 L-9 136 L-38 136 Z"/>
-      <circle class="w" cx="-14" cy="108" r="4.5"/><circle class="w" cx="14" cy="108" r="4.5"/>
-    </g>`;
-  }
+  // shape predicates
+  const rr = (x, y, w, h, r = 0) => (px, py) => {
+    if (px < x || py < y || px > x + w || py > y + h) return false;
+    const cx = Math.min(Math.max(px, x + r), x + w - r), cy = Math.min(Math.max(py, y + r), y + h - r);
+    return (px - cx) ** 2 + (py - cy) ** 2 <= r * r + 0.01;
+  };
+  const ell = (cx, cy, rx, ry = rx) => (px, py) => ((px - cx) / rx) ** 2 + ((py - cy) / ry) ** 2 <= 1;
+  const poly = (pts) => (px, py) => {
+    let inside = false;
+    for (let i = 0, j = pts.length - 1; i < pts.length; j = i++) {
+      const [xi, yi] = pts[i], [xj, yj] = pts[j];
+      if ((yi > py) !== (yj > py) && px < ((xj - xi) * (py - yi)) / (yj - yi) + xi) inside = !inside;
+    }
+    return inside;
+  };
+  const any = (...fs) => (x, y) => fs.some((f) => f(x, y));
+  const not = (f, g) => (x, y) => f(x, y) && !g(x, y);
 
-  const noodle = (d) => `<path class="n" d="${d}"/>`;
+  /* ---------- pixel icons (original designs in the classic 1-bit style) ---------- */
+  const PX = {};
 
-  function glove(x, y, r = 0, s = 1) {
-    return `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>`;
-  }
+  // little desktop computer with a face (eyes drawn separately so they can move)
+  PX.computer = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1));
+    g.shape(rr(1, 0, 30, 34, 3));
+    g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2));
+    g.frame(7, 6, 18, 13, 1);
+    g.line(11, 15, 12, 16).line(12, 16, 19, 16).line(19, 16, 20, 15);
+    g.rect(17, 25, 9, 2, 1);
+    g.frame(6, 26, 4, 4, 1);
+    g.line(4, 36, 27, 36);
+    return g;
+  };
+  PX.computerEyes = (x, y, s) =>
+    `<g class="pupil"><rect class="k" x="${x + 11 * s}" y="${y + 9 * s}" width="${2 * s}" height="${3 * s}" shape-rendering="crispEdges"/><rect class="k" x="${x + 19 * s}" y="${y + 9 * s}" width="${2 * s}" height="${3 * s}" shape-rendering="crispEdges"/></g>`;
 
-  function shoe(x, y, flip = false) {
-    return `<g transform="translate(${x} ${y}) scale(${flip ? -1 : 1} 1)">
-      <ellipse class="k" cx="0" cy="0" rx="27" ry="14"/>
-      <ellipse class="w" cx="-9" cy="-5" rx="7" ry="3.5"/>
-    </g>`;
-  }
+  PX.pencil = () => {
+    const g = new Grid(40, 40);
+    g.shape(poly([[30, 1], [38, 9], [33, 14], [25, 6]]), 'dither');
+    g.shape(poly([[25, 6], [33, 14], [30, 17], [22, 9]]));
+    g.line(24, 8, 31, 15);
+    g.shape(poly([[22, 9], [30, 17], [13, 34], [5, 26]]));
+    g.line(26, 13, 9, 30);
+    g.shape(poly([[5, 26], [13, 34], [2, 38]]));
+    g.shape(poly([[3, 33], [7, 37], [1, 39]]), 'ink');
+    return g;
+  };
 
-  // Figma-style pointer cursor, tip at 0,0
+  PX.window = () => {
+    const g = new Grid(66, 48);
+    g.rect(1, 1, 65, 47, 1);
+    g.shape(rr(0, 0, 64, 46, 0));
+    for (let y = 2; y <= 7; y += 2) g.line(2, y, 61, y);
+    g.rect(20, 2, 25, 6, 2);
+    g.rect(5, 2, 7, 6, 2);
+    g.frame(6, 2, 5, 6);
+    g.line(0, 9, 63, 9);
+    g.frame(4, 13, 56, 4);
+    g.frame(4, 20, 24, 19);
+    g.line(4, 20, 27, 38).line(27, 20, 4, 38);
+    g.rect(32, 21, 26, 2).rect(32, 26, 20, 2).rect(32, 31, 24, 2);
+    g.shape(rr(32, 35, 17, 6, 3), 'ink');
+    g.rect(36, 37, 9, 2, 2);
+    g.line(0, 42, 63, 42);
+    for (let x = 4; x < 60; x += 4) g.set(x, 44, 1);
+    return g;
+  };
+
+  PX.hand = () => {
+    const g = new Grid(32, 38);
+    const finger = rr(11, 1, 6, 17, 3);
+    const k1 = rr(16, 11, 5, 9, 2.5), k2 = rr(20, 12, 5, 9, 2.5), k3 = rr(24, 13, 5, 9, 2.5);
+    const palm = rr(8, 15, 21, 15, 4);
+    const thumb = poly([[9, 18], [3, 15], [1, 18], [7, 25], [10, 25]]);
+    g.shape(any(finger, k1, k2, k3, palm, thumb));
+    g.line(16, 13, 16, 18).line(20, 14, 20, 19).line(24, 15, 24, 20);
+    g.line(12, 4, 15, 4);
+    g.shape(rr(9, 29, 19, 8, 1));
+    g.line(9, 32, 27, 32);
+    return g;
+  };
+
+  PX.magnifier = () => {
+    const g = new Grid(34, 34);
+    g.shape(poly([[19, 22], [22, 19], [33, 30], [30, 33]]), 'ink');
+    g.shape(ell(13, 13, 12.5), 'ink');
+    g.shape(ell(13, 13, 9.5), 'clear');
+    g.line(8, 7, 11, 5).line(6, 10, 6, 9);
+    return g;
+  };
+
+  PX.document = () => {
+    const g = new Grid(28, 34);
+    g.shape(poly([[0.5, 0.5], [19.5, 0.5], [27.5, 8.5], [27.5, 33.5], [0.5, 33.5]]));
+    g.line(19, 0, 19, 8).line(19, 8, 27, 8);
+    g.rect(4, 5, 11, 1).rect(4, 8, 8, 1);
+    [[5, 18], [9, 12], [13, 20], [17, 9], [21, 15]].forEach(([x, top]) => g.rect(x, top, 3, 30 - top));
+    g.line(3, 30, 25, 30);
+    return g;
+  };
+
+  PX.folder = () => {
+    const g = new Grid(36, 28);
+    g.shape(rr(1, 1, 14, 7, 2));
+    g.shape(rr(1, 5, 34, 22, 1));
+    g.line(2, 5, 14, 5);
+    g.line(2, 9, 33, 9);
+    return g;
+  };
+
+  PX.floppy = () => {
+    const g = new Grid(32, 32);
+    g.shape(poly([[0.5, 0.5], [28.5, 0.5], [31.5, 3.5], [31.5, 31.5], [0.5, 31.5]]));
+    g.shape(rr(7, 0.5, 17, 11, 0), 'dither');
+    g.rect(18, 3, 3, 6, 2);
+    g.shape(rr(5, 16, 22, 15, 1));
+    g.rect(8, 20, 16, 1).rect(8, 23, 13, 1).rect(8, 26, 15, 1);
+    return g;
+  };
+
+  PX.trash = () => {
+    const g = new Grid(28, 36);
+    g.shape(rr(9, 0, 10, 5, 1));
+    g.shape(rr(1, 4, 26, 5, 1));
+    g.shape(poly([[3, 8.5], [25, 8.5], [23, 35.5], [5, 35.5]]));
+    [9, 14, 19].forEach((x) => g.line(x, 12, x, 32));
+    return g;
+  };
+
+  PX.watch = () => {
+    const g = new Grid(24, 36);
+    g.shape(rr(6, 0, 12, 9, 1), 'dither');
+    g.shape(rr(6, 27, 12, 9, 1), 'dither');
+    g.shape(ell(12, 18, 11));
+    g.line(12, 18, 12, 10).line(12, 18, 17, 18);
+    [[12, 8], [12, 28], [2, 18], [22, 18]].forEach(([x, y]) => g.set(x, y, 1));
+    return g;
+  };
+
+  PX.bomb = () => {
+    const g = new Grid(34, 34);
+    g.shape(ell(14, 20, 12.5), 'ink');
+    g.shape(poly([[18, 6], [25, 9], [22, 14], [16, 11]]), 'ink');
+    g.line(8, 15, 10, 13).line(7, 17, 7, 18).line(11, 12, 12, 12);
+    [[9, 14], [8, 16]].forEach(([x, y]) => g.set(x, y, 2));
+    g.line(22, 8, 25, 4).line(25, 4, 27, 4);
+    [[30, 1], [30, 7], [27, 0], [33, 4], [32, 1], [32, 7], [28, 7]].forEach(([x, y]) => g.set(x, y, 1));
+    return g;
+  };
+
+  /* ---------- Figma UI parts (vector) ---------- */
   function cursor(x, y, s = 1, r = 0) {
     return `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})">
       <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="var(--ill-paper,#fff)" stroke-width="5" stroke-linejoin="round"/>
     </g>`;
   }
-
   function nameTag(x, y, text, dark = true) {
     const w = text.length * 9.4 + 20;
     return `<g transform="translate(${x} ${y})">
@@ -91,233 +251,145 @@
       <text x="10" y="18" class="${dark ? 'tx' : 'tk'}">${text}</text>
     </g>`;
   }
-
   const handle = (x, y) => `<rect class="p" x="${x - 6}" y="${y - 6}" width="12" height="12" style="stroke-width:3"/>`;
-
-  function selection(x, y, w, h) {
-    return `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="t" style="stroke-width:2"/>
-      ${handle(x, y)}${handle(x + w, y)}${handle(x, y + h)}${handle(x + w, y + h)}`;
-  }
-
-  const motion = (x, y, r = 0) =>
-    `<g transform="translate(${x} ${y}) rotate(${r})"><path class="l" d="M0 0 q10 8 8 22"/><path class="l" d="M14 -6 q14 10 12 32"/></g>`;
-
+  const selection = (x, y, w, h) =>
+    `<rect x="${x}" y="${y}" width="${w}" height="${h}" class="t" style="stroke-width:2"/>${handle(x, y)}${handle(x + w, y)}${handle(x, y + h)}${handle(x + w, y + h)}`;
   function diamond4(x, y, s = 1) {
-    // Figma "main component" icon
     const d = (cx, cy) => `<path class="k" d="M${cx} ${cy - 13} L${cx + 13} ${cy} L${cx} ${cy + 13} L${cx - 13} ${cy}Z"/>`;
     return `<g transform="translate(${x} ${y}) scale(${s})">${d(0, -17)}${d(17, 0)}${d(0, 17)}${d(-17, 0)}</g>`;
   }
+  const sparkle = (x, y, s = 1) => `<path class="k" transform="translate(${x} ${y}) scale(${s})" d="M0 -14 L3 -3 L14 0 L3 3 L0 14 L-3 3 L-14 0 L-3 -3Z"/>`;
 
-  /* ---------- characters ---------- */
+  /* =========================================================
+     Illustrations (names kept so pages don't change)
+     ========================================================= */
+  const ILL = { PX };
 
-  const ILL = {};
-
-  // HERO — the designer holding a giant Figma cursor inside a selection box
-  ILL.cursorKid = () =>
-    svg(
-      '0 0 440 480',
-      `
+  // Pocket / generic: smiling computer inside a Figma selection, with multiplayer cursors
+  ILL.cursorKid = () => {
+    const s = 8, x = 92, y = 82;
+    return svg('0 0 440 480', `
       ${selection(70, 52, 300, 382)}
       ${nameTag(70, 18, 'Designer')}
       ${nameTag(176, 446, '300 × Hug', false)}
-      <g class="arm-wave" style="transform-origin:250px 232px">
-        ${noodle('M250 232 C282 216 300 190 310 156')}
-        ${glove(314, 140, 20)}
-        ${motion(336, 112, 10)}
-      </g>
-      ${noodle('M198 346 C194 378 176 396 166 410')}
-      ${noodle('M234 346 C238 378 256 396 268 410')}
-      ${shoe(156, 418)}${shoe(280, 418, true)}
-      ${torso(216, 214)}
-      ${noodle('M188 232 C158 220 138 190 134 150')}
-      ${cursor(92, 58, 1.25, -8)}
-      ${glove(134, 140, -15)}
-      ${head(216, 164, 1.05, { mood: 'grin', hat: 'beret' })}
+      ${PX.computer().svg(x, y, s)}
+      ${PX.computerEyes(x, y, s)}
+      ${sparkle(392, 96, 1.1)}${sparkle(40, 300, .8)}
       ${cursor(360, 330, 0.55, -10)}
       ${nameTag(380, 370, 'you', true)}
-    `,
-      'Retro cartoon designer holding a giant Figma cursor'
-    );
+      ${cursor(26, 150, 0.5, -10)}
+      ${nameTag(0, 188, 'PM', false)}
+    `, 'Pixel-art retro computer with a smiling face inside a Figma selection box');
+  };
 
-  // Pen tool — drawing a bezier curve with anchors & handles
-  ILL.penPal = () =>
-    svg(
-      '0 0 460 400',
-      `
-      <path class="l" d="M24 330 C110 160 230 380 330 210" style="stroke-width:4"/>
+  // Pen tool: pixel pencil drawing a bezier curve with Figma anchors & handles
+  ILL.penPal = () => {
+    const s = 6, x = 232, y = 40;
+    return svg('0 0 460 400', `
+      <path class="l" d="M24 330 C110 160 190 380 253 271" style="stroke-width:4"/>
       <path class="t" d="M24 330 L90 210"/><circle class="p" cx="90" cy="210" r="7" style="stroke-width:3"/>
-      <path class="t" d="M190 300 L130 300 M190 300 L250 300"/><circle class="p" cx="130" cy="300" r="7" style="stroke-width:3"/><circle class="p" cx="250" cy="300" r="7" style="stroke-width:3"/>
-      ${handle(24, 330)}${handle(190, 300)}
-      <rect class="k" x="324" y="204" width="13" height="13"/>
-      ${noodle('M356 330 C352 352 340 366 330 378')}
-      ${noodle('M388 330 C392 352 404 366 414 378')}
-      ${shoe(322, 384)}${shoe(424, 384, true)}
-      ${torso(372, 210, 0.9)}
-      <g transform="translate(338 206) rotate(-35)">
-        <path class="p" d="M0 0 L-22 -52 L0 -96 L22 -52 Z"/>
-        <path class="l" d="M0 0 L0 -44" style="stroke-width:3"/><circle class="w" cx="0" cy="-50" r="6" stroke="var(--ill-ink,#111)" stroke-width="3"/>
-        <rect class="k" x="-16" y="-128" width="32" height="34" rx="4"/>
-      </g>
-      ${noodle('M348 232 C330 240 318 226 316 200')}
-      ${glove(318, 184, -30, 0.95)}
-      ${noodle('M396 232 C420 238 432 214 432 190')}
-      ${glove(432, 176, 10, 0.95)}
-      ${head(372, 166, 0.95, { mood: 'smile', hat: 'hair' })}
-      ${nameTag(250, 362, 'Pen (P)', true)}
-    `,
-      'Retro cartoon character drawing a bezier curve with the Figma pen tool'
-    );
+      <path class="t" d="M160 296 L110 296 M160 296 L210 296"/><circle class="p" cx="110" cy="296" r="7" style="stroke-width:3"/><circle class="p" cx="210" cy="296" r="7" style="stroke-width:3"/>
+      ${handle(24, 330)}${handle(160, 296)}
+      ${PX.pencil().svg(x, y, s)}
+      ${nameTag(300, 330, 'Pen (P)', true)}
+      ${sparkle(410, 60, 1)}
+    `, 'Pixel-art pencil drawing a bezier curve with Figma anchor points');
+  };
 
-  // Peeking over the top of a Frame with a wireframe inside
-  ILL.framePeek = () =>
-    svg(
-      '0 0 460 380',
-      `
-      ${head(230, 98, 1, { mood: 'o', hat: 'cap' })}
-      <rect class="p" x="40" y="130" width="380" height="230" rx="6"/>
-      <text x="40" y="120" class="tk" style="font-size:14px">Frame 12 — 1440</text>
-      ${glove(150, 128, -10)}${glove(310, 128, 10)}
-      <rect class="t" x="62" y="152" width="336" height="22" rx="4"/>
-      <rect class="t" x="62" y="190" width="150" height="110" rx="4"/>
-      <path class="t" d="M62 190 L212 300 M212 190 L62 300"/>
-      <path class="l" d="M232 198 H380 M232 222 H350 M232 246 H368" style="stroke-width:6"/>
-      <rect class="k" x="232" y="270" width="96" height="30" rx="15"/>
-      <text x="248" y="290" class="tx" style="font-size:12px">BUTTON</text>
-      <path class="t" d="M62 326 H398" style="stroke-dasharray:6 8"/>
-      ${cursor(372, 290, 0.5, -10)}
-    `,
-      'Retro cartoon character peeking over a Figma frame containing a wireframe'
-    );
+  // A classic window, selected as a Figma frame, with a wireframe inside
+  ILL.framePeek = () => {
+    const s = 6, x = 32, y = 62;
+    return svg('0 0 460 380', `
+      <text x="32" y="50" class="tk" style="font-size:14px">Frame 12 — 1440</text>
+      ${PX.window().svg(x, y, s)}
+      <text x="${x + 32.5 * s}" y="${y + 6.6 * s}" text-anchor="middle" class="px" style="font-size:15px">untitled</text>
+      ${handle(32, 62)}${handle(416, 62)}${handle(32, 338)}${handle(416, 338)}
+      ${cursor(316, 268, 0.5, -10)}
+      ${nameTag(340, 300, 'you', true)}
+    `, 'Pixel-art classic window with a wireframe, selected as a Figma frame');
+  };
 
-  // Juggling components
-  ILL.juggler = () =>
-    svg(
-      '0 0 440 460',
-      `
+  // Hand pointer juggling components
+  ILL.juggler = () => {
+    const s = 8, x = 84, y = 150;
+    return svg('0 0 440 460', `
       <path class="d" d="M110 170 C130 30 310 30 330 170"/>
       <g class="float-a">${diamond4(120, 118, 1)}</g>
       <g class="float-b"><rect class="p" x="194" y="22" width="52" height="52" rx="8"/><text x="204" y="56" class="tk" style="font-size:22px">Aa</text></g>
-      <g class="float-c" transform="translate(320 118)"><path class="p" d="M0 -26 L26 0 L0 26 L-26 0Z"/><path class="k" d="M0 -10 L10 0 L0 10 L-10 0Z"/></g>
-      ${noodle('M202 360 C196 392 182 410 170 424')}
-      ${noodle('M238 360 C244 392 258 410 270 424')}
-      ${shoe(160, 432)}${shoe(282, 432, true)}
-      ${torso(220, 228)}
-      ${noodle('M192 246 C160 236 140 210 136 186')}
-      ${glove(134, 172, -20)}
-      ${noodle('M248 246 C280 236 300 210 304 186')}
-      ${glove(306, 172, 20)}
-      ${head(220, 178, 1, { mood: 'grin', hat: 'none' })}
-      <path class="l" d="M188 132 q-6 -18 6 -26 M220 126 q0 -18 10 -24 M250 132 q8 -16 -2 -28" />
-    `,
-      'Retro cartoon character juggling Figma component icons'
-    );
+      <g class="float-c"><g transform="translate(320 118)"><path class="p" d="M0 -26 L26 0 L0 26 L-26 0Z"/><path class="k" d="M0 -10 L10 0 L0 10 L-10 0Z"/></g></g>
+      ${PX.hand().svg(x, y, s)}
+      <path class="l" d="M150 150 l-14 -12 M206 128 l0 -16 M246 150 l14 -12" style="stroke-width:4"/>
+    `, 'Pixel-art pointing hand juggling Figma component icons');
+  };
 
-  // Sitting on a giant comment bubble
-  ILL.commenter = () =>
-    svg(
-      '0 0 420 420',
-      `
+  // Figma comment bubble with a pixel floppy: saved & approved
+  ILL.commenter = () => {
+    const s = 5, x = 132, y = 26;
+    return svg('0 -40 420 460', `
       <path class="p" d="M60 404 L60 276 C60 214 110 180 210 180 C310 180 360 214 360 292 C360 370 310 404 210 404 Z"/>
       <text x="210" y="338" text-anchor="middle" class="tk" style="font:400 52px 'Anton',Impact,sans-serif;letter-spacing:.02em">LGTM!</text>
       <path class="l" d="M140 364 H282" style="stroke-width:4"/>
-      ${noodle('M194 190 C190 222 176 240 164 254')}
-      ${noodle('M222 190 C228 222 244 240 256 252')}
-      ${shoe(154, 260)}${shoe(266, 258, true)}
-      ${torso(208, 64, 0.95)}
-      ${noodle('M182 82 C150 80 132 104 130 132')}
-      ${glove(128, 148, 170)}
-      ${noodle('M234 82 C266 70 280 44 284 20')}
-      ${glove(286, 8, 10)}
-      ${motion(306, -6, 20)}
-      ${head(208, 20, 0.9, { mood: 'grin', hat: 'beret' })}
-    `,
-      'Retro cartoon character sitting on a Figma comment bubble that says LGTM'
-    ).replace('viewBox="0 0 420 420"', 'viewBox="0 -40 420 460"');
-
-  // Standing on stacked layers with a flag
-  ILL.layers = () => {
-    const slab = (y, label) => `<g transform="translate(220 ${y})">
-        <path class="p" d="M-150 0 L0 -60 L150 0 L0 60 Z"/>
-        <path class="k" d="M-150 0 L0 60 L0 78 L-150 18Z"/><path class="p" d="M150 0 L0 60 L0 78 L150 18Z" style="stroke-width:4"/>
-        <path class="t" d="M150 10 L176 10"/><text x="182" y="15" class="tk" style="font-size:14px">${label}</text>
-      </g>`;
-    return svg(
-      '0 0 540 500',
-      `
-      ${slab(412, 'Tokens')}${slab(352, 'Components')}${slab(292, 'Patterns')}
-      ${noodle('M208 270 C206 282 200 290 194 296')}${noodle('M234 270 C236 282 242 290 248 296')}
-      ${shoe(186, 298)}${shoe(256, 298, true)}
-      ${torso(220, 134)}
-      <path class="l" d="M296 40 L296 232" style="stroke-width:6"/>
-      <path class="k" d="M300 42 L380 56 L300 90 Z"/><text x="306" y="70" class="tx" style="font-size:13px">v2.0</text>
-      ${noodle('M246 150 C270 160 286 170 296 176')}
-      ${glove(296, 172, 80)}
-      ${noodle('M194 150 C164 146 150 124 148 100')}
-      ${glove(148, 86, -10)}
-      ${motion(118, 62, -40)}
-      ${head(220, 92, 1, { mood: 'grin', hat: 'cap' })}
-    `,
-      'Retro cartoon character standing on stacked design-system layers holding a v2.0 flag'
-    );
+      ${PX.floppy().svg(x, y, s)}
+      ${sparkle(318, 40, 1.1)}${sparkle(96, 120, .8)}
+      ${nameTag(250, 120, 'saved ✓', true)}
+    `, 'Pixel-art floppy disk on a Figma comment bubble that says LGTM');
   };
 
-  // Researcher with a giant magnifying glass over a sticky note
-  ILL.researcher = (tag = 'n = 14 interviews') =>
-    svg(
-      '0 0 460 440',
-      `
-      <g transform="rotate(-6 120 300)">
-        <rect class="p" x="30" y="220" width="170" height="170"/>
-        <path class="k" d="M30 220 h170 v18 h-170z"/>
-        <path class="l" d="M54 360 V310 M84 360 V280 M114 360 V330 M144 360 V262 M174 360 V300" style="stroke-width:12;stroke-linecap:butt"/>
-      </g>
-      ${noodle('M300 352 C296 384 286 402 276 416')}${noodle('M336 352 C342 384 352 402 362 416')}
-      ${shoe(266, 422)}${shoe(374, 422, true)}
-      ${torso(318, 220)}
-      <g transform="translate(196 210) rotate(-30)">
-        <rect class="k" x="-10" y="60" width="20" height="90" rx="8"/>
-        <circle class="p" cx="0" cy="0" r="62" style="stroke-width:12"/>
-        <path class="l" d="M-30 -30 q14 -14 34 -14" style="stroke-width:6"/>
-      </g>
-      ${noodle('M292 238 C266 250 252 268 246 290')}
-      ${glove(242, 300, -150)}
-      ${noodle('M344 238 C372 230 384 206 384 182')}
-      ${glove(386, 168, 15)}
-      ${head(318, 170, 1, { mood: 'o', hat: 'hair', flip: true })}
-      ${tag ? nameTag(Math.max(10, 440 - tag.length * 9.4 - 20), 30, tag) : ''}
-    `,
-      'Retro cartoon researcher inspecting a sticky note chart with a magnifying glass'
-    );
+  // Stacked folders = design-system layers, with a v2.0 flag
+  ILL.layers = () => {
+    const s = 7;
+    const f = PX.folder();
+    const label = (x, y, t) => `<text x="${x}" y="${y}" class="px" style="font-size:20px">${t}</text>`;
+    return svg('0 0 540 500', `
+      ${f.svg(190, 60, s)}${label(212, 158, 'Patterns')}
+      ${f.svg(145, 175, s)}${label(167, 273, 'Components')}
+      ${f.svg(100, 290, s)}${label(122, 388, 'Tokens')}
+      <path class="l" d="M410 0 L410 96" style="stroke-width:6"/>
+      <path class="k" d="M414 2 L494 16 L414 50 Z"/><text x="420" y="30" class="tx" style="font-size:13px">v2.0</text>
+      ${sparkle(120, 200, .9)}
+    `, 'Pixel-art stacked folders labelled tokens, components and patterns with a v2.0 flag');
+  };
 
-  /* ---------- stickers (used by the click-to-stick mouse toy & decorations) ---------- */
+  // Magnifier over a document with a bar chart
+  ILL.researcher = (tag = 'n = 14 interviews') =>
+    svg('0 0 460 460', `
+      <g transform="rotate(-6 140 290)">${PX.document().svg(40, 170, 7)}</g>
+      ${PX.magnifier().svg(139, 209, 7)}
+      ${tag ? nameTag(Math.max(10, 440 - tag.length * 9.4 - 20), 30, tag) : ''}
+      ${cursor(380, 300, 0.5, -10)}
+      ${sparkle(360, 140, 1)}
+    `, 'Pixel-art magnifying glass over a document with a bar chart');
+
+  /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
+  const pxSticker = (icon, w, h, s, label, tag) =>
+    st(`-8 -8 ${w * s + 16} ${h * s + 16 + (tag ? 30 : 0)}`, `${icon.svg(0, 0, s)}${tag ? nameTag(0, h * s + 8, tag, true) : ''}`, label);
 
   ILL.stickers = {
     burst: () =>
-      st(
-        '0 0 160 160',
-        `<path class="p" d="${(() => {
-          let d = '';
-          for (let i = 0; i < 24; i++) {
-            const a = (i / 24) * Math.PI * 2, r = i % 2 ? 58 : 76;
-            d += (i ? 'L' : 'M') + (80 + r * Math.cos(a)).toFixed(1) + ' ' + (80 + r * Math.sin(a)).toFixed(1) + ' ';
-          }
-          return d + 'Z';
-        })()}"/><text x="80" y="92" text-anchor="middle" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">NEW!</text>`,
-        'Sticker: NEW!'
-      ),
-    ship: () =>
-      st('0 0 200 90', `<rect class="k" x="4" y="4" width="192" height="82" rx="41"/><text x="100" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">SHIP IT</text>`, 'Sticker: ship it'),
-    wip: () =>
-      st('0 0 170 100', `<rect class="p" x="6" y="6" width="158" height="88" rx="10"/><rect class="k" x="16" y="16" width="138" height="68" rx="6"/><text x="85" y="66" text-anchor="middle" class="tx" style="font:400 42px 'Anton',Impact,sans-serif">WIP</text>`, 'Sticker: WIP'),
+      st('0 0 160 160', `<path class="p" d="${(() => {
+        let d = '';
+        for (let i = 0; i < 24; i++) {
+          const a = (i / 24) * Math.PI * 2, r = i % 2 ? 58 : 76;
+          d += (i ? 'L' : 'M') + (80 + r * Math.cos(a)).toFixed(1) + ' ' + (80 + r * Math.sin(a)).toFixed(1) + ' ';
+        }
+        return d + 'Z';
+      })()}"/><text x="80" y="92" text-anchor="middle" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">NEW!</text>`, 'Sticker: NEW!'),
+    ship: () => st('0 0 200 90', `<rect class="k" x="4" y="4" width="192" height="82" rx="41"/><text x="100" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">SHIP IT</text>`, 'Sticker: ship it'),
+    wip: () => st('0 0 170 100', `<rect class="p" x="6" y="6" width="158" height="88" rx="10"/><rect class="k" x="16" y="16" width="138" height="68" rx="6"/><text x="85" y="66" text-anchor="middle" class="tx" style="font:400 42px 'Anton',Impact,sans-serif">WIP</text>`, 'Sticker: WIP'),
     component: () => st('-50 -50 100 100', `<circle class="p" cx="0" cy="0" r="44"/>${diamond4(0, 0, 0.9)}`, 'Sticker: component'),
     cursor: () => st('-10 -10 110 120', `${cursor(10, 6, 1.1, -6)}<g transform="translate(46 78)"><rect class="k" x="0" y="0" width="48" height="24" rx="5"/><text x="9" y="17" class="tx" style="font-size:13px">hi!</text></g>`, 'Sticker: cursor'),
-    smile: () =>
-      st('-60 -60 120 120', `<circle class="p" cx="0" cy="0" r="52"/><g class="pupil"><ellipse class="k" cx="-15" cy="-10" rx="7" ry="12"/><ellipse class="k" cx="15" cy="-10" rx="7" ry="12"/></g><path class="k" d="M-26 12 Q0 44 26 12 Q0 22 -26 12Z"/>`, 'Sticker: smiley'),
-    bolt: () => st('0 0 100 140', `<path class="k" d="M58 4 L10 80 L46 80 L34 136 L90 52 L54 52 L70 4Z" stroke="var(--ill-paper,#fff)" stroke-width="5" stroke-linejoin="round"/>`, 'Sticker: lightning bolt'),
     a11y: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="70" text-anchor="middle" class="tk" style="font:400 28px 'Anton',Impact,sans-serif">WCAG</text><text x="75" y="100" text-anchor="middle" class="tk" style="font-size:16px">AA ✓</text>`, 'Sticker: WCAG AA'),
     star: () => st('0 0 120 120', `<path class="p" d="M60 6 L74 44 L114 46 L82 70 L94 110 L60 86 L26 110 L38 70 L6 46 L46 44Z"/>`, 'Sticker: star'),
     pixel: () => st('0 0 150 70', `<rect class="p" x="4" y="4" width="142" height="62" rx="8" transform="rotate(-3 75 35)"/><text x="75" y="46" text-anchor="middle" class="tk" style="font:400 21px 'Anton',Impact,sans-serif;letter-spacing:.03em" transform="rotate(-3 75 35)">PIXEL PERFECT</text>`, 'Sticker: pixel perfect'),
+    // pixel stickers in the old-Mac style
+    computer: () => st('-8 -8 272 336', `${PX.computer().svg(0, 0, 8)}${PX.computerEyes(0, 0, 8)}`, 'Sticker: pixel computer'),
+    floppy: () => pxSticker(PX.floppy(), 32, 32, 5, 'Sticker: floppy disk', 'saved'),
+    trash: () => pxSticker(PX.trash(), 28, 36, 5, 'Sticker: trash can'),
+    watch: () => pxSticker(PX.watch(), 24, 36, 5, 'Sticker: watch', 'wait…'),
+    bomb: () => pxSticker(PX.bomb(), 34, 34, 5, 'Sticker: bomb', 'bug!'),
+    hand: () => pxSticker(PX.hand(), 32, 38, 5, 'Sticker: pointing hand'),
+    folder: () => pxSticker(PX.folder(), 36, 28, 5, 'Sticker: folder', 'v2_final'),
   };
 
   ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher'];

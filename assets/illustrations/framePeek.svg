@@ -1,46 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Retro cartoon character peeking over a Figma frame containing a wireframe"><style>
+<svg viewBox="0 0 460 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pixel-art classic window with a wireframe, selected as a Figma frame"><style>
     .k{fill:#111111}
+    .w{fill:#ffffff}
     .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
     .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
     .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
     .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
-    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-    .w{fill:#ffffff}
     .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
     .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:#111111}
   </style>
-      <g transform="translate(230 98) scale(1 1)">
-      <circle class="p" cx="-45" cy="2" r="11"/><circle class="p" cx="45" cy="2" r="11"/>
-      <ellipse class="p" cx="0" cy="0" rx="46" ry="44"/>
-      <path class="k" d="M-44 -18 C-44 -64 44 -64 44 -18Z"/><path class="k" d="M30 -22 L82 -18 C80 -10 60 -8 30 -10Z"/>
-      <g class="pupil">
-        <ellipse class="k" cx="-14" cy="-8" rx="8.5" ry="14"/><ellipse class="k" cx="14" cy="-8" rx="8.5" ry="14"/>
-        <path class="w" d="M-14 -9 L-10.5 -20 L-7.2 -12Z"/><path class="w" d="M14 -9 L17.5 -20 L20.8 -12Z"/>
-      </g>
-      <ellipse class="k" cx="0" cy="10" rx="9" ry="6"/>
-      <ellipse class="k" cx="0" cy="26" rx="8" ry="10"/>
-      <path class="t" d="M-32 14 q-5 5 -2 11"/><path class="t" d="M32 14 q5 5 2 11"/>
-    </g>
-      <rect class="p" x="40" y="130" width="380" height="230" rx="6"/>
-      <text x="40" y="120" class="tk" style="font-size:14px">Frame 12 — 1440</text>
-      <g transform="translate(150 128) rotate(-10) scale(1)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g><g transform="translate(310 128) rotate(10) scale(1)">
-      <path class="p" d="M-8 14 L8 14 L9 24 L-9 24Z"/>
-      <path class="p" d="M-16 6 C-24 -10 -12 -24 0 -20 C10 -28 24 -18 18 -4 C24 6 14 16 4 12 C-4 18 -14 16 -16 6Z"/>
-      <path class="t" d="M-3 -6 l6 6 M6 -10 l6 6"/>
-    </g>
-      <rect class="t" x="62" y="152" width="336" height="22" rx="4"/>
-      <rect class="t" x="62" y="190" width="150" height="110" rx="4"/>
-      <path class="t" d="M62 190 L212 300 M212 190 L62 300"/>
-      <path class="l" d="M232 198 H380 M232 222 H350 M232 246 H368" style="stroke-width:6"/>
-      <rect class="k" x="232" y="270" width="96" height="30" rx="15"/>
-      <text x="248" y="290" class="tx" style="font-size:12px">BUTTON</text>
-      <path class="t" d="M62 326 H398" style="stroke-dasharray:6 8"/>
-      <g transform="translate(372 290) rotate(-10) scale(0.5)">
+      <text x="32" y="50" class="tk" style="font-size:14px">Frame 12 — 1440</text>
+      <g transform="translate(32 62) scale(6)" shape-rendering="crispEdges"><path class="w" d="M1 1h62v1h-62zM1 2h1v1h-1zM5 2h1v1h-1zM11 2h1v1h-1zM20 2h25v1h-25zM62 2h1v1h-1zM1 3h5v1h-5zM7 3h3v1h-3zM11 3h52v1h-52zM1 4h1v1h-1zM5 4h1v1h-1zM7 4h3v1h-3zM11 4h1v1h-1zM20 4h25v1h-25zM62 4h1v1h-1zM1 5h5v1h-5zM7 5h3v1h-3zM11 5h52v1h-52zM1 6h1v1h-1zM5 6h1v1h-1zM7 6h3v1h-3zM11 6h1v1h-1zM20 6h25v1h-25zM62 6h1v1h-1zM1 7h5v1h-5zM11 7h52v1h-52zM1 8h62v1h-62zM1 10h62v1h-62zM1 11h62v1h-62zM1 12h62v1h-62zM1 13h3v1h-3zM60 13h3v1h-3zM1 14h3v1h-3zM5 14h54v1h-54zM60 14h3v1h-3zM1 15h3v1h-3zM5 15h54v1h-54zM60 15h3v1h-3zM1 16h3v1h-3zM60 16h3v1h-3zM1 17h62v1h-62zM1 18h62v1h-62zM1 19h62v1h-62zM1 20h3v1h-3zM28 20h35v1h-35zM1 21h3v1h-3zM6 21h20v1h-20zM28 21h4v1h-4zM58 21h5v1h-5zM1 22h3v1h-3zM5 22h1v1h-1zM8 22h16v1h-16zM26 22h1v1h-1zM28 22h4v1h-4zM58 22h5v1h-5zM1 23h3v1h-3zM5 23h3v1h-3zM9 23h14v1h-14zM24 23h3v1h-3zM28 23h35v1h-35zM1 24h3v1h-3zM5 24h4v1h-4zM10 24h12v1h-12zM23 24h4v1h-4zM28 24h35v1h-35zM1 25h3v1h-3zM5 25h5v1h-5zM12 25h8v1h-8zM22 25h5v1h-5zM28 25h35v1h-35zM1 26h3v1h-3zM5 26h7v1h-7zM13 26h6v1h-6zM20 26h7v1h-7zM28 26h4v1h-4zM52 26h11v1h-11zM1 27h3v1h-3zM5 27h8v1h-8zM14 27h4v1h-4zM19 27h8v1h-8zM28 27h4v1h-4zM52 27h11v1h-11zM1 28h3v1h-3zM5 28h9v1h-9zM15 28h2v1h-2zM18 28h9v1h-9zM28 28h35v1h-35zM1 29h3v1h-3zM5 29h10v1h-10zM17 29h10v1h-10zM28 29h35v1h-35zM1 30h3v1h-3zM5 30h9v1h-9zM15 30h2v1h-2zM18 30h9v1h-9zM28 30h35v1h-35zM1 31h3v1h-3zM5 31h8v1h-8zM14 31h4v1h-4zM19 31h8v1h-8zM28 31h4v1h-4zM56 31h7v1h-7zM1 32h3v1h-3zM5 32h7v1h-7zM13 32h6v1h-6zM20 32h7v1h-7zM28 32h4v1h-4zM56 32h7v1h-7zM1 33h3v1h-3zM5 33h5v1h-5zM12 33h8v1h-8zM22 33h5v1h-5zM28 33h35v1h-35zM1 34h3v1h-3zM5 34h4v1h-4zM10 34h12v1h-12zM23 34h4v1h-4zM28 34h35v1h-35zM1 35h3v1h-3zM5 35h3v1h-3zM9 35h14v1h-14zM24 35h3v1h-3zM28 35h5v1h-5zM48 35h15v1h-15zM1 36h3v1h-3zM5 36h1v1h-1zM8 36h16v1h-16zM26 36h1v1h-1zM28 36h4v1h-4zM49 36h14v1h-14zM1 37h3v1h-3zM6 37h20v1h-20zM28 37h4v1h-4zM36 37h9v1h-9zM49 37h14v1h-14zM1 38h3v1h-3zM28 38h4v1h-4zM36 38h9v1h-9zM49 38h14v1h-14zM1 39h31v1h-31zM49 39h14v1h-14zM1 40h32v1h-32zM48 40h15v1h-15zM1 41h62v1h-62zM1 43h62v1h-62zM1 44h3v1h-3zM5 44h3v1h-3zM9 44h3v1h-3zM13 44h3v1h-3zM17 44h3v1h-3zM21 44h3v1h-3zM25 44h3v1h-3zM29 44h3v1h-3zM33 44h3v1h-3zM37 44h3v1h-3zM41 44h3v1h-3zM45 44h3v1h-3zM49 44h3v1h-3zM53 44h3v1h-3zM57 44h6v1h-6z"/><path class="k" d="M0 0h64v1h-64zM0 1h1v1h-1zM63 1h3v1h-3zM0 2h1v1h-1zM2 2h3v1h-3zM6 2h5v1h-5zM12 2h8v1h-8zM45 2h17v1h-17zM63 2h3v1h-3zM0 3h1v1h-1zM6 3h1v1h-1zM10 3h1v1h-1zM63 3h3v1h-3zM0 4h1v1h-1zM2 4h3v1h-3zM6 4h1v1h-1zM10 4h1v1h-1zM12 4h8v1h-8zM45 4h17v1h-17zM63 4h3v1h-3zM0 5h1v1h-1zM6 5h1v1h-1zM10 5h1v1h-1zM63 5h3v1h-3zM0 6h1v1h-1zM2 6h3v1h-3zM6 6h1v1h-1zM10 6h1v1h-1zM12 6h8v1h-8zM45 6h17v1h-17zM63 6h3v1h-3zM0 7h1v1h-1zM6 7h5v1h-5zM63 7h3v1h-3zM0 8h1v1h-1zM63 8h3v1h-3zM0 9h66v1h-66zM0 10h1v1h-1zM63 10h3v1h-3zM0 11h1v1h-1zM63 11h3v1h-3zM0 12h1v1h-1zM63 12h3v1h-3zM0 13h1v1h-1zM4 13h56v1h-56zM63 13h3v1h-3zM0 14h1v1h-1zM4 14h1v1h-1zM59 14h1v1h-1zM63 14h3v1h-3zM0 15h1v1h-1zM4 15h1v1h-1zM59 15h1v1h-1zM63 15h3v1h-3zM0 16h1v1h-1zM4 16h56v1h-56zM63 16h3v1h-3zM0 17h1v1h-1zM63 17h3v1h-3zM0 18h1v1h-1zM63 18h3v1h-3zM0 19h1v1h-1zM63 19h3v1h-3zM0 20h1v1h-1zM4 20h24v1h-24zM63 20h3v1h-3zM0 21h1v1h-1zM4 21h2v1h-2zM26 21h2v1h-2zM32 21h26v1h-26zM63 21h3v1h-3zM0 22h1v1h-1zM4 22h1v1h-1zM6 22h2v1h-2zM24 22h2v1h-2zM27 22h1v1h-1zM32 22h26v1h-26zM63 22h3v1h-3zM0 23h1v1h-1zM4 23h1v1h-1zM8 23h1v1h-1zM23 23h1v1h-1zM27 23h1v1h-1zM63 23h3v1h-3zM0 24h1v1h-1zM4 24h1v1h-1zM9 24h1v1h-1zM22 24h1v1h-1zM27 24h1v1h-1zM63 24h3v1h-3zM0 25h1v1h-1zM4 25h1v1h-1zM10 25h2v1h-2zM20 25h2v1h-2zM27 25h1v1h-1zM63 25h3v1h-3zM0 26h1v1h-1zM4 26h1v1h-1zM12 26h1v1h-1zM19 26h1v1h-1zM27 26h1v1h-1zM32 26h20v1h-20zM63 26h3v1h-3zM0 27h1v1h-1zM4 27h1v1h-1zM13 27h1v1h-1zM18 27h1v1h-1zM27 27h1v1h-1zM32 27h20v1h-20zM63 27h3v1h-3zM0 28h1v1h-1zM4 28h1v1h-1zM14 28h1v1h-1zM17 28h1v1h-1zM27 28h1v1h-1zM63 28h3v1h-3zM0 29h1v1h-1zM4 29h1v1h-1zM15 29h2v1h-2zM27 29h1v1h-1zM63 29h3v1h-3zM0 30h1v1h-1zM4 30h1v1h-1zM14 30h1v1h-1zM17 30h1v1h-1zM27 30h1v1h-1zM63 30h3v1h-3zM0 31h1v1h-1zM4 31h1v1h-1zM13 31h1v1h-1zM18 31h1v1h-1zM27 31h1v1h-1zM32 31h24v1h-24zM63 31h3v1h-3zM0 32h1v1h-1zM4 32h1v1h-1zM12 32h1v1h-1zM19 32h1v1h-1zM27 32h1v1h-1zM32 32h24v1h-24zM63 32h3v1h-3zM0 33h1v1h-1zM4 33h1v1h-1zM10 33h2v1h-2zM20 33h2v1h-2zM27 33h1v1h-1zM63 33h3v1h-3zM0 34h1v1h-1zM4 34h1v1h-1zM9 34h1v1h-1zM22 34h1v1h-1zM27 34h1v1h-1zM63 34h3v1h-3zM0 35h1v1h-1zM4 35h1v1h-1zM8 35h1v1h-1zM23 35h1v1h-1zM27 35h1v1h-1zM33 35h15v1h-15zM63 35h3v1h-3zM0 36h1v1h-1zM4 36h1v1h-1zM6 36h2v1h-2zM24 36h2v1h-2zM27 36h1v1h-1zM32 36h17v1h-17zM63 36h3v1h-3zM0 37h1v1h-1zM4 37h2v1h-2zM26 37h2v1h-2zM32 37h4v1h-4zM45 37h4v1h-4zM63 37h3v1h-3zM0 38h1v1h-1zM4 38h24v1h-24zM32 38h4v1h-4zM45 38h4v1h-4zM63 38h3v1h-3zM0 39h1v1h-1zM32 39h17v1h-17zM63 39h3v1h-3zM0 40h1v1h-1zM33 40h15v1h-15zM63 40h3v1h-3zM0 41h1v1h-1zM63 41h3v1h-3zM0 42h66v1h-66zM0 43h1v1h-1zM63 43h3v1h-3zM0 44h1v1h-1zM4 44h1v1h-1zM8 44h1v1h-1zM12 44h1v1h-1zM16 44h1v1h-1zM20 44h1v1h-1zM24 44h1v1h-1zM28 44h1v1h-1zM32 44h1v1h-1zM36 44h1v1h-1zM40 44h1v1h-1zM44 44h1v1h-1zM48 44h1v1h-1zM52 44h1v1h-1zM56 44h1v1h-1zM63 44h3v1h-3zM0 45h66v1h-66zM1 46h65v1h-65zM1 47h65v1h-65z"/></g>
+      <text x="227" y="101.6" text-anchor="middle" class="px" style="font-size:15px">untitled</text>
+      <rect class="p" x="26" y="56" width="12" height="12" style="stroke-width:3"/><rect class="p" x="410" y="56" width="12" height="12" style="stroke-width:3"/><rect class="p" x="26" y="332" width="12" height="12" style="stroke-width:3"/><rect class="p" x="410" y="332" width="12" height="12" style="stroke-width:3"/>
+      <g transform="translate(316 268) rotate(-10) scale(0.5)">
       <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
+    </g>
+      <g transform="translate(340 300)">
+      <rect x="0" y="0" width="48.2" height="26" rx="5" class="k" />
+      <text x="10" y="18" class="tx">you</text>
     </g>
     </svg>

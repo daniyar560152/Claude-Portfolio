@@ -36,7 +36,7 @@
       <a class="wcard c-${p.color}" href="${window.caseUrl(p.slug)}" data-cursor="View" data-transition>
         <div class="wcard__frame">
           <div class="wcard__inner">
-            <div class="wcard__art" data-ill="${p.ill}"></div>
+            <div class="wcard__art" data-ill="${p.ill}"${p.ill === 'researcher' && p.researchTag ? ` data-ill-arg="${p.researchTag}"` : ''}></div>
             <div class="wcard__info">
               <div class="wcard__top"><span class="wcard__no">${p.no}</span><span class="label">${p.category} · ${p.year}</span></div>
               <div>
@@ -438,7 +438,8 @@
       gsap.to('[data-hero-left]', { xPercent: -40, ease: 'none', scrollTrigger: st });
       gsap.to('[data-hero-right]', { xPercent: 40, ease: 'none', scrollTrigger: st });
       gsap.to('.hero__ill', { yPercent: -18, scale: 0.9, ease: 'none', scrollTrigger: st });
-      gsap.to('.hero__ill .ill', { y: -12, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      gsap.to('.hero__ill .mac-img, .hero__ill .ill', { y: -12, duration: 2.2, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      gsap.to('.mac-cursor', { x: -26, y: -40, duration: 2.8, ease: 'sine.inOut', yoyo: true, repeat: -1 });
     }
 
     // statement: growing line + word fill
@@ -476,7 +477,9 @@
       const cards = $$('.wcard');
       cards.forEach((card, i) => {
         if (i === cards.length - 1) return;
-        gsap.to(card, { scale: 0.88, rotation: i % 2 ? 2 : -2, filter: 'brightness(.6)', ease: 'none', scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 13%', scrub: true } });
+        // explicit start values: tweening filter from 'none' starts at brightness(0) and blacks out the active card.
+        // Dimming starts only once the next card begins to overlap this one.
+        gsap.fromTo(card, { scale: 1, rotation: 0, filter: 'brightness(1)' }, { scale: 0.88, rotation: i % 2 ? 2 : -2, filter: 'brightness(0.6)', ease: 'none', immediateRender: false, scrollTrigger: { trigger: cards[i + 1], start: () => 'top ' + Math.min(innerHeight, innerHeight * 0.13 + card.offsetHeight) + 'px', end: 'top 13%', scrub: true, invalidateOnRefresh: true } });
       });
       cards.forEach((card) => gsap.from($('.wcard__art .ill', card), { yPercent: 30, rotation: -8, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'top 20%', scrub: true } }));
     });

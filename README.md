@@ -9,9 +9,9 @@ A static, animated portfolio that combines two visual languages:
 | Tilted polaroids with stickers, thick colour-framed project cards | `WORD │ coloured tile │ WORD` rows ("How I │ ▢ │ work") |
 | Rotating "This is how I scroll" badge, arrow-square buttons | Rounded colour tiles holding UI artefacts, centred mono paragraphs |
 
-Illustrations are **monochrome retro rubber-hose cartoon characters with Figma UI props**
-(cursor, selection box, pen tool, frames, components, comments, layers). They are hand-built SVG,
-so every background is **transparent**, and their pupils follow the mouse.
+Illustrations are **old-Mac style 1-bit pixel icons with Figma UI props**
+(computer, pencil, window, hand pointer, magnifier, floppy, folders) drawn by a tiny rasteriser in `illustrations.js`; the hero uses `assets/img/mac.webp`. They are SVG,
+so every background is **transparent**, and the pixel computer's eyes follow the mouse.
 
 ## Pages
 

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg viewBox="-10 -10 110 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sticker: cursor"><style>
     .k{fill:#111111}
+    .w{fill:#ffffff}
     .p{fill:#ffffff;stroke:#111111;stroke-width:5;stroke-linejoin:round;stroke-linecap:round}
     .l{fill:none;stroke:#111111;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
     .t{fill:none;stroke:#111111;stroke-width:2.5;stroke-linecap:round}
     .d{fill:none;stroke:#111111;stroke-width:3;stroke-dasharray:2 10;stroke-linecap:round}
-    .n{fill:none;stroke:#111111;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-    .w{fill:#ffffff}
     .tx{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#ffffff;letter-spacing:.02em}
     .tk{font:600 15px 'DM Mono',ui-monospace,monospace;fill:#111111;letter-spacing:.02em}
+    .px{font:400 16px 'Silkscreen','Courier New',monospace;fill:#111111}
   </style><g transform="translate(10 6) rotate(-6) scale(1.1)">
       <path class="k" d="M0 0 L0 62 L15 48 L27 74 L39 68 L27 43 L47 43 Z" stroke="#ffffff" stroke-width="5" stroke-linejoin="round"/>
     </g><g transform="translate(46 78)"><rect class="k" x="0" y="0" width="48" height="24" rx="5"/><text x="9" y="17" class="tx" style="font-size:13px">hi!</text></g></svg>
