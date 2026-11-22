@@ -186,3 +186,10 @@
 @media (max-width: 520px) {
   .bd-cols4, .bd-stats { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* placeholder for a case that isn't written yet */
+.bd-next--soon { cursor: default; }
+.bd-next--soon .bd-display-s { text-transform: uppercase; }
+.bd-next__side { display: flex; align-items: center; gap: 20px; }
+.bd-next__side .bd-tag { color: var(--ink); }
+.bd-next__side .bd-ico { transform: rotate(6deg); }

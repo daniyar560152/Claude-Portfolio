@@ -212,10 +212,11 @@
   <section class="bd-sec bd-white-bg bd-sec--last" id="learnings" data-theme="light">
     ${head('(07) — reflection', 'WHAT I', 'learned')}
     <div class="bd-cols3" data-stagger>${learn.map(([art, t, d]) => `<div class="bd-learn"><span class="bd-ico" style="--w:80px">${art}</span><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div>`).join('')}</div>
-    <a class="bd-next" href="${root.caseUrl(next.slug)}" data-cursor="Next">
-      <div><span class="bd-label">Next project</span><b class="bd-display-s">${esc(next.title[0])} — ${esc(next.title[1])}</b></div>
-      <span class="btn btn--white"><span class="btn__icon">${arrow}</span><span class="btn__text">View case</span></span>
-    </a>
+    <div class="bd-next bd-next--soon" aria-label="Next project, coming soon: full or half payment loan for Otbasy Bank">
+      <div><span class="bd-label">Next project · coming soon</span><b class="bd-display-s">full/half payment — loan otbasy bank</b>
+        <span class="bd-mono-s">Otbasy Bank · loan repayment flow · case study in progress</span></div>
+      <div class="bd-next__side">${tag('In progress', 'white')}<span class="bd-ico" style="--w:120px">${stk('wip')}</span></div>
+    </div>
   </section>`;
 
   root.BOARDS = root.BOARDS || {};
