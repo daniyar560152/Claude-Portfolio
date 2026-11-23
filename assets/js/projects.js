@@ -92,8 +92,29 @@
       ],
     },
     {
-      slug: 'orbit',
+      slug: 'loan',
       no: '02',
+      client: 'Otbasy Bank',
+      category: 'Banking · Mobile app',
+      title: ['LOAN', 'paid off early'],
+      short: 'Early loan repayment and encumbrance removal in the app',
+      color: 'mint',
+      ill: 'macPay',
+      board: 'loan', // rendered from the Figma case board (assets/js/board-loan.js)
+      coverStickers: ['paidoff', 'coins'],
+      year: '2026',
+      summary:
+        'Otbasy Bank clients repay their housing loan ahead of schedule — partly or in full — and lift the encumbrance from their home, in two guided flows inside the mobile app. Built on 2 236 real branch service-desk tickets.',
+      tools: ['Figma', 'FigJam', 'Excel', 'Maze', 'Amplitude', 'Jira'],
+      impact: [
+        { value: '2 236', suffix: '', label: 'Branch tickets analysed' },
+        { value: 75, suffix: '%', label: 'Needed no code fix — design gaps' },
+      ],
+      screens: [],
+    },
+    {
+      slug: 'orbit',
+      no: '03',
       client: 'Orbit Analytics',
       category: 'B2B SaaS · Design system',
       title: ['ONE SYSTEM', 'six squads'],
@@ -177,7 +198,7 @@
     },
     {
       slug: 'medly',
-      no: '03',
+      no: '04',
       client: 'Medly Clinics',
       category: 'Healthcare · Responsive web',
       title: ['BOOKING', 'without the call'],
@@ -261,7 +282,7 @@
     },
     {
       slug: 'shoply',
-      no: '04',
+      no: '05',
       client: 'Shoply',
       category: 'E-commerce · AI assistant',
       title: ['AI THAT', 'actually helps'],

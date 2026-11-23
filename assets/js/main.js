@@ -558,7 +558,8 @@
 
   function fmtCount(el, v) {
     const dec = +(el.dataset.decimals || 0);
-    return (el.dataset.prefix || '') + v.toFixed(dec) + (el.dataset.suffix || '');
+    const n = v.toFixed(dec);
+    return (el.dataset.prefix || '') + (el.dataset.group ? n.replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : n) + (el.dataset.suffix || '');
   }
 
   /* ---------------- boot ---------------- */

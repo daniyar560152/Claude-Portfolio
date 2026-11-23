@@ -220,3 +220,35 @@
   .bd-sec:not(.bd-center-col) > .bd-head { align-items: flex-start; text-align: left; }
   .bd-sec:not(.bd-center-col) > .bd-head .bd-head__title { justify-content: flex-start; }
 }
+
+/* ---------- loan board ---------- */
+.bd-hero--mint { background: var(--mint); }
+.bd-phones { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 24px; }
+.bd-phone { margin: 0; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.bd-phone figcaption { display: flex; flex-direction: column; gap: 6px; }
+.bd-phone__cap { display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+.bd-phone .bd-h3 { text-transform: uppercase; }
+.bd-legend { display: flex; align-items: center; gap: 8px; color: var(--grey); }
+.bd-legend .bd-bar { width: 18px; height: 8px; }
+.bd-legend .bd-bar--after { margin-left: 10px; }
+.bd-table--tickets td { vertical-align: top; line-height: 1.55; font-size: 14px; }
+.bd-table--tickets td:first-child { width: 22%; }
+.bd-table--tickets td:last-child { width: 12%; white-space: nowrap; }
+.bd-quote > .bd-art { flex: none; }
+.bd-card--phones .bd-card__inner { padding-bottom: 72px; }
+.bd-quote__text--m { font-size: clamp(30px, 3.1vw, 44px); }
+.bd-next { text-decoration: none; transition: background .3s; }
+.bd-next:hover { background: var(--ink); }
+.bd-next__btn { display: inline-flex; gap: 8px; align-items: center; background: var(--white); color: var(--ink); padding: 10px 14px; border: 1.5px solid var(--ink); }
+@media (max-width: 1100px) { .bd-phones { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 800px) {
+  /* phones: screens in a swipeable row, big enough to read */
+  .bd-phones {
+    display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: -22px; padding: 4px 22px 12px; scroll-padding-inline: 22px; gap: 16px;
+  }
+  .bd-phones::-webkit-scrollbar { display: none; }
+  .bd-phone { flex: 0 0 min(64vw, 260px); scroll-snap-align: start; }
+  .bd-table--tickets td:first-child, .bd-table--tickets td:last-child { width: auto; }
+  .bd-table--tickets { min-width: 720px; }
+}

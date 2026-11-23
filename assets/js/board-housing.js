@@ -23,12 +23,22 @@
   const icon = (name, tag) => I().icon(name, tag);
   const stk = (name) => I().stickers[name]();
   const ill = (name) => I()[name]();
+  const caseNo = (p) => `${p.no} / ${String((root.PROJECTS || []).length).padStart(2, '0')}`;
+  // link card to the next case study (bottom of every board)
+  const nextCard = (next) => next ? `
+    <a class="bd-next" href="${root.caseUrl(next.slug)}" data-cursor="Next" data-transition>
+      <div><span class="bd-label">Next project · ${esc(next.no)}</span><b class="bd-display-s">${esc(next.title[0])} — ${esc(next.client)}</b>
+        <span class="bd-mono-s">${esc(next.short)}</span></div>
+      <span class="bd-next__btn bd-label"><span aria-hidden="true">→</span> View case</span>
+    </a>` : '';
+  // shared with the other case boards (board-loan.js, …)
+  root.BOARD_KIT = { esc, tag, head, win, icon, stk, ill, caseNo, nextCard };
 
   /* ---------- 01 Hero ---------- */
-  const hero = () => `
+  const hero = (p) => `
   <section class="bd-sec bd-hero" id="overview" data-theme="light">
-    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">Case 05 / 05</span></div>
-    <p class="bd-kicker" data-split="words">(Case 05) — Otbasy Bank · housing queue redesign</p>
+    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">Case ${caseNo(p)}</span></div>
+    <p class="bd-kicker" data-split="words">(Case ${p.no}) — Otbasy Bank · housing queue redesign</p>
     <h1 class="bd-hero__title">
       <span class="bd-display-xl" data-split="chars">HOUSING</span>
       <span class="bd-hero__row"><span class="bd-serif-l bd-blue" data-split="words">queue,</span><span class="bd-display-l" data-split="chars">MADE SIMPLE</span></span>
@@ -216,16 +226,12 @@
   <section class="bd-sec bd-white-bg bd-sec--last" id="learnings" data-theme="light">
     ${head('(07) — reflection', 'WHAT I', 'learned')}
     <div class="bd-cols3" data-stagger>${learn.map(([art, t, d]) => `<div class="bd-learn"><span class="bd-ico" style="--w:80px">${art}</span><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div>`).join('')}</div>
-    <div class="bd-next bd-next--soon" aria-label="Next project, coming soon: full or half payment loan for Otbasy Bank">
-      <div><span class="bd-label">Next project · coming soon</span><b class="bd-display-s">full/half payment — loan otbasy bank</b>
-        <span class="bd-mono-s">Otbasy Bank · loan repayment flow · case study in progress</span></div>
-      <div class="bd-next__side">${tag('In progress', 'white')}<span class="bd-ico" style="--w:120px">${stk('wip')}</span></div>
-    </div>
+    ${nextCard(next)}
   </section>`;
 
   root.BOARDS = root.BOARDS || {};
   root.BOARDS.housing = {
     toc: [['overview', 'Overview'], ['impact', 'TL;DR'], ['problem', 'Problem'], ['how', 'How it works'], ['flow', 'User flow'], ['research', 'Research'], ['process', 'Process'], ['solution', 'Solution'], ['results', 'Results'], ['learnings', 'Reflection']],
-    render: (p, next) => `<div class="bd">${hero()}${overview()}${tldr()}${problem()}${how()}${showcase()}${research()}${process()}${solution()}${results()}${reflection(next)}</div>`,
+    render: (p, next) => `<div class="bd">${hero(p)}${overview()}${tldr()}${problem()}${how()}${showcase()}${research()}${process()}${solution()}${results()}${reflection(next)}</div>`,
   };
 })(typeof window !== 'undefined' ? window : globalThis);

@@ -469,6 +469,109 @@
     g.line(6, 19, 36, 2); g.line(36, 2, 31, 2); g.line(36, 2, 36, 7); g.line(7, 19, 37, 2);
     return g;
   };
+  /* ---------- loan set (Otbasy early-repayment case): new old-Mac 1-bit icons ---------- */
+  PX.bank = () => {
+    const g = new Grid(36, 33);
+    g.shape(poly([[18, 0.5], [35.5, 9.5], [0.5, 9.5]]), 'dither');
+    g.shape(ell(18, 6.5, 2.2), 'paper'); g.set(18, 5, 1); g.set(18, 7, 1);
+    g.shape(rr(1, 9, 34, 3, 0), 'ink');
+    for (let i = 0; i < 5; i++) g.shape(rr(2.5 + i * 7, 12, 4, 14, 0));
+    g.shape(rr(0, 26, 36, 3, 0), 'ink'); g.shape(rr(0, 29, 36, 4, 0));
+    return g;
+  };
+  PX.bankCard = () => {
+    const g = new Grid(42, 28);
+    g.rect(1, 1, 41, 27, 1); g.shape(rr(0, 0, 40, 26, 2));
+    g.shape(rr(4, 7, 9, 7, 1), 'dither'); g.line(4, 10, 12, 10); g.line(8, 7, 8, 13);
+    for (let i = 0; i < 4; i++) g.rect(4 + i * 8, 18, 6, 2);
+    g.rect(28, 4, 8, 2); g.rect(31, 7, 5, 1); g.rect(4, 22, 12, 1);
+    return g;
+  };
+  PX.coins = () => {
+    const g = new Grid(40, 35);
+    for (let i = 0; i < 4; i++) { const y = 28 - i * 5; g.shape(any(rr(1, y - 3, 20, 6, 0), ell(11, y + 3, 10, 3))); g.shape(ell(11, y - 3, 10, 3)); }
+    g.line(1, 9, 1, 31); g.line(21, 9, 21, 31);
+    g.shape(ell(29, 22, 10), 'ink'); g.shape(ell(29, 22, 7.6), 'paper');
+    g.rect(25, 17, 9, 1); g.rect(25, 19, 9, 1); g.rect(29, 19, 1, 8);
+    return g;
+  };
+  PX.calculator = () => {
+    const g = new Grid(30, 40);
+    g.rect(2, 2, 28, 38, 1); g.shape(rr(0, 0, 28, 38, 2));
+    g.shape(rr(3, 3, 22, 9, 0), 'ink'); [10, 14, 18].forEach((x) => g.frame(x, 5, 3, 5, 2)); g.rect(22, 9, 1, 1, 2);
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) {
+      const x = 3 + c * 6, y = 15 + r * 5.5;
+      if (c === 3 && r === 3) continue;
+      if (c === 3 && r === 2) { g.shape(rr(x, y, 4, 9.5, 0), 'ink'); continue; }
+      g.shape(rr(x, y, 4, 4, 0));
+    }
+    return g;
+  };
+  PX.phone = () => {
+    const g = new Grid(26, 40);
+    g.rect(2, 2, 24, 38, 1); g.shape(rr(0, 0, 24, 38, 3));
+    g.shape(rr(3, 5, 18, 16, 0), 'ink'); g.shape(rr(5, 7, 14, 12, 0), 'paper');
+    [7, 11, 15].forEach((x) => g.rect(x, 10, 2, 2)); g.rect(7, 15, 10, 1);
+    for (let r = 0; r < 3; r++) for (let c = 0; c < 3; c++) g.shape(rr(4 + c * 6, 24 + r * 4, 4, 2.6, 0), 'ink');
+    g.rect(9, 2, 6, 1);
+    return g;
+  };
+  PX.padlockOpen = () => {
+    const g = new Grid(32, 40);
+    g.shape(any(ell(20, 9, 8.5), rr(11.5, 9, 17, 11, 0)), 'ink'); g.shape(any(ell(20, 9, 5.5), rr(14.5, 9, 11, 12, 0)), 'clear');
+    g.shape(rr(11, 12.5, 4, 8, 0), 'clear');
+    g.shape(rr(2.5, 19, 27, 20.5, 2)); g.shape(rr(4.5, 21, 23, 3, 0), 'dither');
+    g.shape(ell(16, 28, 2.6), 'ink'); g.rect(15, 29, 3, 6);
+    return g;
+  };
+  PX.receipt = () => {
+    const g = new Grid(30, 40), pts = [[0.5, 0.5], [28.5, 0.5], [28.5, 36]];
+    for (let i = 0; i <= 9; i++) pts.push([28.5 - i * 3, i % 2 ? 36 : 39.5]);
+    pts.push([0.5, 36]);
+    g.shape(poly(pts)); g.rect(5, 4, 19, 2);
+    for (let i = 0; i < 4; i++) { const y = 10 + i * 3.5; g.rect(5, y, 11, 1); g.rect(19, y, 5, 1); }
+    for (let x = 5; x < 25; x += 2) g.set(x, 25, 1);
+    g.rect(5, 28, 8, 2); g.rect(16, 28, 8, 2);
+    return g;
+  };
+  PX.alarmClock = () => {
+    const g = new Grid(34, 37);
+    g.shape(ell(7, 6.5, 5.5), 'ink'); g.shape(ell(27, 6.5, 5.5), 'ink'); g.rect(15, 1, 4, 3);
+    g.line(8, 31, 5, 36); g.line(9, 31, 6, 36); g.line(26, 31, 29, 36); g.line(25, 31, 28, 36);
+    g.shape(ell(17, 19.5, 14.5), 'ink'); g.shape(ell(17, 19.5, 12), 'paper');
+    g.rect(16, 9, 2, 2); g.rect(16, 28, 2, 2); g.rect(7, 19, 2, 2); g.rect(25, 19, 2, 2);
+    g.line(17, 19, 17, 12); g.line(16, 19, 16, 12); g.line(17, 19, 22, 23); g.line(17, 20, 22, 24);
+    return g;
+  };
+  const pie = (full) => {
+    const g = new Grid(34, 34), C = ell(17, 17, 16);
+    g.shape(C); g.shape((x, y) => C(x, y) && (full || x < 17), 'dither');
+    if (!full) { g.line(17, 1, 17, 32); g.line(16, 1, 16, 32); }
+    else { g.shape(rr(8, 10, 18, 14, 2), 'paper'); g.frame(8, 10, 18, 14); g.line(11, 17, 15, 21); g.line(15, 21, 23, 13); g.line(11, 18, 15, 22); g.line(15, 22, 23, 14); }
+    for (let y = 0; y < 34; y++) for (let x = 0; x < 34; x++) {
+      const e = C(x + 0.5, y + 0.5) && (!C(x - 0.5, y + 0.5) || !C(x + 1.5, y + 0.5) || !C(x + 0.5, y - 0.5) || !C(x + 0.5, y + 1.5));
+      if (e) g.set(x, y, 1);
+    }
+    return g;
+  };
+  PX.pieHalf = () => pie(false);
+  PX.pieFull = () => pie(true);
+  PX.macCoin = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    g.shape(ell(16, 12.5, 5.2), 'ink'); g.shape(ell(16, 12.5, 3.8), 'paper'); g.rect(14, 10, 5, 1); g.rect(14, 12, 5, 1); g.rect(16, 12, 1, 4);
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+  PX.ticketTray = () => {
+    const g = new Grid(42, 34);
+    for (let i = 0; i < 3; i++) { const x = 6 + i * 3, y = 2 + i * 4; g.shape(rr(x, y, 24, 20, 0)); for (let k = 0; k < 3; k++) g.rect(x + 3, y + 4 + k * 3, 14 - k * 3, 1); }
+    g.shape(poly([[0.5, 18.5], [41.5, 18.5], [37.5, 33.5], [4.5, 33.5]]), 'dither');
+    g.shape(rr(12, 22, 18, 7, 1), 'paper'); g.frame(12, 22, 18, 7); g.rect(15, 24, 12, 3);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -514,6 +617,48 @@
       ${sparkle(420, 60, 1.1)}${sparkle(40, 360, .8)}
     `, 'Pixel-art classic Mac alert dialog with the cursor on OK');
 
+
+  /* ---------- loan case characters ---------- */
+  ILL.calcFrame = () => svg('0 0 440 430', `
+      ${selection(60, 50, 300, 330)}
+      ${nameTag(60, 14, 'payoff 01')}
+      ${nameTag(118, 392, '1 700 000 ₸', false)}
+      ${PX.calculator().svg(98, 70, 7.6)}
+      ${sparkle(400, 90, 1.1)}${sparkle(28, 320, .8)}
+      ${cursor(332, 310, 0.55, -10)}
+      ${nameTag(356, 352, 'you', true)}
+    `, 'Pixel-art calculator inside a Figma selection box, tagged with the payoff sum');
+  ILL.macPay = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, 'loan #2021')}
+      ${PX.macCoin().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'bank', false)}
+    `, 'Pixel-art classic computer showing a tenge coin, tagged loan 2021');
+  ILL.unlocked = () => svg('0 0 460 420', `
+      <g transform="rotate(-5 200 230)">${PX.padlockOpen().svg(70, 70, 8)}</g>
+      ${PX.stamp().svg(290, 230, 6.5)}
+      ${nameTag(220, 40, 'encumbrance ✓ lifted')}
+      ${sparkle(50, 90, 1)}
+      ${cursor(400, 330, 0.5, -10)}
+    `, 'Pixel-art open padlock with a round approval stamp');
+  ILL.paidOff = () => svg('0 0 460 420', `
+      ${PX.receipt().svg(40, 96, 7.6)}
+      ${PX.stamp().svg(220, 228, 6.5)}
+      <text x="40" y="66" class="tk" style="font:400 46px 'Anton',Impact,sans-serif">PAID OFF!</text>
+      ${cursor(352, 318, 0.6, -10)}
+      ${sparkle(420, 120, 1.1)}${sparkle(20, 390, .8)}
+    `, 'Pixel-art receipt with a paid stamp');
+  ILL.ticketTray = () => svg('0 0 440 420', `
+      ${nameTag(40, 24, '2 236 tickets')}
+      ${PX.ticketTray().svg(40, 76, 8.4)}
+      ${sparkle(410, 90, 1.1)}${sparkle(24, 380, .8)}
+      ${cursor(330, 300, 0.55, -10)}
+      ${nameTag(200, 376, 'from branches', false)}
+    `, 'Pixel-art in-tray full of support tickets');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -550,9 +695,13 @@
     ticket: () => pxSticker(PX.ticket(), 42, 24, 5, 'Sticker: queue ticket', '#1284'),
     movein: () => st('0 0 210 90', `<rect class="k" x="4" y="4" width="202" height="82" rx="41"/><text x="105" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">MOVE IN!</text>`, 'Sticker: move in'),
     zoom: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="76" text-anchor="middle" class="tk" style="font:400 34px 'Anton',Impact,sans-serif">200%</text><text x="75" y="102" text-anchor="middle" class="tk" style="font-size:15px">ZOOM ✓</text>`, 'Sticker: zoom 200%'),
+    // loan set
+    paidoff: () => st('0 0 210 90', `<rect class="k" x="4" y="4" width="202" height="82" rx="41"/><text x="105" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">PAID OFF!</text>`, 'Sticker: paid off'),
+    coins: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.coins().svg(48, 6, 2.85)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">0 ₸ left to pay</text></g>`, 'Sticker: zero left to pay'),
+    zero: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">0 ₸</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">DEBT ✓</text>`, 'Sticker: zero debt'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;
