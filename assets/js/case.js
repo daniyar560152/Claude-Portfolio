@@ -4,6 +4,7 @@
  */
 (function () {
   const PROJECTS = window.PROJECTS || [];
+  const T = (x) => (window.t ? window.t(x) : x);
   const params = new URLSearchParams(location.search);
   const idx = Math.max(0, PROJECTS.findIndex((p) => p.slug === (window.CASE_SLUG || params.get('p'))));
   const p = PROJECTS[idx];
@@ -115,7 +116,7 @@
     return `
     <section class="cs-hero" id="overview" data-theme="light">
       <div class="wrap">
-        <div class="crumbs"><a href="index.html#work">← All work</a><span>${p.no} / ${String(PROJECTS.length).padStart(2, '0')}</span><span>${p.category}</span><span>${p.year}</span></div>
+        <div class="crumbs"><a href="${window.homeUrl || 'index.html'}#work">← All work</a><span>${p.no} / ${String(PROJECTS.length).padStart(2, '0')}</span><span>${p.category}</span><span>${p.year}</span></div>
         <p class="kicker center" data-split="lines">${esc(p.client)}</p>
         <h1 class="display cs-title"><span data-split="chars">${esc(p.title[0])}</span><span class="serif blue" data-split="chars">${esc(p.title[1])}</span></h1>
         <p class="cs-lead">${esc(p.summary)}</p>
@@ -265,7 +266,7 @@
         <div class="learn" data-stagger>${p.learnings.map((l, i) => `<div><b>0${i + 1}</b><p>${esc(l)}</p></div>`).join('')}</div>
         <a class="next c-${next.color}" href="${window.caseUrl(next.slug)}" data-cursor="Next">
           <div class="wcard__frame"><div class="next__inner">
-            <div><p class="label">Next case study — ${next.no} · ${esc(next.category)}</p><h2 class="display">${esc(next.title[0])} <span class="serif">${esc(next.title[1])}</span></h2>
+            <div><p class="label">${T('Next case study')} — ${next.no} · ${esc(next.category)}</p><h2 class="display">${esc(next.title[0])} <span class="serif">${esc(next.title[1])}</span></h2>
             <span class="btn" style="margin-top:20px"><span class="btn__icon">${arrow}</span><span class="btn__text">Read it</span></span></div>
             <div data-ill="${next.ill}"></div>
           </div></div>
@@ -277,6 +278,9 @@
   window.renderPage = function () {
     if (!p) return;
     document.title = `${p.client} — ${p.short} · Daniyar`;
+    // language switch in the nav points at this same case in the other language
+    const sw = document.querySelector('[data-lang-switch]');
+    if (sw && window.altCaseUrl) sw.href = window.altCaseUrl(p.slug);
     const main = document.getElementById('case');
     const toc = document.querySelector('.cs-toc');
     const board = p.board && window.BOARDS && window.BOARDS[p.board];
@@ -327,7 +331,7 @@
       const btn = $('[data-funnel-toggle]', funnel);
       if (btn) btn.addEventListener('click', () => {
         const on = funnel.classList.toggle('show-after');
-        btn.textContent = on ? '← Show before' : 'Show after →';
+        btn.textContent = T(on ? '← Show before' : 'Show after →');
         $$('.funnel__row b', funnel).forEach((b) => {
           const to = +(on ? b.dataset.valAfter : b.dataset.valBefore), o = { v: +b.textContent };
           gsap.to(o, { v: to, duration: 0.8, ease: 'power2.out', onUpdate: () => { b.textContent = Math.round(o.v); } });

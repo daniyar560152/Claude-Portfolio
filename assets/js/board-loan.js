@@ -8,12 +8,13 @@
   const K = () => root.BOARD_KIT;
   const esc = (s) => K().esc(s), tag = (...a) => K().tag(...a), head = (...a) => K().head(...a), win = (...a) => K().win(...a);
   const icon = (...a) => K().icon(...a), stk = (n) => K().stk(n), ill = (n) => K().ill(n);
+  const T = (s) => K().T(s), title2 = (a, b) => K().title2(a, b);
 
   /* ---------- 01 Hero ---------- */
   const hero = (p) => `
   <section class="bd-sec bd-hero bd-hero--mint" id="overview" data-theme="light">
-    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">Case ${K().caseNo(p)}</span></div>
-    <p class="bd-kicker" data-split="words">(Case ${p.no}) — Otbasy Bank · early loan repayment</p>
+    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">${T('Case')} ${K().caseNo(p)}</span></div>
+    <p class="bd-kicker" data-split="words">(${T('Case')} ${p.no}) — ${T('Otbasy Bank')} · ${T('early loan repayment')}</p>
     <h1 class="bd-hero__title">
       <span class="bd-display-xl" data-split="chars">PAY OFF</span>
       <span class="bd-hero__row"><span class="bd-serif-l bd-blue" data-split="words">early,</span><span class="bd-display-l" data-split="chars">IN THE APP</span></span>
@@ -55,7 +56,7 @@
   const fmt = (v) => String(v).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   const tldr = () => `
   <section class="bd-sec bd-blue-bg" id="impact" data-theme="dark">
-    <h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">TL;DR</span><span class="bd-serif-l" data-split="words">impact</span></h2>
+    ${title2('TL;DR', 'impact')}
     <p class="bd-mono">Branches logged 2 236 service-desk tickets about early repayment — and 75% of them were not bugs but design gaps: a hidden pension step, old applications blocking new ones, silent statuses and an encumbrance flow that ended at a public service centre. The redesign closes each gap inside the app.</p>
     <div class="bd-stats" data-stagger>${stats.map(([t, v, pre, suf, cap]) => `<div class="bd-stat bd-stat--${t}"><span class="bd-label"></span><b class="bd-display-s" data-count="${v}" data-group="1" data-prefix="${pre}" data-suffix="${suf}" data-decimals="0">${pre}${fmt(v)}${suf}</b><span class="bd-mono-s">${esc(cap)}</span></div>`).join('')}</div>
     <p class="bd-mono-s">Problem shares come from 2 236 real branch service-desk tickets (archive) and 179 from May 2026. Targets in the last table are goals, not measured outcomes.</p>
@@ -224,7 +225,7 @@
   ];
   const solution = () => `
   <section class="bd-sec bd-ink-bg" id="solution" data-theme="dark">
-    <h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">THE</span><span class="bd-serif-l" data-split="words">solution</span></h2>
+    ${title2('THE', 'solution')}
     <div class="bd-flowicons" data-stagger>${flowIcons.map(([ic, l], i) => `<div class="bd-flowicon"><span class="bd-ico" style="--w:90px">${icon(ic)}</span><span class="bd-label">${l}</span></div>${i < 4 ? '<span class="bd-display-s bd-arrow">→</span>' : ''}`).join('')}</div>
     <span class="bd-label bd-swipe" aria-hidden="true">swipe →</span>
     <div class="bd-decisions" data-stagger>${decisions.map(([t, d], i) => `<div class="bd-decision"><b class="bd-h1">0${i + 1}</b><div><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div></div>`).join('')}</div>

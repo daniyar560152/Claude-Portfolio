@@ -245,6 +245,7 @@
     </g>`;
   }
   function nameTag(x, y, text, dark = true) {
+    if (root.t) text = root.t(text); // Russian pages: size the tag to the translated label
     const w = text.length * 9.4 + 20;
     return `<g transform="translate(${x} ${y})">
       <rect x="0" y="0" width="${w}" height="26" rx="5" class="${dark ? 'k' : 'p'}" ${dark ? '' : 'style="stroke-width:3"'}/>

@@ -367,8 +367,12 @@
     },
   ];
 
-  root.PROJECTS = PROJECTS;
-  // Link to a case study. Static builds (scripts/build-static.js) override this with one file per project.
-  if (!root.caseUrl) root.caseUrl = (slug) => 'case.html?p=' + slug;
+  const ru = root.LANG === 'ru';
+  // on Russian pages every display string goes through the dictionary (ids, colours and asset keys stay as they are)
+  root.PROJECTS = ru && root.deepT ? root.deepT(PROJECTS, ['slug', 'color', 'ill', 'board', 'coverStickers', 'screens', 'no', 'year', 'tools']) : PROJECTS;
+  // Links. Static builds (scripts/build-static.js) override these with one file per project and language.
+  if (!root.caseUrl) root.caseUrl = (slug) => (ru ? 'case-ru.html?p=' : 'case.html?p=') + slug;
+  if (!root.altCaseUrl) root.altCaseUrl = (slug) => (ru ? 'case.html?p=' : 'case-ru.html?p=') + slug;
+  if (!root.homeUrl) root.homeUrl = ru ? 'index-ru.html' : 'index.html';
   if (typeof module !== 'undefined' && module.exports) module.exports = PROJECTS;
 })(typeof window !== 'undefined' ? window : globalThis);

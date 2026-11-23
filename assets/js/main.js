@@ -373,6 +373,7 @@
       el.style.left = (e.pageX - size / 2) + 'px';
       el.style.top = (e.pageY - size / 2) + 'px';
       el.innerHTML = ILL.stickers[pick(names)]();
+      if (window.translateDOM) window.translateDOM(el);
       layer.appendChild(el);
       list.push(el);
       if (list.length > 40) peel(list[0]);
@@ -566,6 +567,7 @@
   renderWorkCards();
   if (typeof window.renderPage === 'function') window.renderPage();
   injectIllustrations();
+  if (window.translateDOM) window.translateDOM(document.body); // Russian pages: EN → RU before splitting text
   $$('[data-split]').forEach(split);
   initLenis();
   bindTransitions();

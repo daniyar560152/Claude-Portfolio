@@ -10,11 +10,18 @@
 
   /* ---------- small parts of the design system ---------- */
   const tag = (label, tone = 'outline') => `<span class="bd-tag bd-tag--${tone}">${esc(label)}</span>`;
-  const head = (kicker, word, serif, tone = '') => `
+  const T = (s) => (root.t ? root.t(s) : s);
+  const pair = (a, b) => (root.tPair ? root.tPair(a, b) : [a, b]);
+  const head = (kicker, word, serif, tone = '') => {
+    const [w, s] = pair(word, serif);
+    return `
     <div class="bd-head ${tone}">
-      <p class="bd-kicker" data-split="words">${esc(kicker)}</p>
-      <h2 class="bd-head__title"><span class="bd-display-l" data-split="chars">${esc(word)}</span><span class="bd-serif-l" data-split="words">${esc(serif)}</span></h2>
+      <p class="bd-kicker" data-split="words">${esc(T(kicker))}</p>
+      <h2 class="bd-head__title"><span class="bd-display-l" data-split="chars">${esc(w)}</span><span class="bd-serif-l" data-split="words">${esc(s)}</span></h2>
     </div>`;
+  };
+  // inline two-part headings (TL;DR impact, THE solution) that aren't Section head components
+  const title2 = (a, b) => { const [w, s] = pair(a, b); return `<h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">${esc(w)}</span><span class="bd-serif-l" data-split="words">${esc(s)}</span></h2>`; };
   const win = (title, body, { active = true, cls = '' } = {}) => `
     <div class="bd-win ${cls}">
       <div class="bd-win__bar${active ? '' : ' is-idle'}"><i class="bd-win__box"></i><i class="bd-win__lines"></i><span>${esc(title)}</span><i class="bd-win__lines"></i><i class="bd-win__spacer"></i></div>
@@ -27,18 +34,18 @@
   // link card to the next case study (bottom of every board)
   const nextCard = (next) => next ? `
     <a class="bd-next" href="${root.caseUrl(next.slug)}" data-cursor="Next" data-transition>
-      <div><span class="bd-label">Next project · ${esc(next.no)}</span><b class="bd-display-s">${esc(next.title[0])} — ${esc(next.client)}</b>
+      <div><span class="bd-label">${T('Next project')} · ${esc(next.no)}</span><b class="bd-display-s">${esc(next.title[0])} — ${esc(next.client)}</b>
         <span class="bd-mono-s">${esc(next.short)}</span></div>
       <span class="bd-next__btn bd-label"><span aria-hidden="true">→</span> View case</span>
     </a>` : '';
   // shared with the other case boards (board-loan.js, …)
-  root.BOARD_KIT = { esc, tag, head, win, icon, stk, ill, caseNo, nextCard };
+  root.BOARD_KIT = { esc, tag, head, title2, T, win, icon, stk, ill, caseNo, nextCard };
 
   /* ---------- 01 Hero ---------- */
   const hero = (p) => `
   <section class="bd-sec bd-hero" id="overview" data-theme="light">
-    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">Case ${caseNo(p)}</span></div>
-    <p class="bd-kicker" data-split="words">(Case ${p.no}) — Otbasy Bank · housing queue redesign</p>
+    <div class="bd-hero__top"><span class="bd-logo">Daniyar</span><span class="bd-label">${T('Case')} ${caseNo(p)}</span></div>
+    <p class="bd-kicker" data-split="words">(${T('Case')} ${p.no}) — ${T('Otbasy Bank')} · ${T('housing queue redesign')}</p>
     <h1 class="bd-hero__title">
       <span class="bd-display-xl" data-split="chars">HOUSING</span>
       <span class="bd-hero__row"><span class="bd-serif-l bd-blue" data-split="words">queue,</span><span class="bd-display-l" data-split="chars">MADE SIMPLE</span></span>
@@ -79,7 +86,7 @@
   ];
   const tldr = () => `
   <section class="bd-sec bd-blue-bg" id="impact" data-theme="dark">
-    <h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">TL;DR</span><span class="bd-serif-l" data-split="words">impact</span></h2>
+    ${title2('TL;DR', 'impact')}
     <p class="bd-mono">One entry point for six state programmes, eligibility explained before people start, a live check of 11 government databases and a cabinet built around one question: “where is my family in the queue?”</p>
     <div class="bd-stats" data-stagger>${stats.map(([t, v, pre, suf, cap]) => `<div class="bd-stat bd-stat--${t}"><span class="bd-label"></span><b class="bd-display-s" data-count="${v}" data-prefix="${pre}" data-suffix="${suf}" data-decimals="0">${pre}${v}${suf}</b><span class="bd-mono-s">${esc(cap)}</span></div>`).join('')}</div>
     <p class="bd-mono-s">Measured in moderated usability tests (n = 12, prototype vs current) and the first 6 weeks of the pilot in two regions. Numbers in this case are illustrative.</p>
@@ -198,7 +205,7 @@
   ];
   const solution = () => `
   <section class="bd-sec bd-ink-bg" id="solution" data-theme="dark">
-    <h2 class="bd-head__title bd-left"><span class="bd-display-l" data-split="chars">THE</span><span class="bd-serif-l" data-split="words">solution</span></h2>
+    ${title2('THE', 'solution')}
     <div class="bd-flowicons" data-stagger>${flowIcons.map(([ic, l], i) => `<div class="bd-flowicon"><span class="bd-ico" style="--w:90px">${icon(ic)}</span><span class="bd-label">${l}</span></div>${i < 4 ? '<span class="bd-display-s bd-arrow">→</span>' : ''}`).join('')}</div>
     <span class="bd-label bd-swipe" aria-hidden="true">swipe →</span>
     <div class="bd-decisions" data-stagger>${decisions.map(([t, d], i) => `<div class="bd-decision"><b class="bd-h1">0${i + 1}</b><div><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div></div>`).join('')}</div>
