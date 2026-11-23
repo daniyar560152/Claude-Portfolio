@@ -113,8 +113,29 @@
       screens: [],
     },
     {
-      slug: 'orbit',
+      slug: 'market',
       no: '03',
+      client: 'Otbasy Bank',
+      category: 'Marketplace · Responsive web',
+      title: ['PROPERTY', 'and a mortgage'],
+      short: 'Property marketplace with state mortgage programmes',
+      color: 'yellow',
+      ill: 'macCatalog',
+      board: 'market', // rendered from the Figma case board (assets/js/board-market.js)
+      coverStickers: ['newbuild', 'yurtcard'],
+      year: '2025',
+      summary:
+        'Baspana Market is Otbasy Bank’s property marketplace: new builds, resale and rentals next to the state and bank mortgage programmes that pay for them — catalog, residential-complex page and programme pages for web and mobile.',
+      tools: ['Figma', 'FigJam', 'Maze', 'Hotjar', 'Jira'],
+      impact: [
+        { value: '102 000', suffix: '', label: 'Listings in the catalog' },
+        { value: 8, suffix: '', label: 'State & bank programmes' },
+      ],
+      screens: [],
+    },
+    {
+      slug: 'orbit',
+      no: '04',
       client: 'Orbit Analytics',
       category: 'B2B SaaS · Design system',
       title: ['ONE SYSTEM', 'six squads'],
@@ -198,7 +219,7 @@
     },
     {
       slug: 'medly',
-      no: '04',
+      no: '05',
       client: 'Medly Clinics',
       category: 'Healthcare · Responsive web',
       title: ['BOOKING', 'without the call'],
@@ -282,7 +303,7 @@
     },
     {
       slug: 'shoply',
-      no: '05',
+      no: '06',
       client: 'Shoply',
       category: 'E-commerce · AI assistant',
       title: ['AI THAT', 'actually helps'],

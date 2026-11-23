@@ -252,3 +252,39 @@
   .bd-table--tickets td:first-child, .bd-table--tickets td:last-child { width: auto; }
   .bd-table--tickets { min-width: 720px; }
 }
+
+/* ---------- market board: real screens you can scroll inside ---------- */
+.bd-hero--yellow { background: var(--yellow); }
+.bd-screens { display: flex; gap: 28px; align-items: flex-start; }
+.bd-screens .bd-win--desk { flex: 1 1 auto; min-width: 0; }
+.bd-screens .bd-win--phone { flex: 0 0 300px; }
+.bd-screens.is-phone-only { justify-content: center; }
+.bd-card--screens .bd-card__inner { padding-bottom: 72px; }
+.bd-scrwrap { position: relative; }
+.bd-scr { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; background: var(--white); outline: none; }
+.bd-scr::-webkit-scrollbar { display: none; }
+.bd-scrwrap--desk .bd-scr { height: 600px; }
+.bd-scrwrap--phone .bd-scr { height: 620px; }
+.bd-scr img { display: block; width: 100%; height: auto; }
+.bd-scr:focus-visible { box-shadow: inset 0 0 0 3px var(--blue); }
+.bd-scr__bar { position: absolute; top: 8px; bottom: 8px; right: 5px; width: 4px; border-radius: 4px; background: rgba(17, 17, 17, .12); pointer-events: none; overflow: hidden; }
+.bd-scr__bar::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: calc(var(--p, 0) * 100%); min-height: 14%; background: var(--blue); border-radius: 4px; transition: height .1s linear; }
+.bd-scr__hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--white); padding: 7px 12px; border-radius: 99px; pointer-events: none; white-space: nowrap; transition: opacity .4s; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); }
+.is-scrolled .bd-scr__hint { opacity: 0; }
+.bd-scr__hint .for-touch { display: none; }
+@media (hover: none) {
+  .bd-scr__hint .for-mouse { display: none; }
+  .bd-scr__hint .for-touch { display: inline; }
+  .bd-scr { overscroll-behavior: auto; } /* at the end of a screen the page carries on scrolling */
+}
+@media (max-width: 1100px) { .bd-screens .bd-win--phone { flex-basis: 260px; } }
+@media (max-width: 800px) {
+  /* phones: screens side by side in a swipe row, each one scrolls up and down inside */
+  .bd-screens { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -22px; padding: 4px 22px 12px; gap: 16px; }
+  .bd-screens::-webkit-scrollbar { display: none; }
+  .bd-screens .bd-win--phone { order: -1; flex: 0 0 74vw; scroll-snap-align: start; }
+  .bd-screens .bd-win--desk { flex: 0 0 88vw; scroll-snap-align: start; }
+  .bd-screens.is-phone-only .bd-win--phone { flex-basis: 80vw; margin-inline: auto; }
+  .bd-scrwrap--desk .bd-scr { height: 58vh; }
+  .bd-scrwrap--phone .bd-scr { height: 68vh; }
+}

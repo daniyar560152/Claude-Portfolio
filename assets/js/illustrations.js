@@ -573,6 +573,74 @@
     return g;
   };
 
+  /* ---------- market set (Baspana Market case): new old-Mac 1-bit icons ---------- */
+  PX.block = () => {
+    const g = new Grid(30, 40);
+    g.rect(2, 2, 28, 38, 1); g.shape(rr(0, 0, 28, 38, 0));
+    g.shape(rr(0, 0, 28, 4, 0), 'dither'); g.line(0, 4, 27, 4);
+    for (let r = 0; r < 6; r++) for (let c = 0; c < 4; c++) { const x = 3 + c * 6, y = 7 + r * 4.6; g.frame(x, y, 4, 3); if ((r + c) % 3 === 0) g.rect(x + 1, y + 1, 2, 1); }
+    g.shape(rr(10, 32, 8, 6, 0), 'ink'); g.rect(13, 33, 2, 5, 2); g.line(0, 37, 27, 37);
+    return g;
+  };
+  PX.floorPlan = () => {
+    const g = new Grid(40, 34);
+    g.rect(1, 1, 40, 34, 1); g.shape(rr(0, 0, 38, 32, 0));
+    g.rect(0, 0, 38, 2); g.rect(0, 30, 38, 2); g.rect(0, 0, 2, 32); g.rect(36, 0, 2, 32);
+    g.rect(16, 0, 2, 13); g.rect(16, 19, 2, 13); g.rect(2, 15, 9, 2); g.rect(24, 15, 12, 2);
+    g.shape(rr(4, 4, 9, 6, 1), 'dither'); g.frame(22, 20, 10, 7); g.rect(24, 22, 6, 3, 2);
+    g.line(18, 13, 22, 9); g.line(11, 16, 14, 13); g.set(8, 22, 1); g.rect(5, 24, 6, 2);
+    return g;
+  };
+  PX.mapPin = () => {
+    const g = new Grid(36, 36);
+    g.shape(rr(0, 18, 36, 18, 0), 'dither'); g.line(0, 26, 35, 26, 2); g.line(12, 18, 12, 35, 2); g.line(25, 18, 25, 35, 2);
+    g.shape(any(ell(18, 11, 10), poly([[10, 16], [26, 16], [18, 31]])), 'ink'); g.shape(ell(18, 11, 4.2), 'paper');
+    return g;
+  };
+  PX.filter = () => {
+    const g = new Grid(38, 30);
+    for (let i = 0; i < 3; i++) { const y = 3 + i * 11; g.rect(1, y + 2, 36, 2); const k = [24, 9, 18][i]; g.shape(rr(k - 4, y - 1, 8, 9, 1)); g.rect(k - 1, y + 1, 2, 5); }
+    return g;
+  };
+  PX.crane = () => {
+    const g = new Grid(40, 40);
+    g.shape(rr(8, 6, 5, 32, 0), 'dither'); g.frame(8, 6, 5, 32); g.rect(0, 5, 40, 3); g.rect(0, 2, 6, 3); g.line(10, 0, 10, 5); g.line(10, 0, 0, 5); g.line(10, 0, 30, 5);
+    g.line(34, 8, 34, 20); g.shape(rr(29, 20, 10, 7, 0)); g.frame(29, 20, 10, 7); g.rect(31, 22, 6, 1); g.rect(31, 24, 6, 1);
+    g.rect(4, 37, 14, 3); g.shape(rr(22, 30, 12, 8, 0)); g.frame(22, 30, 12, 8); g.rect(24, 32, 3, 2); g.rect(29, 32, 3, 2);
+    return g;
+  };
+  PX.yurt = () => {
+    const g = new Grid(40, 32);
+    g.shape(poly([[20, 1], [38.5, 13], [1.5, 13]])); g.shape(rr(15, 0, 10, 4, 1), 'ink');
+    g.line(20, 4, 8, 12); g.line(20, 4, 32, 12); g.line(20, 4, 20, 12);
+    g.shape(rr(3, 13, 34, 17, 0), 'dither'); g.frame(3, 13, 34, 17); g.shape(rr(15, 17, 10, 13, 2), 'ink'); g.shape(rr(17, 19, 6, 11, 1), 'paper');
+    g.line(0, 31, 39, 31);
+    return g;
+  };
+  PX.priceTag = () => {
+    const g = new Grid(40, 26);
+    g.shape(poly([[0.5, 13], [10, 1], [39.5, 1], [39.5, 25], [10, 25]])); g.shape(ell(9, 13, 2.6), 'ink'); g.shape(ell(9, 13, 1.2), 'clear');
+    g.shape(ell(19, 8, 2.2), 'ink'); g.shape(ell(30, 18, 2.2), 'ink'); g.line(31, 5, 18, 21); g.line(32, 5, 19, 21);
+    g.rect(35, 4, 2, 18, 2);
+    return g;
+  };
+  PX.calendar = () => {
+    const g = new Grid(34, 36);
+    g.rect(2, 4, 32, 32, 1); g.shape(rr(0, 2, 32, 32, 2)); g.shape(rr(0, 2, 32, 8, 1), 'ink');
+    g.shape(rr(7, 0, 3, 7, 0), 'ink'); g.shape(rr(22, 0, 3, 7, 0), 'ink');
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 5; c++) g.rect(3 + c * 6, 13 + r * 5, 3, 2);
+    g.shape(ell(22, 24, 5.5), 'paper'); g.frame(16, 18, 13, 13); g.line(19, 24, 21, 27); g.line(21, 27, 26, 20); g.line(19, 25, 21, 28); g.line(21, 28, 26, 21);
+    return g;
+  };
+  PX.macGrid = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) g.shape(rr(9 + c * 5.4, 8 + r * 5.4, 4.4, 4.4, 0), 'dither');
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -669,6 +737,33 @@
       ${nameTag(354, 372, 'you', true)}
     `, 'Pixel-art stack of coins and a tenge coin, tagged paid off');
 
+  /* ---------- Baspana Market characters ---------- */
+  ILL.blockFrame = () => svg('0 0 440 430', `
+      ${selection(70, 40, 290, 350)}
+      ${nameTag(70, 4, 'complex #2021')}
+      ${nameTag(128, 402, '805 flats', false)}
+      ${PX.block().svg(100, 60, 7.8)}
+      ${sparkle(400, 90, 1.1)}${sparkle(30, 320, .8)}
+      ${cursor(332, 300, 0.55, -10)}
+      ${nameTag(356, 342, 'you', true)}
+    `, 'Pixel-art apartment block inside a Figma selection box');
+  ILL.macCatalog = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, '102 000 results')}
+      ${PX.macGrid().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'bank', false)}
+    `, 'Pixel-art classic computer showing a catalog grid');
+  ILL.planCheck = () => svg('0 0 460 420', `
+      <g transform="rotate(-5 200 230)">${PX.floorPlan().svg(30, 110, 7.6)}</g>
+      ${PX.stamp().svg(300, 240, 6.5)}
+      ${nameTag(190, 40, '2-room ✓ fits Nauryz')}
+      ${sparkle(60, 70, 1)}
+      ${cursor(410, 340, 0.5, -10)}
+    `, 'Pixel-art floor plan with an approval stamp');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -709,9 +804,13 @@
     paidoff: () => st('0 0 210 90', `<rect class="k" x="4" y="4" width="202" height="82" rx="41"/><text x="105" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">PAID OFF!</text>`, 'Sticker: paid off'),
     coins: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.coins().svg(48, 6, 2.85)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">0 ₸ left to pay</text></g>`, 'Sticker: zero left to pay'),
     zero: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">0 ₸</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">DEBT ✓</text>`, 'Sticker: zero debt'),
+    // Baspana Market set
+    newbuild: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">${root.t ? root.t('NEW BUILD!') : 'NEW BUILD!'}</text>`, 'Sticker: new build'),
+    yurtcard: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.yurt().svg(57, 8, 2.4)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">8 programmes</text></g>`, 'Sticker: eight programmes'),
+    online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;
