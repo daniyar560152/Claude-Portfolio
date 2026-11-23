@@ -660,6 +660,15 @@
       ${nameTag(200, 376, 'from branches', false)}
     `, 'Pixel-art in-tray full of support tickets');
 
+  // Loan card: a stack of tenge coins, paid off
+  ILL.coinStack = () => svg('0 0 440 440', `
+      ${nameTag(56, 24, 'paid off ✓')}
+      ${PX.coins().svg(44, 84, 8.6)}
+      ${sparkle(400, 110, 1.1)}${sparkle(30, 380, .8)}
+      ${cursor(330, 330, 0.55, -10)}
+      ${nameTag(354, 372, 'you', true)}
+    `, 'Pixel-art stack of coins and a tenge coin, tagged paid off');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -702,7 +711,7 @@
     zero: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">0 ₸</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">DEBT ✓</text>`, 'Sticker: zero debt'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;

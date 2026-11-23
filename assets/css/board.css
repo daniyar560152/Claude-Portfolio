@@ -175,7 +175,7 @@
 /* ---------- reflection ---------- */
 .bd-learn { display: flex; flex-direction: column; gap: 14px; padding: 28px; background: var(--paper); border: 1.5px solid var(--ink); }
 .bd-next { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 32px 40px; background: var(--blue); color: var(--white); flex-wrap: wrap; }
-.bd-next > div { display: flex; flex-direction: column; gap: 4px; }
+.bd-next > div { display: flex; flex-direction: column; gap: 14px; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {

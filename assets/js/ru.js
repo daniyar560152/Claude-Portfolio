@@ -6,6 +6,11 @@
  */
 (function (root) {
   const RU = {
+"6+ years designing products in fintech, B2B, B2C and C2C. I run research, frame problems with PMs, prototype until it feels right, and stay with engineering until it ships — then I measure it.": "6+ лет проектирую продукты в финтехе, B2B, B2C и C2C. Провожу исследования, формулирую задачи вместе с PM, прототипирую, пока не станет «то самое», и остаюсь с разработкой до релиза — а потом измеряю результат.",
+"Let's talk": "Обсудим",
+"paid off ✓": "погашено ✓",
+"Pixel-art stack of coins and a tenge coin, tagged paid off": "Пиксельная стопка монет и монета тенге с меткой «погашено»",
+
 "work (verb)": "работаю",
 "Discover (home)": "Понять",
 "& define": "задачу",
@@ -387,7 +392,6 @@
 "A designer": "Дизайнер,",
 "who speaks": "который говорит",
 "dev": "с разработкой",
-"8+ years designing products in fintech, B2B SaaS and healthcare. I run research, frame problems with PMs, prototype until it feels right, and stay with engineering until it ships — then I measure it.": "8+ лет проектирую продукты в финтехе, B2B SaaS и медицине. Провожу исследования, формулирую задачи вместе с PM, прототипирую, пока не станет «то самое», и остаюсь с разработкой до релиза — а потом измеряю результат.",
 "Years": "Лет в профессии",
 "Products shipped": "Запущенных продуктов",
 "User interviews": "Интервью с пользователями",
@@ -487,7 +491,6 @@
 "Operations Director": "Операционный директор",
 "“We asked for a chatbot. We got a shopping tool people actually come back to.”": "«Мы просили чат-бота. А получили инструмент для покупок, к которому люди правда возвращаются».",
 "Got a messy problem?": "Есть запутанная задача?",
-"Let's talk": "Давайте обсудим",
 "© 2026 Daniyar — designed with too much coffee": "© 2026 Daniyar — сделано с избытком кофе",
 "Available from Jan 2027": "Свободен с января 2027",
 "Back to top ↑": "Наверх ↑",

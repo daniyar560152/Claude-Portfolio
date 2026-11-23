@@ -99,7 +99,7 @@
       title: ['LOAN', 'paid off early'],
       short: 'Early loan repayment and encumbrance removal in the app',
       color: 'mint',
-      ill: 'macPay',
+      ill: 'coinStack',
       board: 'loan', // rendered from the Figma case board (assets/js/board-loan.js)
       coverStickers: ['paidoff', 'coins'],
       year: '2026',
