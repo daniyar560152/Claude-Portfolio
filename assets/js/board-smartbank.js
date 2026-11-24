@@ -44,12 +44,6 @@
     document.addEventListener('click', (e) => {
       const b = e.target.closest && e.target.closest('[data-smb-zoom]');
       if (b) { e.preventDefault(); open(b); return; }
-      const t = e.target.closest && e.target.closest('[data-smb-theme]');
-      if (t) {
-        const box = t.closest('.smb-themes');
-        box.dataset.theme = t.dataset.smbTheme;
-        box.querySelectorAll('[data-smb-theme]').forEach((x) => x.setAttribute('aria-pressed', String(x === t)));
-      }
     });
   }
 
@@ -292,20 +286,31 @@
   </section>`;
 
 
-  /* ---------- real Smartbank screens: the components in use ---------- */
+  /* ---------- 08 Redesign of the old Smartbank app (the step before the design system) ---------- */
   const SCR = {
-    's-home': [750, 2366], 's-home-cards': [750, 2526], 's-smartcard': [750, 3652], 's-card-actions': [750, 2268],
+    's-home-cards': [750, 2526], 's-smartcard': [750, 3652], 's-card-actions': [750, 2268],
     's-terms': [750, 1762], 's-popup': [750, 1334], 's-deposit': [750, 1624], 's-loan': [750, 1624],
   };
-  const screensList = [
-    ['s-home', 'Home', 'Home: transfers, loan banner, cards, bonuses, services', ['Top bar with rates', 'Shortcut tiles', 'Promo banner', 'Product card', 'Bonus widget', 'Tab bar']],
-    ['s-home-cards', 'Home · many cards', 'Home with three cards and an instalment debt', ['Card cell', 'Multi-currency balance', 'Card thumbnails', 'Debt line']],
-    ['s-smartcard', 'Visa Metal Diamond Club', 'Premium card page with benefits and privileges', ['Card hero', 'Benefit list', 'Icon badges', 'Documents cell', 'Primary button']],
-    ['s-card-actions', 'Card · actions', 'PAYDA instalment card: balance, debt and card actions', ['Product header', 'Segmented tabs', 'Action cells', 'Toggle', 'Apple Pay']],
-    ['s-terms', 'Change terms', 'Instalment terms: months picker, payment options and fees', ['Month picker', 'Radio cards', 'Info hint', 'Fee rows']],
-    ['s-popup', 'Pop-up · early repayment', 'Partial early repayment pop-up with an amount field', ['Amount field', 'Hint', 'Info banner', 'Disabled button']],
-    ['s-deposit', 'Deposit · actions', 'Deposit with top-up, rate chip and actions', ['Rate chip', 'Segmented tabs', 'Action cells', 'Toggle']],
-    ['s-loan', 'Cash loan · actions', 'Cash loan: monthly payment and early repayment actions', ['Monthly payment', 'Segmented tabs', 'Action cells']],
+  const rdResearch = [
+    ['statement', 'lilac', 'UX audit of the old app', 'Every screen of cards, deposits and loans side by side: four different headers, actions hidden in menus, terms in fine print.'],
+    ['txRow', 'yellow', 'Requests and analytics', 'Branch-queue and contact-centre reasons, plus the most used actions in the app, decided what goes on top of each screen.'],
+    ['cardFan', 'mint', 'Benchmark', 'Home screens, card pages and loan flows of Kaspi, Halyk, Jusan, Forte and BCC — what Kazakh clients already know.'],
+    ['iconGrid', 'pink', 'Prototype tests', 'Clickable prototypes of the key flows — top-up, instalment terms, early repayment — checked with clients before handoff.'],
+  ];
+  const rdFound = [
+    ['Every product looked different', 'One product page for cards, deposits and loans: header → main action → Statement · Info · Actions.'],
+    ['Actions were buried', 'Everything you can do with a product sits in one “Actions” tab, grouped and with a one-line hint.'],
+    ['Home was a static list', 'A home you can tune: shortcuts, products with every currency and debt, bonuses, services, “Home settings”.'],
+    ['Rules lived in fine print', 'Fees, minimum amounts and conditions sit right in the flow, next to the choice they affect.'],
+  ];
+  const rdScreens = [
+    ['s-home-cards', 'Home', 'Smartbank home with cards, bonuses and services', ['Transfers and a loan as the first two shortcuts, offers in a banner you can close', 'Every card with its balance in each currency, and the debt for an instalment card', 'Bonuses with the favourite category, then “open an account, card or deposit”, a branch visit and ATMs', '“Home settings” — hide, add or reorder blocks']],
+    ['s-card-actions', 'Card page', 'PAYDA instalment card: balance, debt and actions', ['The product header: card, number, Apple Pay and main-card marks, balance and debt', 'One main action — “Top up the card”', 'Tabs Info · Instalment · Actions; actions grouped: pay and transfer, then card settings — Apple Pay, main card, PIN, block, online payments, plastic, notifications']],
+    ['s-deposit', 'Deposit page', 'Deposit with top-up, rate and actions', ['The same header pattern: name, rate chip, amount saved, end date', '“Top up the deposit” as the main action', 'Actions: transfer, rename, close, hide from the accounts list, account by phone number']],
+    ['s-loan', 'Loan page', 'Cash loan: monthly payment and repayment actions', ['The monthly payment and its due date instead of the loan total', '“Make the monthly payment” as the main action', 'Actions: partial or full early repayment, rename']],
+    ['s-popup', 'Early repayment', 'Partial early repayment with an amount field', ['One question per screen: how much to pay now', 'Minimum amount (three monthly payments) and the debt right under the field', 'A hint for those who want a shorter term instead, and a button that wakes up only on a valid amount']],
+    ['s-terms', 'Instalment terms', 'Instalment card terms: months, payment options and fees', ['Months for purchases at partners as a 3 · 6 · 9 · 12 picker', 'Purchases elsewhere: on credit at 3% a month or in instalments', 'The fee shown next to the choice, and the cash-withdrawal limit at the end']],
+    ['s-smartcard', 'Premium card', 'Visa Metal Diamond Club premium card page', ['A premium page for VIP clients: the card, its three main benefits', 'The private club — personal manager, investments, currency exchange, consulting, partners', 'Visa Infinite privileges, tariffs and one action — “Request a call”']],
   ];
   const phoneScr = (file, alt) => {
     const [w, h] = SCR[file];
@@ -317,17 +322,41 @@
       <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('Click to scroll the screen')}</span><span class="for-touch">${T('Tap to scroll the screen')}</span></span>
     </div>`;
   };
-  const screensBlock = () => `
-    <h3 class="bd-h1 smb-subhead">${T('The components in real screens')}</h3>
-    <p class="bd-mono" style="max-width:820px">${T('Eight Smartbank screens built only from the system: the same tiles, cells, tabs, toggles and buttons in light theme. Click a phone to scroll it, or open it full screen.')}</p>
-    <div class="smb-screens">${screensList.map(([f, name, alt, parts], i) => `
-      <figure class="smb-screen" data-reveal>
-        <figcaption class="smb-screen__head"><b class="bd-label">0${i + 1}</b><span class="bd-h3">${esc(T(name))}</span>
-          <button class="bd-full" type="button" data-smb-zoom="${IMG}${f}.webp" data-phone data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}"><span aria-hidden="true">⤢</span>${T('Full screen')}</button></figcaption>
+  const productPattern = [['Card', 'Top up the card'], ['Deposit', 'Top up the deposit'], ['Loan', 'Make the monthly payment']];
+  const redesign = () => `
+  <section class="bd-sec bd-white-bg" id="redesign" data-theme="light">
+    ${head('(08) — redesign', 'THE APP', 'redesign')}
+    <p class="bd-mono" style="max-width:860px">Before the design system there was the redesign. As the UX/UI designer I redrew the old Smartbank app — home, the pages of cards, deposits and loans, a premium card, instalment terms and early repayment. The patterns that kept repeating here became the design system in the next section.</p>
+
+    <h3 class="bd-h1 smb-subhead">${T('How I researched it')}</h3>
+    <div class="smb-layers" data-stagger>${rdResearch.map(([ic, t, h, d], i) => `<div class="smb-layer bd-tint--${t}"><div class="smb-layer__top"><span class="bd-ico" style="--w:60px">${icon(ic)}</span><b class="bd-label">0${i + 1}</b></div><h3 class="bd-h2">${h}</h3><p class="bd-mono-s">${d}</p></div>`).join('')}</div>
+    <div class="smb-found" data-stagger>${rdFound.map(([h, d]) => `<div class="smb-found__row"><p class="bd-h3">${esc(h)}</p><span class="bd-h2 bd-blue" aria-hidden="true">→</span><p class="bd-mono-s">${esc(d)}</p></div>`).join('')}</div>
+
+    <div class="smb-pattern" data-reveal>
+      <span class="bd-label">${T('One product page for every product')}</span>
+      <div class="smb-pattern__row">${productPattern.map(([p, a]) => `
+        <div class="smb-pattern__col"><b class="bd-h3">${esc(T(p))}</b>
+          <span class="smb-pattern__blk">${T('Header — name, balance, key fact')}</span>
+          <span class="smb-pattern__blk smb-pattern__blk--ink">${esc(T(a))}</span>
+          <span class="smb-pattern__tabs"><i>${T('Statement')}</i><i>${T('Info')}</i><i class="on">${T('Actions')}</i></span>
+          <span class="smb-pattern__blk">${T('Grouped actions with hints')}</span>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <h3 class="bd-h1 smb-subhead">${T('The redesigned screens')}</h3>
+    <div class="smb-rd">${rdScreens.map(([f, name, alt, notes], i) => `
+      <article class="smb-rd__item" data-reveal>
         <div class="bd-handset">${phoneScr(f, alt)}</div>
-        <div class="smb-chips">${parts.map((x) => `<span class="smb-chip">${esc(T(x))}</span>`).join('')}</div>
-      </figure>`).join('')}
-    </div>`;
+        <div class="smb-rd__text">
+          <b class="bd-label">0${i + 1}</b>
+          <h4 class="bd-h2">${esc(T(name))}</h4>
+          <ul>${notes.map((n) => `<li class="bd-mono-s">${esc(T(n))}</li>`).join('')}</ul>
+          <button class="bd-full" type="button" data-smb-zoom="${IMG}${f}.webp" data-phone data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}"><span aria-hidden="true">⤢</span>${T('Full screen')}</button>
+        </div>
+      </article>`).join('')}
+    </div>
+  </section>`;
 
   /* ---------- 09 Design system (both decks, one story) ---------- */
   const dsStats = [['4', 'themes — Black VIP, Black regular, White regular, White VIP'], ['76', 'tokens in one theme, 300+ in all'], ['617', 'icons for 2 platforms, desktop and mobile'], ['12 + 22', 'bank cards in vector + mini logos of other banks']];
@@ -338,47 +367,27 @@
     ['txRow', 'pink', 'Statement components', 'The transaction row, statuses, bonus line and details sheet from the statements project became shared components for cards, accounts and deposits.'],
   ];
   const tokens = [['light_vip-colorText-primary-whitegreyBG', '#2C2D2E', 'Main headline colour — reads black on white or grey backgrounds'], ['light_vip-colorText-secondary-whitegreyBG', '#8A827A', 'Subheads and regular text in grey frames; second-level information'], ['dark_vip-colorText-primary', '#FFF8F2', 'Main headline colour — reads white on dark backgrounds'], ['dark_vip-colorText-secondary', '#ADA299', 'Subheads and regular text on dark backgrounds']];
-  const themes = [['black-vip', 'Black VIP'], ['black', 'Black regular'], ['white', 'White regular'], ['white-vip', 'White VIP']];
   const system = () => `
   <section class="bd-sec" id="system" data-theme="light">
-    ${head('(08) — design system', 'ONE', 'system')}
-    <p class="bd-mono" style="max-width:820px">Both projects stand on the same atoms. Statements gave the system its components; the Smartbank redesign — profile, VIP and Premium services, card management, bonuses, Visa alias transfers, notifications, payroll — gave it themes, tokens and icons.</p>
+    ${head('(09) — design system', 'ONE', 'system')}
+    <p class="bd-mono" style="max-width:820px">The next step after the redesign: its repeating parts turned into a system. The redesign gave it the product page, cells, tabs and buttons; statements gave it the transaction row; the VIP work gave it four themes, tokens and icons.</p>
     <div class="bd-cols4" data-stagger>${dsStats.map(([v, l]) => `<div class="bd-metric"><b class="bd-metric-l">${v}</b><span class="bd-label">${esc(l)}</span></div>`).join('')}</div>
     <div class="smb-layers" data-stagger>${layers.map(([ic, t, h, d]) => `<div class="smb-layer bd-tint--${t}"><span class="bd-ico" style="--w:72px">${icon(ic)}</span><h3 class="bd-h2">${h}</h3><p class="bd-mono-s">${d}</p></div>`).join('')}</div>
 
-    ${screensBlock()}
     <h3 class="bd-h1 smb-subhead">${T('A few examples')}</h3>
-    <div class="smb-themes" data-theme="black-vip" data-reveal>
-      <div class="smb-themes__side">
-        <span class="bd-label">${T('Example 1 · one screen, four themes')}</span>
-        <div class="smb-themes__btns" role="group" aria-label="${esc(T('Theme'))}">${themes.map(([k, n], i) => `<button type="button" data-smb-theme="${k}" aria-pressed="${i === 0}">${esc(T(n))}</button>`).join('')}</div>
-        <p class="bd-mono-s">${T('The same components switch theme through tokens — nothing is redrawn.')}</p>
-      </div>
-      <div class="smb-demo" aria-label="${esc(T('Theme preview'))}">
-        <p class="smb-demo__title">Metalcard</p>
-        <div class="smb-demo__card"><small>${T('Available on the account')}</small><b>5 000 543<em>.00 ₸</em></b><small>610 638.18 ₽ · 9 106.51 £</small></div>
-        <span class="smb-demo__btn">${T('Top up the card')}</span>
-        <div class="smb-demo__tabs"><span>${T('Statement')}</span><span class="is-on">${T('Info')}</span><span>${T('Actions')}</span></div>
-        <div class="smb-demo__row"><i>▶</i><span><b>Cinema 11</b><small>${T('Entertainment')}</small></span><span class="r"><b>− 5 000 ₸</b><small class="acc">+1 500 B (30%)</small></span></div>
-        <div class="smb-demo__row"><i>K</i><span><b>Kaspi Bank</b><small>${T('To another bank’s card')}</small></span><span class="r"><b>− 44 950 ₸</b><small class="err">${T('Declined')}</small></span></div>
-        <div class="smb-demo__row"><i>⇄</i><span><b>${T('Dollar account')}</b><small>${T('Between own accounts')}</small></span><span class="r"><b>− 12 850 $</b><small class="wait">${T('In progress')}</small></span></div>
-      </div>
-    </div>
-
     <div class="smb-tokens" data-reveal>
-      <span class="bd-label">${T('Example 2 · tokens with a name, a value and a rule')}</span>
+      <span class="bd-label">${T('Example 1 · tokens with a name, a value and a rule')}</span>
       ${tokens.map(([n, hex, d]) => `<div class="smb-token"><i style="background:${hex}"></i><code>${n}</code><b>${hex}</b><span class="bd-mono-s bd-grey">${esc(T(d))}</span></div>`).join('')}
       <span class="bd-label bd-grey">${T('+ 300 more tokens across four themes')}</span>
     </div>
 
-    <span class="bd-label">${T('Example 3 · the system in use — open any slide full size')}</span>
+    <span class="bd-label">${T('Example 2 · the system in use — open any slide full size')}</span>
     <div class="smb-gallery">
       ${shot('vip', 'Black VIP theme on three Smartbank screens', 'Black VIP theme: card, home and transfer')}
       ${shot('icons', 'Interface icons in 24, 20 and 18 px', 'Interface icons · 24 / 20 / 18 px')}
       ${shot('payments', 'Payment icons: benefits and MCC categories', 'Payments: benefits and MCC icons')}
       ${shot('cards', 'Eurasian Bank cards in vector and other banks’ mini logos', '12 cards in vector · 22 mini logos')}
     </div>
-    ${shot('redesign', 'Smartbank redesign overview', 'Smartbank redesign: profile, VIP · Premium, cards, bonuses, Visa alias, notifications, payroll')}
   </section>`;
 
   /* ---------- 10 Expected ---------- */
@@ -398,7 +407,7 @@
   ];
   const results = () => `
   <section class="bd-sec" id="results" data-theme="light">
-    ${head('(09) — expected', 'WHAT WE', 'expected')}
+    ${head('(10) — expected', 'WHAT WE', 'expected')}
     <div class="smb-values" data-stagger>${bizValue.map(([h, d]) => `<div class="smb-value"><h3 class="bd-h2">${esc(h)}</h3><p class="bd-mono-s">${esc(d)}</p></div>`).join('')}</div>
     <div class="bd-table-wrap" data-reveal><table class="bd-table"><thead><tr><th>Metric</th><th>Design lever</th><th>Target</th><th>Type</th></tr></thead>
       <tbody>${rows.map((r) => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="bd-h3 bd-blue">${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>
@@ -414,14 +423,14 @@
   ];
   const reflection = (next) => `
   <section class="bd-sec bd-white-bg bd-sec--last" id="learnings" data-theme="light">
-    ${head('(10) — reflection', 'WHAT I', 'learned')}
+    ${head('(11) — reflection', 'WHAT I', 'learned')}
     <div class="bd-cols3" data-stagger>${learn.map(([art, t, d]) => `<div class="bd-learn"><span class="bd-ico" style="--w:80px">${art}</span><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div>`).join('')}</div>
     ${K().nextCard(next)}
   </section>`;
 
   root.BOARDS = root.BOARDS || {};
   root.BOARDS.smartbank = {
-    toc: [['overview', 'Overview'], ['impact', 'TL;DR'], ['problem', 'Problem'], ['why', 'Why now'], ['research', 'Research'], ['journey', 'Journey'], ['solution', 'Solution'], ['test', 'Testing'], ['process', 'Process'], ['system', 'Design system'], ['results', 'Expected'], ['learnings', 'Reflection']],
-    render: (p, next) => `<div class="bd">${hero(p)}${overview()}${tldr()}${problem()}${why()}${research()}${journey()}${solution()}${test()}${process()}${system()}${results()}${reflection(next)}</div>`,
+    toc: [['overview', 'Overview'], ['impact', 'TL;DR'], ['problem', 'Problem'], ['why', 'Why now'], ['research', 'Research'], ['journey', 'Journey'], ['solution', 'Solution'], ['test', 'Testing'], ['process', 'Process'], ['redesign', 'Redesign'], ['system', 'Design system'], ['results', 'Expected'], ['learnings', 'Reflection']],
+    render: (p, next) => `<div class="bd">${hero(p)}${overview()}${tldr()}${problem()}${why()}${research()}${journey()}${solution()}${test()}${process()}${redesign()}${system()}${results()}${reflection(next)}</div>`,
   };
 })(typeof window !== 'undefined' ? window : globalThis);
