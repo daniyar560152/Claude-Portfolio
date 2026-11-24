@@ -6,6 +6,10 @@
  */
 (function (root) {
   const RU = {
+"Click to scroll the screen": "Нажмите, чтобы листать экран",
+"Tap to scroll the screen": "Коснитесь, чтобы листать экран",
+"Full screen": "На весь экран",
+
 "Email me": "Написать на почту",
 "for sale + mortgage": "продаётся + ипотека",
 "Open full size": "Открыть в полном размере",

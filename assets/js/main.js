@@ -364,7 +364,7 @@
     };
     document.addEventListener('click', (e) => {
       if (e.button !== 0 || e.defaultPrevented) return;
-      if (e.target.closest('a, button, input, textarea, select, label, .tool, .sticker, [data-pile], .nav, .badge, .sticker-hud, .phone, .desk, .qcard')) return;
+      if (e.target.closest('a, button, input, textarea, select, label, .tool, .sticker, [data-pile], .nav, .badge, .sticker-hud, .phone, .desk, .qcard, .bd-stage, .bd-lb')) return;
       if (String(window.getSelection && window.getSelection()).length) return;
       const el = document.createElement('div');
       el.className = 'sticker';

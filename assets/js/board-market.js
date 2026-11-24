@@ -19,33 +19,31 @@
     'd-catalog': 'baspana.otbasybank.kz/catalog', 'd-object': 'baspana.otbasybank.kz/complex/zhas-kanat',
     'd-programs': 'baspana.otbasybank.kz/programs', 'd-programme': 'baspana.otbasybank.kz/programs/nauryz',
   };
+  // a screen only takes the scroll once someone clicks / taps it, so scrolling the page past it never gets stuck
   const screen = (file, alt) => {
     const [w, h] = SCREENS[file];
     const kind = file[0] === 'd' ? 'desk' : 'phone';
     return `<div class="bd-scrwrap bd-scrwrap--${kind}">
-      <div class="bd-scr" data-lenis-prevent tabindex="0" role="region" aria-label="${esc(T(alt))} — ${esc(T('scrollable screen'))}">
+      <div class="bd-scr" tabindex="0" role="region" aria-label="${esc(T(alt))} — ${esc(T('scrollable screen'))}">
         <img src="assets/img/market/${file}.webp" alt="${esc(T(alt))}" width="${w}" height="${h}" loading="lazy" decoding="async">
       </div>
       <i class="bd-scr__bar" aria-hidden="true"></i>
-      <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('↕ scroll inside')}</span><span class="for-touch">${T('swipe ↕ inside')}</span></span>
+      <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('Click to scroll the screen')}</span><span class="for-touch">${T('Tap to scroll the screen')}</span></span>
     </div>`;
   };
-  const expandBtn = (file, alt) => `<button class="bd-expand" type="button" data-expand="${file}" data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}" data-cursor="${esc(T('Zoom'))}">⤢</button>`;
-  // a small working browser: address bar + the real page, scrollable
-  const browser = ([file, label, alt]) => `
-    <figure class="bd-device bd-device--desk">
-      <div class="bd-browser">
-        <div class="bd-browser__bar"><i class="bd-browser__dots" aria-hidden="true"><b></b><b></b><b></b></i><span class="bd-browser__url">${URLS[file]}</span>${expandBtn(file, alt)}</div>
-        ${screen(file, alt)}
-      </div>
-      <figcaption class="bd-label">${esc(T(label))}</figcaption>
+  const fullBtn = (file, alt) => `<button class="bd-full" type="button" data-expand="${file}" data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}"><span aria-hidden="true">⤢</span>${T('Full screen')}</button>`;
+  // one panel of the row: a label, a "full screen" button and the device with the real page inside
+  const stage = ([file, label, alt]) => {
+    const desk = file[0] === 'd';
+    const device = desk
+      ? `<div class="bd-browser"><div class="bd-browser__bar"><i class="bd-browser__dots" aria-hidden="true"><b></b><b></b><b></b></i><span class="bd-browser__url">${URLS[file]}</span></div>${screen(file, alt)}</div>`
+      : `<div class="bd-handset">${screen(file, alt)}</div>`;
+    return `
+    <figure class="bd-stage bd-stage--${desk ? 'desk' : 'phone'}">
+      <figcaption class="bd-stage__head"><span class="bd-label">${esc(T(label))}</span>${fullBtn(file, alt)}</figcaption>
+      <div class="bd-stage__body">${device}</div>
     </figure>`;
-  // a phone with the real mobile page inside
-  const phone = ([file, label, alt]) => `
-    <figure class="bd-device bd-device--phone">
-      <div class="bd-phone">${screen(file, alt)}${expandBtn(file, alt)}</div>
-      <figcaption class="bd-label">${esc(T(label))}</figcaption>
-    </figure>`;
+  };
 
   // full-size viewer: one overlay for the page, scroll the screen at its real size
   const openFull = (btn) => {
@@ -76,16 +74,46 @@
     document.documentElement.classList.add('bd-lb-open');
     lb.querySelector('.bd-lb__close').focus({ preventScroll: true });
   };
-  // scroll progress + hide the hint once someone has scrolled a screen (one listener for the page)
+
   if (typeof document !== 'undefined' && !root.__bdScr) {
     root.__bdScr = true;
-    document.addEventListener('click', (e) => { const b = e.target.closest && e.target.closest('[data-expand]'); if (b) { e.preventDefault(); openFull(b); } });
-    document.addEventListener('scroll', (e) => {
+    const wrapOf = (el) => el && el.closest && el.closest('.bd-scrwrap');
+    const on = (w) => {
+      if (!w || w.classList.contains('is-active')) return;
+      document.querySelectorAll('.bd-scrwrap.is-active').forEach(off);
+      w.classList.add('is-active');
+      w.querySelector('.bd-scr').setAttribute('data-lenis-prevent', '');
+      if (io) io.observe(w);
+    };
+    function off(w) {
+      if (!w || !w.classList.contains('is-active')) return;
+      w.classList.remove('is-active');
+      w.querySelector('.bd-scr').removeAttribute('data-lenis-prevent');
+      if (io) io.unobserve(w);
+    }
+    // stop as soon as the screen leaves the viewport
+    const io = 'IntersectionObserver' in window ? new IntersectionObserver((es) => es.forEach((e) => { if (!e.isIntersecting) off(e.target); })) : null;
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest && e.target.closest('[data-expand]');
+      if (b) { e.preventDefault(); openFull(b); return; }
+      const w = wrapOf(e.target);
+      if (w) on(w);
+      else document.querySelectorAll('.bd-scrwrap.is-active').forEach(off); // click / tap outside stops it
+    });
+    document.addEventListener('keydown', (e) => { // keyboard: focus a screen and use the arrows
+      const w = wrapOf(document.activeElement);
+      if (w && /^(Arrow|Page|Home|End| )/.test(e.key)) on(w);
+    });
+    document.addEventListener('mouseout', (e) => { // mouse leaves the screen: the page scrolls again
+      const w = wrapOf(e.target);
+      if (w && w.classList.contains('is-active') && !w.contains(e.relatedTarget)) off(w);
+    });
+    document.addEventListener('focusout', (e) => { const w = wrapOf(e.target); if (w && !w.contains(e.relatedTarget)) off(w); });
+    document.addEventListener('scroll', (e) => { // progress bar
       const el = e.target;
       if (!el || !el.classList || !el.classList.contains('bd-scr')) return;
       const max = el.scrollHeight - el.clientHeight;
       el.parentElement.style.setProperty('--p', max > 0 ? (el.scrollTop / max).toFixed(3) : 1);
-      if (el.scrollTop > 8) el.parentElement.classList.add('is-scrolled');
     }, true);
   }
 
@@ -194,11 +222,10 @@
         <div class="bd-flowcard__text">
           <div class="bd-card__top"><div class="bd-card__title"><b class="bd-h1 bd-blue">${f.no}</b><b class="bd-h1">${f.word}</b><i class="bd-serif-m">${f.serif}</i></div>${tag(f.desk && f.phone ? 'web + mobile' : f.desk ? 'web' : 'mobile')}</div>
           <p class="bd-mono-s">${esc(f.text)}</p>
-          <p class="bd-label bd-flowcard__how">${T('↕ scroll the screens')}<br>${T('⤢ open full size')}</p>
         </div>
-        <div class="bd-screens${f.desk ? '' : ' is-phone-only'}${f.phone ? '' : ' is-desk-only'}">
-          ${f.desk ? browser(f.desk) : ''}
-          ${f.phone ? phone(f.phone) : ''}
+        <div class="bd-stages${f.desk && f.phone ? '' : ' is-single'}">
+          ${f.desk ? stage(f.desk) : ''}
+          ${f.phone ? stage(f.phone) : ''}
         </div>
       </div>
       <div class="bd-card__sticker">${f.sticker}</div>
