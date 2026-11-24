@@ -172,14 +172,36 @@
         'An online car loan for a used car bought from another person: interviews, a JTBD analysis, a persona and two usability tests, then the flow from the landing to the decision for mobile and desktop. Online car loans grew 2.5× in a quarter.',
       tools: ['Figma', 'FigJam'],
       impact: [
-        { value: 79, suffix: '', label: 'NPS AUTO online, from 61' },
+        { prefix: '×', value: '2.5', suffix: '', label: 'Online car loans in a quarter' },
+        { value: 74, suffix: '%', label: 'Conversion to a funded loan, from 72.7%' },
+      ],
+      screens: [],
+    },
+    {
+      slug: 'rereg',
+      no: '06',
+      client: 'Eurasian Bank',
+      category: 'GovTech · Responsive web',
+      title: ['NEW OWNER', 'and a pledge, online'],
+      short: 'Car re-registration for the buyer and the seller, without the queue',
+      color: 'mint',
+      ill: 'plateFrame',
+      board: 'rereg', // rendered as a case board (assets/js/board-rereg.js)
+      coverStickers: ['esign', 'kzplate'],
+      cardSticker: 'esign',
+      year: '2022',
+      summary:
+        'The second half of a car loan: re-registering the car, new plates, state fees and the pledge — online for both the buyer and the seller, with biometrics, an e-signature and state services behind it. NPS AUTO online grew from 61 to 78.79.',
+      tools: ['Figma', 'FigJam'],
+      impact: [
+        { value: '78.79', suffix: '', label: 'NPS AUTO online, from 61' },
         { value: 8, suffix: '%', label: 'Car-loan conversion, from 6%' },
       ],
       screens: [],
     },
     {
       slug: 'wallet',
-      no: '06',
+      no: '07',
       client: 'Concept',
       category: 'Mobile banking · Concept',
       title: ['GROUP WALLETS', 'and money in envelopes'],

@@ -888,6 +888,66 @@
     return g;
   };
 
+  /* ---------- Car re-registration (GovTech) icons ---------- */
+  // a KZ licence plate
+  PX.plate = () => {
+    const g = new Grid(48, 18);
+    g.rect(2, 2, 46, 16, 1); g.shape(rr(0, 0, 46, 16, 2)); g.frame(1, 1, 44, 14);
+    g.shape(rr(3, 3, 8, 10, 0), 'dither'); g.rect(4, 4, 6, 3, 2); g.shape(ell(7, 5.5, 1.3), 'ink'); g.rect(11, 3, 1, 10);
+    const d = (x, cols) => cols.forEach(([cx, cy, w, h]) => g.rect(x + cx, 4 + cy, w, h));
+    d(14, [[0, 0, 4, 1], [3, 0, 1, 8], [0, 7, 4, 1]]);           // 1-ish
+    d(20, [[0, 0, 4, 1], [3, 0, 1, 4], [0, 3, 4, 1], [0, 3, 1, 5], [0, 7, 4, 1]]); // 2
+    d(26, [[0, 0, 4, 1], [3, 0, 1, 8], [0, 3, 4, 1], [0, 7, 4, 1]]); // 3
+    d(33, [[0, 0, 1, 8], [3, 0, 1, 8], [0, 0, 4, 1], [0, 3, 4, 1]]); // A
+    d(39, [[0, 0, 4, 1], [0, 0, 1, 8], [0, 3, 3, 1], [0, 7, 4, 1]]); // E-ish
+    return g;
+  };
+  // a face inside a scan frame — biometrics
+  PX.faceScan = () => {
+    const g = new Grid(36, 36);
+    [[0, 0, 1, 1], [35, 0, -1, 1], [0, 35, 1, -1], [35, 35, -1, -1]].forEach(([x, y, dx, dy]) => { for (let i = 0; i < 8; i++) { g.set(x + i * dx, y, 1); g.set(x, y + i * dy, 1); g.set(x + i * dx, y + dy, 1); g.set(x + dx, y + i * dy, 1); } });
+    g.shape(ell(18, 17, 9, 11)); g.shape(rr(10, 6, 16, 6, 3), 'dither'); g.frame(10, 6, 16, 6);
+    g.rect(14, 15, 2, 2); g.rect(20, 15, 2, 2); g.line(18, 17, 17, 20); g.line(15, 23, 21, 23);
+    for (let x = 3; x < 33; x += 2) g.set(x, 18, 1);
+    return g;
+  };
+  // a document with a seal and a signature line — e-signature
+  PX.eSign = () => {
+    const g = new Grid(36, 40);
+    g.rect(2, 2, 30, 38, 1); g.shape(rr(0, 0, 30, 37, 1));
+    for (let r = 0; r < 4; r++) g.rect(4, 5 + r * 4, 22 - (r % 2) * 6, 1);
+    g.line(4, 30, 7, 26); g.line(7, 26, 9, 30); g.line(9, 30, 12, 27); g.line(12, 27, 14, 30); g.rect(4, 32, 13, 1);
+    g.shape(ell(26, 29, 7.5), 'ink'); g.shape(ell(26, 29, 5.5), 'dither'); g.shape(ell(26, 29, 3), 'paper'); g.rect(25, 27, 2, 4);
+    return g;
+  };
+  // a government building
+  PX.govBuilding = () => {
+    const g = new Grid(42, 36);
+    g.shape(poly([[21, 1], [40, 10], [2, 10]])); g.shape(ell(21, 7, 2.2), 'ink');
+    g.shape(rr(3, 10, 36, 3, 0), 'ink');
+    [6, 13, 20, 27, 34].forEach((x) => { g.shape(rr(x, 13, 3, 16, 0)); g.frame(x, 13, 3, 16); });
+    g.shape(rr(2, 29, 38, 3, 0), 'dither'); g.frame(2, 29, 38, 3); g.rect(0, 32, 42, 3);
+    return g;
+  };
+  // a padlock on a chain — the pledge
+  PX.pledge = () => {
+    const g = new Grid(40, 36);
+    [[2, 6], [8, 9], [14, 12]].forEach(([x, y]) => { g.shape(not(ell(x + 3, y + 2, 3.4, 2.2), ell(x + 3, y + 2, 1.6, 0.8)), 'ink'); });
+    g.shape(not(rr(20, 4, 14, 16, 6), rr(23, 7, 8, 14, 3)), 'ink');
+    g.shape(rr(16, 15, 22, 18, 2)); g.shape(rr(16, 15, 22, 4, 1), 'dither'); g.frame(16, 15, 22, 18);
+    g.shape(ell(27, 23, 2.4), 'ink'); g.rect(26, 24, 2, 5);
+    return g;
+  };
+  // two hands shaking — buyer and seller
+  PX.handshake = () => {
+    const g = new Grid(44, 26);
+    g.shape(rr(0, 6, 9, 13, 0), 'dither'); g.frame(0, 6, 9, 13); g.shape(rr(35, 6, 9, 13, 0), 'dither'); g.frame(35, 6, 9, 13);
+    g.shape(poly([[8, 8], [20, 5], [30, 9], [36, 8], [36, 18], [28, 22], [18, 23], [8, 18]]));
+    g.line(16, 10, 24, 14); g.line(14, 13, 22, 17); g.line(18, 16, 24, 19); g.line(26, 9, 34, 12);
+    g.line(20, 5, 15, 11);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -1100,6 +1160,33 @@
       ${cursor(400, 320, 0.5, -10)}
     `, 'Pixel-art piggy bank inside a selection box, with an umbrella');
 
+  /* ---------- Car re-registration characters ---------- */
+  ILL.plateFrame = () => svg('0 0 460 380', `
+      ${selection(30, 120, 400, 160)}
+      ${nameTag(30, 84, 'keep my plate · 6 months')}
+      ${PX.plate().svg(42, 132, 7.8)}
+      ${PX.handshake().svg(150, 300, 3)}
+      ${sparkle(430, 80, 1.1)}${sparkle(30, 340, .8)}
+      ${cursor(330, 300, 0.55, -10)}
+      ${nameTag(354, 342, 'you', true)}
+    `, 'Pixel-art Kazakh licence plate in a selection box, with a handshake');
+  ILL.govMac = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, 'GovTech · registered ✓')}
+      ${PX.govBuilding().svg(76, 92, 7)}
+      ${PX.eSign().svg(300, 270, 3.2)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 340, .8)}
+      ${cursor(250, 380, 0.55, -10)}
+      ${nameTag(274, 422, 'you', true)}
+    `, 'Pixel-art government building and an e-signed document');
+  ILL.bioCheck = () => svg('0 0 460 420', `
+      ${nameTag(40, 24, 'biometrics + e-signature')}
+      ${PX.faceScan().svg(40, 70, 8.6)}
+      ${PX.pledge().svg(330, 300, 3)}
+      ${sparkle(430, 90, 1)}
+      ${cursor(360, 160, 0.5, -10)}
+      ${nameTag(378, 202, 'buyer', false)}
+    `, 'Pixel-art face in a scan frame with a padlock on a chain');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -1149,10 +1236,12 @@
     usedcar: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.car().svg(33, 14, 3)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">${root.t ? root.t('used car OK') : 'used car OK'}</text></g>`, 'Sticker: used car'),
     splitok: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 34px 'Anton',Impact,sans-serif">${root.t ? root.t('SPLIT ✓') : 'SPLIT ✓'}</text>`, 'Sticker: split the bill'),
     envelopes4: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.envelopes().svg(61, 10, 2.1)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">${root.t ? root.t('4 envelopes') : '4 envelopes'}</text></g>`, 'Sticker: four envelopes'),
+    esign: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="82" text-anchor="middle" class="tk" style="font:400 30px 'Anton',Impact,sans-serif">${root.t ? root.t('E-SIGN') : 'E-SIGN'}</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:12px">${root.t ? root.t('NO QUEUE ✓') : 'NO QUEUE ✓'}</text>`, 'Sticker: e-signature, no queue'),
+    kzplate: () => st('-12 -12 236 130', `<g transform="rotate(-4 105 50)"><rect class="p" x="0" y="0" width="210" height="100" rx="16"/>${PX.plate().svg(15, 12, 3.8)}<text x="105" y="94" text-anchor="middle" class="tk" style="font-size:16px">${root.t ? root.t('re-registered') : 're-registered'}</text></g>`, 'Sticker: licence plate re-registered'),
     online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan', 'carLoan', 'macCar', 'keyTag', 'groupPurse', 'macRing', 'piggyGoal'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan', 'carLoan', 'macCar', 'keyTag', 'groupPurse', 'macRing', 'piggyGoal', 'plateFrame', 'govMac', 'bioCheck'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;

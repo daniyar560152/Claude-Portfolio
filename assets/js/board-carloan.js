@@ -87,8 +87,8 @@
   /* ---------- 03 TL;DR ---------- */
   const stats = [
     ['white', '×2.5', 'online car loans issued: ₸1.94 bn → ₸4.81 bn, Q3 → Q4 2022'],
-    ['yellow', '78.79', 'NPS AUTO online, up from 61'],
-    ['mint', '8%', 'car-loan conversion, up from 6%'],
+    ['yellow', '73.53', 'NPS online, up from 72.3'],
+    ['mint', '74%', 'conversion from choosing the bank to a funded loan, up from 72.7%'],
     ['pink', '2 min', 'to a decision, online'],
   ];
   const tldr = () => `
@@ -252,15 +252,15 @@
   /* ---------- 09 Results ---------- */
   const rows = [
     ['Online car loans issued (c2c, b2c)', '₸1 939.6 m', '₸4 809.4 m', '×2.5'],
-    ['NPS AUTO online', '61', '78.79', '+17.8'],
-    ['Car-loan conversion, with the offline flow', '6%', '8%', '+2 pp'],
+    ['NPS online', '72.3', '73.53', '+1.2'],
+    ['Conversion from choosing the bank to a funded loan, with the offline flow', '72.7%', '74.0%', '+1.3 pp'],
   ];
   const results = () => `
   <section class="bd-sec" id="results" data-theme="light">
     ${head('(06) — results', 'THE', 'results')}
     <div class="bd-table-wrap" data-reveal><table class="bd-table"><thead><tr><th>Metric</th><th>Q3 2022</th><th>Q4 2022</th><th>Change</th></tr></thead>
       <tbody>${rows.map((r) => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td><td class="bd-h3 bd-blue">${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>
-    <p class="bd-mono-s bd-grey">${T('Next step: re-registering the car for the buyer and the seller right in Smartbank.')}</p>
+    <p class="bd-mono-s bd-grey">${T('Next step: re-registering the car for the buyer and the seller right in Smartbank.')} <a href="${root.caseUrl ? root.caseUrl('rereg') : 'case.html?p=rereg'}" class="bd-blue">${T('See the next case →')}</a></p>
     <div class="bd-quote" data-reveal><div class="bd-art" style="--w:200px">${icon('towTruck')}</div>
       <div><p class="bd-serif-l bd-quote__text">“People buy the car, not the loan — so the loan has to get out of the way.”</p><span class="bd-label">Design principle behind the flow</span></div></div>
   </section>`;
