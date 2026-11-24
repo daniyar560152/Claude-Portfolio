@@ -129,6 +129,46 @@
     else (typeof target === 'number' ? window.scrollTo({ top: target, behavior: 'smooth' }) : target.scrollIntoView({ behavior: 'smooth' }));
   }
 
+  /* ---------------- keep the reading position when switching language ---------------- */
+  // Saves which section sits on the reading line and how far into it, so RU <-> EN opens at the same place
+  // (texts differ in length, so a section + progress is more accurate than raw pixels).
+  const POS_KEY = 'langPos';
+  let posData = null;
+  const anchorOf = (el) => (el.parentElement && el.parentElement.classList.contains('pin-spacer') ? el.parentElement : el);
+  function savePos(href) {
+    const line = innerHeight * 0.3;
+    let best = -1;
+    const secs = $$('section');
+    secs.forEach((el, i) => { const r = anchorOf(el).getBoundingClientRect(); if (r.top <= line && r.bottom > line) best = i; });
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const d = { to: new URL(href, location.href).pathname, ratio: max > 0 ? scrollY / max : 0, t: Date.now() };
+    if (best > -1) { const r = anchorOf(secs[best]).getBoundingClientRect(); d.i = best; d.n = secs.length; d.p = (line - r.top) / Math.max(1, r.height); }
+    store.set(POS_KEY, JSON.stringify(d));
+  }
+  function applyPos() {
+    const d = posData;
+    if (!d) return;
+    const secs = $$('section');
+    const el = d.i != null && secs.length === d.n ? secs[d.i] : null; // same page structure in both languages
+    let y;
+    if (el) { const r = anchorOf(el).getBoundingClientRect(); y = r.top + scrollY + d.p * r.height - innerHeight * 0.3; }
+    else y = d.ratio * (document.documentElement.scrollHeight - innerHeight);
+    y = Math.max(0, Math.round(y));
+    window.scrollTo(0, y);
+    if (lenis) lenis.scrollTo(y, { immediate: true, force: true });
+    ScrollTrigger.update();
+  }
+  function restorePos() {
+    let d = null;
+    try { d = JSON.parse(store.get(POS_KEY) || 'null'); } catch (e) { d = null; }
+    store.set(POS_KEY, '');
+    if (!d || Date.now() - d.t > 20000 || d.to !== location.pathname) return false;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    posData = d;
+    applyPos();
+    return true;
+  }
+
   /* ---------------- page transitions ---------------- */
   const wipe = $('.wipe');
   if (wipe) gsap.set(wipe, { yPercent: store.get('visited') ? 0 : 100 });
@@ -145,6 +185,7 @@
       }
       const url = new URL(a.href, location.href);
       if (url.origin !== location.origin) return;
+      if (a.hasAttribute('data-lang-switch')) savePos(a.href);
       if (url.pathname === location.pathname && url.search === location.search && url.hash) return;
       e.preventDefault();
       if (reduce || !wipe) { location.href = url.href; return; }
@@ -586,14 +627,18 @@
   Promise.race([ready, new Promise((r) => setTimeout(r, 2500))]).then(() => {
     initScroll();
     if (typeof window.pageAnimations === 'function' && !reduce) window.pageAnimations({ gsap, ScrollTrigger, $, $$ });
+    ScrollTrigger.refresh();
+    const restored = restorePos(); // language switch: jump to the same place before the page is revealed
     runLoader(() => {
       if (heroScope && !reduce) gsap.set($$('.split-char', heroScope), { yPercent: 0 });
       if (!reduce) intro();
       ScrollTrigger.refresh();
-      if (location.hash && $(location.hash)) setTimeout(() => scrollToTarget($(location.hash)), 300);
+      if (restored) applyPos(); // re-apply after the final layout refresh
+      else if (location.hash && $(location.hash)) setTimeout(() => scrollToTarget($(location.hash)), 300);
+      setTimeout(() => { posData = null; }, 1500);
     });
   });
-  window.addEventListener('load', () => ScrollTrigger.refresh());
+  window.addEventListener('load', () => { ScrollTrigger.refresh(); if (posData) applyPos(); });
 
   window.APP = { scrollTo: scrollToTarget, injectIllustrations };
 })();
