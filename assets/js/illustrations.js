@@ -817,6 +817,77 @@
     return g;
   };
 
+  /* ---------- Mobile bank 2025 (group wallets + envelopes) icons ---------- */
+  // a coin purse with a kiss clasp and four pockets inside
+  PX.purse = () => {
+    const g = new Grid(40, 36);
+    g.shape(poly([[7, 12], [33, 12], [38.5, 27], [36, 34.5], [4, 34.5], [1.5, 27]]));          // body
+    g.shape(poly([[3, 27], [37, 27], [36, 34], [4, 34]]), 'dither'); g.line(3, 27, 37, 27);
+    g.shape(rr(6, 8, 28, 5, 2), 'ink'); g.rect(8, 10, 24, 1, 2);                                  // metal frame
+    g.shape(ell(16, 4.5, 3.2)); g.shape(ell(24, 4.5, 3.2)); g.set(15, 3, 2); g.set(23, 3, 2);     // kiss clasp
+    g.rect(15, 7, 2, 2); g.rect(23, 7, 2, 2);
+    [[9, 16], [17, 16], [25, 16]].forEach(([x, y]) => { for (let k = 0; k < 7; k += 2) { g.set(x + k, y, 1); g.set(x + k, y + 7, 1); g.set(x, y + k, 1); g.set(x + 6, y + k, 1); } });
+    return g;
+  };
+  // three envelopes fanned out — money already split into sections
+  PX.envelopes = () => {
+    const g = new Grid(44, 34);
+    [[1, 12, 'dither'], [9, 6, 'blob'], [17, 0, 'blob']].forEach(([x, y, m]) => {
+      g.rect(x + 2, y + 2, 26, 20, 1); g.shape(rr(x, y, 26, 20, 1), m); g.frame(x, y, 26, 20);
+      g.line(x, y, x + 13, y + 10); g.line(x + 25, y, x + 13, y + 10);
+    });
+    g.shape(ell(30, 10, 2.4), 'ink');
+    return g;
+  };
+  // a piggy bank — a savings goal
+  PX.piggy = () => {
+    const g = new Grid(42, 32);
+    g.shape(ell(20, 16, 15, 11)); g.shape(poly([[7, 7], [12, 1], [14, 9]])); g.shape(rr(32, 12, 8, 8, 3));
+    g.rect(35, 15, 1, 2); g.rect(37, 15, 1, 2); g.shape(ell(12, 13, 1.4), 'ink');
+    g.rect(16, 6, 9, 2); g.rect(9, 25, 4, 6); g.rect(25, 25, 4, 6); g.line(9, 30, 12, 30); g.line(25, 30, 28, 30);
+    g.shape(ell(20, 18, 5, 4), 'dither'); g.line(1, 16, 4, 14);
+    return g;
+  };
+  // three people — a group wallet
+  PX.group = () => {
+    const g = new Grid(44, 30);
+    [[10, 'dither'], [34, 'dither'], [22, 'blob']].forEach(([x, m]) => {
+      const big = x === 22; const r = big ? 6 : 5;
+      g.shape(ell(x, big ? 9 : 11, r), m); g.shape(poly([[x - (big ? 11 : 9), 29], [x - (big ? 8 : 7), big ? 18 : 20], [x + (big ? 8 : 7), big ? 18 : 20], [x + (big ? 11 : 9), 29]]), m);
+    });
+    g.line(0, 29, 43, 29);
+    return g;
+  };
+  // an umbrella — the safety cushion
+  PX.umbrella = () => {
+    const g = new Grid(38, 38);
+    g.shape(not(ell(19, 18, 18, 16), rr(0, 18, 38, 20, 0)));
+    [[1, 18], [10, 18], [19, 18], [28, 18]].forEach(([x]) => g.shape(ell(x + 4.5, 18, 4.6, 2.6), 'clear'));
+    g.line(19, 3, 19, 18); g.line(10, 5, 14, 17); g.line(28, 5, 24, 17);
+    g.rect(18, 18, 2, 14); g.rect(12, 31, 8, 2); g.rect(12, 28, 2, 4);
+    g.shape(ell(19, 2, 1.4), 'ink');
+    return g;
+  };
+  // a calendar with a repeat arrow — automatic payments
+  PX.autopay = () => {
+    const g = new Grid(36, 36);
+    g.rect(2, 4, 32, 32, 1); g.shape(rr(0, 2, 32, 32, 2)); g.shape(rr(0, 2, 32, 8, 1), 'ink');
+    g.shape(rr(7, 0, 3, 7, 0), 'ink'); g.shape(rr(22, 0, 3, 7, 0), 'ink');
+    g.shape(not(ell(16, 22, 8.5), ell(16, 22, 6)), 'ink'); g.shape(rr(15, 12, 9, 6, 0), 'paper');
+    g.shape(poly([[17, 11], [23, 14.5], [17, 18]]), 'ink'); g.rect(15, 21, 2, 2);
+    return g;
+  };
+  // a classic Mac showing a ring chart of a wallet section
+  PX.macRing = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    g.shape(not(ell(12.5, 12.5, 4.6), ell(12.5, 12.5, 2.6)), 'dither'); g.shape(not(ell(12.5, 12.5, 4.6), any(ell(12.5, 12.5, 2.6), rr(7, 12.5, 12, 6, 0))), 'ink');
+    g.rect(19, 9, 4, 1); g.rect(19, 12, 4, 1); g.rect(19, 15, 3, 1);
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -1002,6 +1073,33 @@
       ${cursor(400, 250, 0.5, -10)}
     `, 'Pixel-art car key inside a selection box, with a speedometer');
 
+  /* ---------- Mobile bank 2025 characters ---------- */
+  ILL.groupPurse = () => svg('0 0 460 420', `
+      ${nameTag(40, 24, 'trip to Georgia · 4 people')}
+      ${PX.purse().svg(40, 70, 7)}
+      ${PX.group().svg(306, 296, 3)}
+      ${sparkle(430, 120, 1.1)}${sparkle(30, 380, .8)}
+      ${cursor(370, 190, 0.55, -10)}
+      ${nameTag(394, 232, 'you', true)}
+    `, 'Pixel-art coin purse with four pockets and a group of three people');
+  ILL.macRing = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, 'rent · 100% ✓')}
+      ${PX.macRing().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'Vlad', false)}
+    `, 'Pixel-art classic computer showing a ring chart of a wallet section');
+  ILL.piggyGoal = () => svg('0 0 460 400', `
+      ${selection(40, 60, 380, 300)}
+      ${nameTag(40, 24, 'piggy bank · new phone')}
+      ${PX.piggy().svg(70, 100, 7.6)}
+      ${PX.umbrella().svg(330, 250, 2.6)}
+      ${sparkle(430, 80, 1)}
+      ${cursor(400, 320, 0.5, -10)}
+    `, 'Pixel-art piggy bank inside a selection box, with an umbrella');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -1049,10 +1147,12 @@
     viptheme: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/>${PX.gem().svg(48, 34, 1.5)}<text x="75" y="106" text-anchor="middle" class="tk" style="font:400 30px 'Anton',Impact,sans-serif">VIP</text>`, 'Sticker: VIP theme'),
     twomin: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="84" text-anchor="middle" class="tk" style="font:400 36px 'Anton',Impact,sans-serif">${root.t ? root.t('2 MIN') : '2 MIN'}</text><text x="75" y="108" text-anchor="middle" class="tk" style="font-size:15px">${root.t ? root.t('ONLINE ✓') : 'ONLINE ✓'}</text>`, 'Sticker: decision in 2 minutes'),
     usedcar: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.car().svg(33, 14, 3)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">${root.t ? root.t('used car OK') : 'used car OK'}</text></g>`, 'Sticker: used car'),
+    splitok: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 34px 'Anton',Impact,sans-serif">${root.t ? root.t('SPLIT ✓') : 'SPLIT ✓'}</text>`, 'Sticker: split the bill'),
+    envelopes4: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.envelopes().svg(61, 10, 2.1)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">${root.t ? root.t('4 envelopes') : '4 envelopes'}</text></g>`, 'Sticker: four envelopes'),
     online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan', 'carLoan', 'macCar', 'keyTag'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan', 'carLoan', 'macCar', 'keyTag', 'groupPurse', 'macRing', 'piggyGoal'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;
