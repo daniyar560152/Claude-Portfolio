@@ -492,3 +492,19 @@ html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
 .rr-stage h3, .rr-stage p { margin: 0; }
 @media (max-width: 1100px) { .rr-stages { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 800px) { .rr-stages { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- readability on case pages: Inter instead of DM Mono, nothing under 16px ----------
+   Kept as they were: the "full screen" buttons, the "click to scroll" hints and the small number badges. */
+[data-page="case"] { --f-mono: 'Inter', 'Inter Tight', system-ui, -apple-system, sans-serif; }
+[data-page="case"] :is(.bd-full, .bd-scr__hint) { font-family: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
+.bd .bd-mono, .bd .bd-arrow-li, .bd .bd-table { font-size: 17px; line-height: 1.6; letter-spacing: 0; }
+.bd .bd-mono-s, .bd .smb-cjm__note, .bd .smb-parts li, .bd .smb-bonusbox__row, .bd .smb-token code, .bd .smb-token b,
+.bd .smb-row small, .bd .smb-pattern__blk, .bd .smb-pattern__tabs i, .bd .bd-table--tickets td { font-size: 16px; line-height: 1.55; letter-spacing: 0; }
+.bd .bd-label, .bd .bd-tag, .bd .bd-win__bar span, .bd .bd-table th, .bd .bd-browser__url { font-size: 16px; letter-spacing: .03em; }
+.bd .bd-tag { padding: 5px 12px; }
+.bd .bd-flowcard__how { line-height: 1.6; }
+[data-page="case"] .crumbs, [data-page="case"] .cs-toc { font-size: 16px; }
+@media (max-width: 800px) {
+  .bd .bd-mono { font-size: 16px; }
+  .smb-row b { font-size: 16px; }
+}
