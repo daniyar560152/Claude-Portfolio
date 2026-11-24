@@ -524,12 +524,11 @@
     mm.add('(min-width: 821px)', () => {
       $$('[data-hscroll]').forEach((sec) => {
         const track = $('[data-htrack]', sec);
-        const dist = () => track.scrollWidth - innerWidth + 40;
+        const dist = () => Math.max(0, track.scrollWidth - innerWidth + 40);
         gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true } });
-        $$('.qcard:not(.qcard--intro)', track).forEach((c, i) => gsap.set(c, { rotation: i % 2 ? 1.5 : -1.5 }));
+        $$('.qcard', track).forEach((c, i) => gsap.set(c, { rotation: i % 2 ? 1.5 : -1.5 }));
       });
     });
-    mm.add('(max-width: 820px)', () => { $$('[data-hscroll]').forEach((sec) => { sec.style.overflowX = 'auto'; }); });
 
     initNavTheme();
 
