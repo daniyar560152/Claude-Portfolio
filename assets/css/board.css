@@ -441,3 +441,28 @@ html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
   .smb-token span { grid-column: 2 / -1; }
   .smb-shot__btn .bd-full { right: 8px; bottom: 8px; padding: 6px 10px; font-size: 10px; }
 }
+
+/* Smartbank: research, process, real screens */
+.smb-layers--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.smb-layer__top { display: flex; justify-content: space-between; align-items: flex-start; }
+.smb-seg, .smb-jobs { border: 1.5px solid var(--ink); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 14px; background: var(--paper); }
+.smb-seg__row { display: grid; grid-template-columns: 150px 1fr; gap: 14px; align-items: baseline; padding-top: 12px; border-top: 1px solid var(--b-line); }
+.smb-jobs ol, .smb-jobs ul { margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 10px; }
+.smb-jobs--wide ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px 32px; }
+.smb-screens { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px 22px; }
+.smb-screen { margin: 0; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+.smb-screen__head { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: center; }
+.smb-screen__head .bd-full { grid-column: 1 / -1; justify-self: start; }
+.smb-screen .bd-handset { width: 100%; box-sizing: border-box; }
+.smb-screen .bd-scrwrap--phone .bd-scr { height: 520px; }
+.smb-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.smb-chip { font-family: var(--f-mono); font-size: 11px; letter-spacing: .03em; text-transform: uppercase; padding: 5px 9px; border: 1.2px solid var(--ink); border-radius: 99px; background: var(--white); }
+@media (max-width: 1200px) { .smb-screens { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 1100px) { .smb-layers--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 800px) {
+  .smb-layers--3, .smb-jobs--wide ul { grid-template-columns: minmax(0, 1fr); }
+  .smb-seg__row { grid-template-columns: 110px 1fr; }
+  .smb-screens { grid-template-columns: minmax(0, 1fr); }
+  .smb-screen .bd-handset { width: min(100%, 330px); margin-inline: auto; }
+  .smb-screen .bd-scrwrap--phone .bd-scr { height: min(130vw, 64vh); }
+}

@@ -36,6 +36,7 @@
       }
       const img = lb.querySelector('img');
       img.src = btn.dataset.smbZoom; img.alt = btn.dataset.alt || '';
+      lb.classList.toggle('is-phone', btn.hasAttribute('data-phone'));
       lb._from = btn; lb.scrollTop = 0;
       lb.classList.add('is-open'); document.documentElement.classList.add('bd-lb-open');
       lb.querySelector('.bd-lb__close').focus({ preventScroll: true });
@@ -150,6 +151,76 @@
     <div class="smb-values" data-stagger>${value.map((v, i) => `<div class="smb-value"><b class="bd-h1 bd-blue">${i + 1}</b><p class="bd-mono">${esc(v)}</p></div>`).join('')}</div>
   </section>`;
 
+
+  /* ---------- 04 UX research ---------- */
+  const methods = [
+    ['statement', 'lilac', 'Request analytics', 'Nine months of electronic-queue data from the branches and contact-centre logs: what people come and call about.'],
+    ['txRow', 'yellow', 'Client voice', 'Client comments in Russian and Kazakh — what hurts in their own words; the quotes above are three of them.'],
+    ['gem', 'mint', 'NPS factor analysis', 'Which product factors push people to be detractors. Statements came out on top: 38% for deposits, 22% for cards.'],
+    ['iconGrid', 'pink', 'Customer journey map', 'The global scenario of getting a deposit statement — actions, thoughts, emotions and pains at every stage.'],
+    ['cardFan', 'orange', 'Competitive benchmark', 'Seven Kazakh banks — Kaspi, Halyk, Jusan, Forte, BCC, RBK, Simply — compared for cards, deposits and current accounts.'],
+    ['swatches', 'brand', 'Usability test', 'A prototype of an account statement: can people read every status, every transaction and every icon?'],
+  ];
+  const segments = [['430 000', 'card holders who make retail purchases and use Smartbank'], ['80 000', 'clients with active deposits and current accounts'], ['+', 'everyone with operations outside these two groups']];
+  const jobs = [
+    'Get a statement for more than six months back and pick any range of dates without going to a branch',
+    'Get a PDF statement in Smartbank — for free',
+    'Read transaction names in my language, not in the accounting system’s',
+    'Understand the bonus for every retail purchase on its own',
+    'Find my spending in the history by date',
+  ];
+  const bench = [['Cards', 'Kaspi · BCC · Jusan', 'Everyone shows the bonus or cashback next to the amount and lets you export a statement.'], ['Deposits', 'Kaspi · Halyk · Jusan', 'A full deposit history in the app; ours showed six months and no PDF.'], ['Current accounts', '—', 'Almost nobody has a real statement here — our chance to lead.']];
+  const hmw = [['lilac', 'How might we give a statement for any period without a trip to the branch?'], ['yellow', 'How might we make every transaction readable without the accounting system’s words?'], ['mint', 'How might we show the bonus for every purchase, so people stop moving money elsewhere?']];
+  const research = () => `
+  <section class="bd-sec bd-white-bg" id="research" data-theme="light">
+    ${head('(04) — ux research', 'HOW WE', 'researched')}
+    <div class="smb-layers smb-layers--3" data-stagger>${methods.map(([ic, t, h, d], i) => `<div class="smb-layer bd-tint--${t}"><div class="smb-layer__top"><span class="bd-ico" style="--w:60px">${icon(ic)}</span><b class="bd-label">0${i + 1}</b></div><h3 class="bd-h2">${h}</h3><p class="bd-mono-s">${d}</p></div>`).join('')}</div>
+    <div class="bd-split">
+      <div class="smb-seg" data-reveal><span class="bd-label">${T('Who the statement is for')}</span>
+        ${segments.map(([v, l]) => `<div class="smb-seg__row"><b class="bd-metric-m bd-blue">${v}</b><span class="bd-mono-s">${esc(l)}</span></div>`).join('')}
+      </div>
+      <div class="smb-jobs" data-reveal><span class="bd-label">${T('Jobs the old statement could not do')}</span>
+        <ol>${jobs.map((j) => `<li class="bd-mono-s">${esc(j)}</li>`).join('')}</ol>
+      </div>
+    </div>
+    <div class="bd-table-wrap" data-reveal><table class="bd-table"><thead><tr><th>Product</th><th>Compared with</th><th>What we saw</th></tr></thead>
+      <tbody>${bench.map((r) => `<tr><td class="bd-h3">${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('')}</tbody></table></div>
+    <div class="bd-cols3" data-stagger>${hmw.map(([t, q]) => `<div class="bd-hmw bd-tint--${t}"><span class="bd-label">HMW</span><p class="bd-serif-m">${esc(q)}</p></div>`).join('')}</div>
+    <p class="bd-mono-s bd-grey">Is it worth the time? Statements are the market norm — every competitor we studied already ships them — and the transaction history is one of the most used parts of a bank every day.</p>
+  </section>`;
+
+  /* ---------- 07 Process ---------- */
+  const phases = [
+    ['Discover', 'step 1', 'Queue data, contact-centre logs, NPS factor analysis, client comments', 'Analytics · NPS', 'lilac'],
+    ['Define', 'step 2', 'CJM, benchmark of seven banks, jobs and value for clients and business', 'FigJam', 'yellow'],
+    ['Design', 'by 1 March', 'Transaction anatomy, 100+ scenarios for cards, accounts and deposits, details, themes', 'Figma', 'mint'],
+    ['Testing', 'by 1 March', 'Statement prototype test; the “between own accounts” icon redrawn', 'Prototype', 'pink'],
+    ['Deliver', 'Mar → Jun', 'Release in four stages: 1 March, 1 April, 1 May, 1 June', 'Jira', 'orange'],
+  ];
+  const needs = [
+    'One agreement: the statement looks the same for every product',
+    'Repeat a payment or transfer right from the history',
+    'A receipt for every payment and transfer in the history',
+    'Up to 12 months back',
+    'The exchange rate on conversions between own accounts',
+    'A PDF statement in the app for 0 ₸',
+    'An RS Bank specialist and a Way4 specialist for one month',
+  ];
+  const process = () => `
+  <section class="bd-sec" id="process" data-theme="light">
+    ${head('(07) — process', 'HOW I', 'worked')}
+    <div class="bd-cols4" data-stagger>
+      <div class="bd-metric"><b class="bd-metric-l">99%</b><span class="bd-label">${T('of the design ready at the pitch')}</span></div>
+      <div class="bd-metric"><b class="bd-metric-l">80%</b><span class="bd-label">${T('of the specification written')}</span></div>
+      <div class="bd-metric"><b class="bd-metric-l">4</b><span class="bd-label">${T('release stages, March → June')}</span></div>
+      <div class="bd-metric"><b class="bd-metric-l">100+</b><span class="bd-label">${T('statement scenarios designed')}</span></div>
+    </div>
+    <div class="bd-phases" data-stagger>${phases.map(([ph, w, a, t, c]) => `<div class="bd-phase bd-tint--${c}"><div class="bd-phase__top"><h3 class="bd-h2">${ph}</h3>${tag(w)}</div><p class="bd-mono-s">${a}</p><span class="bd-label bd-grey">${t}</span></div>`).join('')}</div>
+    <div class="smb-jobs smb-jobs--wide" data-reveal><span class="bd-label">${T('What it took to ship')}</span>
+      <ul>${needs.map((j) => `<li class="bd-mono-s">${esc(j)}</li>`).join('')}</ul>
+    </div>
+  </section>`;
+
   /* ---------- 06 Journey ---------- */
   const stages = [
     ['The need', ['Top up a deposit and be sure the money is safe', 'Show it for a loan', 'Get a visa'], 'Where can I get it fast?', '😐', []],
@@ -159,7 +230,7 @@
   ];
   const journey = () => `
   <section class="bd-sec" id="journey" data-theme="light">
-    ${head('(04) — journey', 'HOW IT', 'was')}
+    ${head('(05) — journey', 'HOW IT', 'was')}
     <p class="bd-mono" style="max-width:760px">Customer journey map — getting a deposit statement, the global scenario.</p>
     <div class="smb-cjm" data-reveal>
       ${stages.map(([st, act, th, em, pain], i) => `
@@ -215,10 +286,48 @@
   const tests = [['100%', 'identified every status correctly'], ['93.75%', 'read all transactions in the statement right'], ['6.25%', 'were confused by the “between own accounts” icon — it looked like “repeat payment”, so we redrew it']];
   const test = () => `
   <section class="bd-sec bd-white-bg" id="test" data-theme="light">
-    ${head('(05) — test', 'DID IT', 'read')}
+    ${head('(06) — test', 'DID IT', 'read')}
     <div class="bd-cols3" data-stagger>${tests.map(([v, l]) => `<div class="bd-metric"><b class="bd-metric-l">${v}</b><span class="bd-label">${esc(l)}</span></div>`).join('')}</div>
     ${shot('test', 'Statement test results', 'Statement test on an account statement prototype')}
   </section>`;
+
+
+  /* ---------- real Smartbank screens: the components in use ---------- */
+  const SCR = {
+    's-home': [750, 2366], 's-home-cards': [750, 2526], 's-smartcard': [750, 3652], 's-card-actions': [750, 2268],
+    's-terms': [750, 1762], 's-popup': [750, 1334], 's-deposit': [750, 1624], 's-loan': [750, 1624],
+  };
+  const screensList = [
+    ['s-home', 'Home', 'Home: transfers, loan banner, cards, bonuses, services', ['Top bar with rates', 'Shortcut tiles', 'Promo banner', 'Product card', 'Bonus widget', 'Tab bar']],
+    ['s-home-cards', 'Home · many cards', 'Home with three cards and an instalment debt', ['Card cell', 'Multi-currency balance', 'Card thumbnails', 'Debt line']],
+    ['s-smartcard', 'Visa Metal Diamond Club', 'Premium card page with benefits and privileges', ['Card hero', 'Benefit list', 'Icon badges', 'Documents cell', 'Primary button']],
+    ['s-card-actions', 'Card · actions', 'PAYDA instalment card: balance, debt and card actions', ['Product header', 'Segmented tabs', 'Action cells', 'Toggle', 'Apple Pay']],
+    ['s-terms', 'Change terms', 'Instalment terms: months picker, payment options and fees', ['Month picker', 'Radio cards', 'Info hint', 'Fee rows']],
+    ['s-popup', 'Pop-up · early repayment', 'Partial early repayment pop-up with an amount field', ['Amount field', 'Hint', 'Info banner', 'Disabled button']],
+    ['s-deposit', 'Deposit · actions', 'Deposit with top-up, rate chip and actions', ['Rate chip', 'Segmented tabs', 'Action cells', 'Toggle']],
+    ['s-loan', 'Cash loan · actions', 'Cash loan: monthly payment and early repayment actions', ['Monthly payment', 'Segmented tabs', 'Action cells']],
+  ];
+  const phoneScr = (file, alt) => {
+    const [w, h] = SCR[file];
+    return `<div class="bd-scrwrap bd-scrwrap--phone">
+      <div class="bd-scr" tabindex="0" role="region" aria-label="${esc(T(alt))} — ${esc(T('scrollable screen'))}">
+        <img src="${IMG}${file}.webp" alt="${esc(T(alt))}" width="${w}" height="${h}" loading="lazy" decoding="async">
+      </div>
+      <i class="bd-scr__bar" aria-hidden="true"></i>
+      <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('Click to scroll the screen')}</span><span class="for-touch">${T('Tap to scroll the screen')}</span></span>
+    </div>`;
+  };
+  const screensBlock = () => `
+    <h3 class="bd-h1 smb-subhead">${T('The components in real screens')}</h3>
+    <p class="bd-mono" style="max-width:820px">${T('Eight Smartbank screens built only from the system: the same tiles, cells, tabs, toggles and buttons in light theme. Click a phone to scroll it, or open it full screen.')}</p>
+    <div class="smb-screens">${screensList.map(([f, name, alt, parts], i) => `
+      <figure class="smb-screen" data-reveal>
+        <figcaption class="smb-screen__head"><b class="bd-label">0${i + 1}</b><span class="bd-h3">${esc(T(name))}</span>
+          <button class="bd-full" type="button" data-smb-zoom="${IMG}${f}.webp" data-phone data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}"><span aria-hidden="true">⤢</span>${T('Full screen')}</button></figcaption>
+        <div class="bd-handset">${phoneScr(f, alt)}</div>
+        <div class="smb-chips">${parts.map((x) => `<span class="smb-chip">${esc(T(x))}</span>`).join('')}</div>
+      </figure>`).join('')}
+    </div>`;
 
   /* ---------- 09 Design system (both decks, one story) ---------- */
   const dsStats = [['4', 'themes — Black VIP, Black regular, White regular, White VIP'], ['76', 'tokens in one theme, 300+ in all'], ['617', 'icons for 2 platforms, desktop and mobile'], ['12 + 22', 'bank cards in vector + mini logos of other banks']];
@@ -232,11 +341,12 @@
   const themes = [['black-vip', 'Black VIP'], ['black', 'Black regular'], ['white', 'White regular'], ['white-vip', 'White VIP']];
   const system = () => `
   <section class="bd-sec" id="system" data-theme="light">
-    ${head('(06) — design system', 'ONE', 'system')}
+    ${head('(08) — design system', 'ONE', 'system')}
     <p class="bd-mono" style="max-width:820px">Both projects stand on the same atoms. Statements gave the system its components; the Smartbank redesign — profile, VIP and Premium services, card management, bonuses, Visa alias transfers, notifications, payroll — gave it themes, tokens and icons.</p>
     <div class="bd-cols4" data-stagger>${dsStats.map(([v, l]) => `<div class="bd-metric"><b class="bd-metric-l">${v}</b><span class="bd-label">${esc(l)}</span></div>`).join('')}</div>
     <div class="smb-layers" data-stagger>${layers.map(([ic, t, h, d]) => `<div class="smb-layer bd-tint--${t}"><span class="bd-ico" style="--w:72px">${icon(ic)}</span><h3 class="bd-h2">${h}</h3><p class="bd-mono-s">${d}</p></div>`).join('')}</div>
 
+    ${screensBlock()}
     <h3 class="bd-h1 smb-subhead">${T('A few examples')}</h3>
     <div class="smb-themes" data-theme="black-vip" data-reveal>
       <div class="smb-themes__side">
@@ -279,9 +389,17 @@
     ['Price of a statement', 'PDF in the app', '0 ₸', 'shipped in design'],
     ['How far back', 'Date range picker', '12 months', 'shipped in design'],
   ];
+  const bizValue = [
+    ['Trust', 'Transparent operations raise trust in the bank.'],
+    ['Contact centre', 'Fewer calls about bonuses and statements.'],
+    ['NPS', 'Every study we ran, clients named the limited statement.'],
+    ['Front office', 'About 5 000 fewer branch requests free the staff.'],
+    ['Bonuses', 'All negative bonus complaints came from opaque accruals — the statement shows them.'],
+  ];
   const results = () => `
   <section class="bd-sec" id="results" data-theme="light">
-    ${head('(07) — expected', 'WHAT WE', 'expected')}
+    ${head('(09) — expected', 'WHAT WE', 'expected')}
+    <div class="smb-values" data-stagger>${bizValue.map(([h, d]) => `<div class="smb-value"><h3 class="bd-h2">${esc(h)}</h3><p class="bd-mono-s">${esc(d)}</p></div>`).join('')}</div>
     <div class="bd-table-wrap" data-reveal><table class="bd-table"><thead><tr><th>Metric</th><th>Design lever</th><th>Target</th><th>Type</th></tr></thead>
       <tbody>${rows.map((r) => `<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="bd-h3 bd-blue">${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join('')}</tbody></table></div>
     <div class="bd-quote" data-reveal><div class="bd-art" style="--w:200px">${icon('gem')}</div>
@@ -296,14 +414,14 @@
   ];
   const reflection = (next) => `
   <section class="bd-sec bd-white-bg bd-sec--last" id="learnings" data-theme="light">
-    ${head('(08) — reflection', 'WHAT I', 'learned')}
+    ${head('(10) — reflection', 'WHAT I', 'learned')}
     <div class="bd-cols3" data-stagger>${learn.map(([art, t, d]) => `<div class="bd-learn"><span class="bd-ico" style="--w:80px">${art}</span><h3 class="bd-h2">${t}</h3><p class="bd-mono">${d}</p></div>`).join('')}</div>
     ${K().nextCard(next)}
   </section>`;
 
   root.BOARDS = root.BOARDS || {};
   root.BOARDS.smartbank = {
-    toc: [['overview', 'Overview'], ['impact', 'TL;DR'], ['problem', 'Problem'], ['why', 'Why now'], ['journey', 'Journey'], ['solution', 'Solution'], ['test', 'Test'], ['system', 'Design system'], ['results', 'Expected'], ['learnings', 'Reflection']],
-    render: (p, next) => `<div class="bd">${hero(p)}${overview()}${tldr()}${problem()}${why()}${journey()}${solution()}${test()}${system()}${results()}${reflection(next)}</div>`,
+    toc: [['overview', 'Overview'], ['impact', 'TL;DR'], ['problem', 'Problem'], ['why', 'Why now'], ['research', 'Research'], ['journey', 'Journey'], ['solution', 'Solution'], ['test', 'Testing'], ['process', 'Process'], ['system', 'Design system'], ['results', 'Expected'], ['learnings', 'Reflection']],
+    render: (p, next) => `<div class="bd">${hero(p)}${overview()}${tldr()}${problem()}${why()}${research()}${journey()}${solution()}${test()}${process()}${system()}${results()}${reflection(next)}</div>`,
   };
 })(typeof window !== 'undefined' ? window : globalThis);
