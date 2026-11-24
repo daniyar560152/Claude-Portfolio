@@ -120,7 +120,7 @@
       title: ['PROPERTY', 'and a mortgage'],
       short: 'Property marketplace with state mortgage programmes',
       color: 'yellow',
-      ill: 'macCatalog',
+      ill: 'homeSign',
       board: 'market', // rendered from the Figma case board (assets/js/board-market.js)
       coverStickers: ['newbuild', 'yurtcard'],
       year: '2025',

@@ -564,6 +564,8 @@
 
   /* ---------------- boot ---------------- */
   renderWorkCards();
+  // masked email: the page shows a label, the address is stored reversed and only put together here, for the Gmail compose window
+  $$('[data-mail]').forEach((a) => { a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + a.dataset.mail.split('').reverse().join(''); });
   if (typeof window.renderPage === 'function') window.renderPage();
   injectIllustrations();
   if (window.translateDOM) window.translateDOM(document.body); // Russian pages: EN → RU before splitting text

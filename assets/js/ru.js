@@ -6,6 +6,14 @@
  */
 (function (root) {
   const RU = {
+"Email me": "Написать на почту",
+"for sale + mortgage": "продаётся + ипотека",
+"Open full size": "Открыть в полном размере",
+"Close": "Закрыть",
+"Zoom": "Увеличить",
+"↕ scroll the screens": "↕ листайте экраны внутри",
+"⤢ open full size": "⤢ откройте в полном размере",
+
 "CASE 03 / 06": "КЕЙС 03 / 06",
 "(Case 03) — Otbasy Bank · Baspana Market": "(Кейс 03) — Отбасы банк · Baspana Market",
 "Baspana Market": "Baspana Market",

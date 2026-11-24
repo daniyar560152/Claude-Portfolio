@@ -641,6 +641,26 @@
     return g;
   };
 
+  // property-for-sale sign on a post: a little house and a % for the mortgage on the board
+  PX.saleSign = () => {
+    const g = new Grid(44, 46);
+    g.shape(rr(3, 2, 4, 41, 0), 'dither'); g.frame(3, 2, 5, 42);              // post
+    g.shape(rr(3, 4, 38, 3, 0)); g.frame(3, 4, 39, 4); g.rect(39, 3, 3, 6);   // arm
+    [12, 34].forEach((x) => { for (let y = 8; y < 13; y += 2) g.set(x, y, 1); }); // chains
+    g.rect(11, 15, 32, 22, 1);                                                 // board shadow
+    g.shape(rr(9, 13, 31, 22, 1)); g.frame(11, 15, 27, 18);
+    g.shape(poly([[13, 23.5], [19, 17.5], [25, 23.5]]), 'ink');                 // house
+    g.shape(rr(14.5, 23, 9, 7, 0)); g.frame(14, 23, 10, 8); g.rect(18, 26, 2, 5);
+    [[27, 17], [32, 25]].forEach(([x, y]) => {                                  // %
+      g.rect(x, y, 6, 6, 1); g.rect(x + 2, y + 2, 2, 2, 2);
+      [[x, y], [x + 5, y], [x, y + 5], [x + 5, y + 5]].forEach(([cx, cy]) => g.set(cx, cy, 2));
+    });
+    g.line(36, 17, 28, 31); g.line(37, 17, 29, 31);
+    g.rect(0, 43, 44, 3, 1); g.rect(0, 44, 44, 1, 2);                          // ground
+    [[14, 41], [22, 42], [30, 41], [38, 42]].forEach(([x, y]) => { g.set(x, y, 1); g.set(x + 1, y - 1, 1); g.set(x + 2, y, 1); });
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -764,6 +784,15 @@
       ${cursor(410, 340, 0.5, -10)}
     `, 'Pixel-art floor plan with an approval stamp');
 
+  // Market card: a property-for-sale sign with the mortgage on it
+  ILL.homeSign = () => svg('0 0 440 470', `
+      ${nameTag(150, 16, 'for sale + mortgage')}
+      ${PX.saleSign().svg(46, 66, 8.2)}
+      ${sparkle(408, 110, 1.1)}${sparkle(26, 300, .8)}
+      ${cursor(360, 380, 0.55, -10)}
+      ${nameTag(384, 422, 'you', true)}
+    `, 'Pixel-art for-sale sign on a post, showing a house and a percent sign');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -810,7 +839,7 @@
     online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;

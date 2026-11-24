@@ -15,6 +15,10 @@
     'd-catalog': [1123, 966], 'd-object': [1119, 4427], 'd-programs': [1119, 1564], 'd-programme': [1123, 3597],
     'm-home': [450, 5408], 'm-catalog': [450, 1873], 'm-object': [450, 8010], 'm-programs': [450, 4953],
   };
+  const URLS = {
+    'd-catalog': 'baspana.otbasybank.kz/catalog', 'd-object': 'baspana.otbasybank.kz/complex/zhas-kanat',
+    'd-programs': 'baspana.otbasybank.kz/programs', 'd-programme': 'baspana.otbasybank.kz/programs/nauryz',
+  };
   const screen = (file, alt) => {
     const [w, h] = SCREENS[file];
     const kind = file[0] === 'd' ? 'desk' : 'phone';
@@ -26,9 +30,56 @@
       <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('↕ scroll inside')}</span><span class="for-touch">${T('swipe ↕ inside')}</span></span>
     </div>`;
   };
+  const expandBtn = (file, alt) => `<button class="bd-expand" type="button" data-expand="${file}" data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}" data-cursor="${esc(T('Zoom'))}">⤢</button>`;
+  // a small working browser: address bar + the real page, scrollable
+  const browser = ([file, label, alt]) => `
+    <figure class="bd-device bd-device--desk">
+      <div class="bd-browser">
+        <div class="bd-browser__bar"><i class="bd-browser__dots" aria-hidden="true"><b></b><b></b><b></b></i><span class="bd-browser__url">${URLS[file]}</span>${expandBtn(file, alt)}</div>
+        ${screen(file, alt)}
+      </div>
+      <figcaption class="bd-label">${esc(T(label))}</figcaption>
+    </figure>`;
+  // a phone with the real mobile page inside
+  const phone = ([file, label, alt]) => `
+    <figure class="bd-device bd-device--phone">
+      <div class="bd-phone">${screen(file, alt)}${expandBtn(file, alt)}</div>
+      <figcaption class="bd-label">${esc(T(label))}</figcaption>
+    </figure>`;
+
+  // full-size viewer: one overlay for the page, scroll the screen at its real size
+  const openFull = (btn) => {
+    let lb = document.querySelector('.bd-lb');
+    if (!lb) {
+      lb = document.createElement('div');
+      lb.className = 'bd-lb';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.setAttribute('data-lenis-prevent', '');
+      lb.innerHTML = `<div class="bd-lb__inner"><img alt=""></div><button class="bd-lb__close" type="button" aria-label="${esc(T('Close'))}">✕</button>`;
+      document.body.appendChild(lb);
+      const close = () => {
+        lb.classList.remove('is-open');
+        document.documentElement.classList.remove('bd-lb-open');
+        if (lb._from) lb._from.focus({ preventScroll: true });
+      };
+      lb.addEventListener('click', (e) => { if (e.target === lb || e.target.closest('.bd-lb__close')) close(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lb.classList.contains('is-open')) close(); });
+    }
+    const file = btn.dataset.expand, img = lb.querySelector('img');
+    const [w, h] = SCREENS[file];
+    img.src = `assets/img/market/${file}.webp`; img.alt = btn.dataset.alt; img.width = w; img.height = h;
+    lb.classList.toggle('is-phone', file[0] === 'm');
+    lb._from = btn;
+    lb.scrollTop = 0;
+    lb.classList.add('is-open');
+    document.documentElement.classList.add('bd-lb-open');
+    lb.querySelector('.bd-lb__close').focus({ preventScroll: true });
+  };
   // scroll progress + hide the hint once someone has scrolled a screen (one listener for the page)
   if (typeof document !== 'undefined' && !root.__bdScr) {
     root.__bdScr = true;
+    document.addEventListener('click', (e) => { const b = e.target.closest && e.target.closest('[data-expand]'); if (b) { e.preventDefault(); openFull(b); } });
     document.addEventListener('scroll', (e) => {
       const el = e.target;
       if (!el || !el.classList || !el.classList.contains('bd-scr')) return;
@@ -139,12 +190,15 @@
   ];
   const flowCard = (f) => `
     <article class="bd-card is-wide bd-card--screens bd-frame--${f.frame}" data-reveal>
-      <div class="bd-card__inner">
-        <div class="bd-card__top"><div class="bd-card__title"><b class="bd-h1 bd-blue">${f.no}</b><b class="bd-h1">${f.word}</b><i class="bd-serif-m">${f.serif}</i></div>${tag(f.desk && f.phone ? 'web + mobile' : f.desk ? 'web' : 'mobile')}</div>
-        <p class="bd-mono-s">${esc(f.text)}</p>
+      <div class="bd-card__inner bd-flowcard">
+        <div class="bd-flowcard__text">
+          <div class="bd-card__top"><div class="bd-card__title"><b class="bd-h1 bd-blue">${f.no}</b><b class="bd-h1">${f.word}</b><i class="bd-serif-m">${f.serif}</i></div>${tag(f.desk && f.phone ? 'web + mobile' : f.desk ? 'web' : 'mobile')}</div>
+          <p class="bd-mono-s">${esc(f.text)}</p>
+          <p class="bd-label bd-flowcard__how">${T('↕ scroll the screens')}<br>${T('⤢ open full size')}</p>
+        </div>
         <div class="bd-screens${f.desk ? '' : ' is-phone-only'}${f.phone ? '' : ' is-desk-only'}">
-          ${f.desk ? win(f.desk[1], screen(f.desk[0], f.desk[2]), { cls: 'bd-win--scr bd-win--desk' }) : ''}
-          ${f.phone ? win(f.phone[1], screen(f.phone[0], f.phone[2]), { cls: 'bd-win--scr bd-win--phone', active: !f.desk }) : ''}
+          ${f.desk ? browser(f.desk) : ''}
+          ${f.phone ? phone(f.phone) : ''}
         </div>
       </div>
       <div class="bd-card__sticker">${f.sticker}</div>

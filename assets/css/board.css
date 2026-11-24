@@ -253,38 +253,71 @@
   .bd-table--tickets { min-width: 720px; }
 }
 
-/* ---------- market board: real screens you can scroll inside ---------- */
+/* ---------- market board: real screens in a small browser and a phone, scrollable ---------- */
 .bd-hero--yellow { background: var(--yellow); }
-.bd-screens { display: flex; gap: 28px; align-items: flex-start; }
-.bd-screens .bd-win--desk { flex: 1 1 auto; min-width: 0; }
-.bd-screens .bd-win--phone { flex: 0 0 300px; }
-.bd-screens.is-phone-only { justify-content: center; }
-.bd-card--screens .bd-card__inner { padding-bottom: 72px; }
+.bd-flowcard { display: grid; grid-template-columns: minmax(240px, 1fr) auto; gap: 24px 44px; align-items: end; }
+.bd-flowcard__text { display: flex; flex-direction: column; gap: 22px; align-self: start; }
+.bd-flowcard__text .bd-card__top { flex-wrap: wrap; gap: 12px; }
+.bd-flowcard__how { color: rgba(17, 17, 17, .6); line-height: 1.7; }
+.bd-card--screens .bd-card__inner { padding-bottom: 56px; }
+.bd-screens { display: flex; gap: 32px; align-items: flex-end; }
+.bd-device { margin: 0; display: flex; flex-direction: column; gap: 10px; align-items: center; flex: none; }
+.bd-device figcaption { color: rgba(17, 17, 17, .6); }
+/* the desktop page shows at exactly half its pixel width: sharp on retina */
+.bd-device--desk { width: 562px; }
+.bd-browser { width: 100%; background: var(--white); border: 1.5px solid var(--ink); border-radius: 10px; overflow: hidden; box-shadow: 5px 5px 0 var(--ink); }
+.bd-browser__bar { display: flex; align-items: center; gap: 10px; padding: 7px 8px 7px 12px; border-bottom: 1.5px solid var(--ink); background: var(--paper); }
+.bd-browser__dots { display: flex; gap: 5px; flex: none; }
+.bd-browser__dots b { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--ink); }
+.bd-browser__dots b:first-child { background: var(--ink); }
+.bd-browser__url { flex: 1; min-width: 0; font-family: var(--f-mono); font-size: 11px; background: var(--white); border: 1.5px solid var(--ink); border-radius: 99px; padding: 3px 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bd-scrwrap--desk .bd-scr { height: 360px; }
+/* phone: 450px-wide page at half size */
+.bd-device--phone { width: 241px; }
+.bd-phone { position: relative; width: 100%; padding: 8px; background: var(--ink); border-radius: 34px; box-shadow: 5px 5px 0 rgba(17, 17, 17, .25); }
+.bd-phone .bd-scrwrap { border-radius: 26px; overflow: hidden; }
+.bd-scrwrap--phone .bd-scr { height: 468px; }
+.bd-phone .bd-expand { position: absolute; top: 18px; right: 18px; }
+.bd-expand { flex: none; width: 28px; height: 28px; display: grid; place-items: center; border: 1.5px solid var(--ink); border-radius: 8px; background: var(--white); color: var(--ink); font-size: 15px; line-height: 1; cursor: pointer; transition: background .2s, color .2s; z-index: 2; }
+.bd-expand:hover, .bd-expand:focus-visible { background: var(--blue); color: var(--white); outline: none; }
 .bd-scrwrap { position: relative; }
 .bd-scr { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; background: var(--white); outline: none; }
 .bd-scr::-webkit-scrollbar { display: none; }
-.bd-scrwrap--desk .bd-scr { height: 600px; }
-.bd-scrwrap--phone .bd-scr { height: 620px; }
 .bd-scr img { display: block; width: 100%; height: auto; }
 .bd-scr:focus-visible { box-shadow: inset 0 0 0 3px var(--blue); }
-.bd-scr__bar { position: absolute; top: 8px; bottom: 8px; right: 5px; width: 4px; border-radius: 4px; background: rgba(17, 17, 17, .12); pointer-events: none; overflow: hidden; }
+.bd-scr__bar { position: absolute; top: 8px; bottom: 8px; right: 4px; width: 4px; border-radius: 4px; background: rgba(17, 17, 17, .12); pointer-events: none; overflow: hidden; }
 .bd-scr__bar::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: calc(var(--p, 0) * 100%); min-height: 14%; background: var(--blue); border-radius: 4px; transition: height .1s linear; }
-.bd-scr__hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--white); padding: 7px 12px; border-radius: 99px; pointer-events: none; white-space: nowrap; transition: opacity .4s; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); }
+.bd-scr__hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); background: var(--ink); color: var(--white); padding: 6px 11px; border-radius: 99px; pointer-events: none; white-space: nowrap; transition: opacity .4s; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); font-size: 11px; }
 .is-scrolled .bd-scr__hint { opacity: 0; }
 .bd-scr__hint .for-touch { display: none; }
+/* full-size viewer */
+.bd-lb { position: fixed; inset: 0; z-index: 9000; background: rgba(17, 17, 17, .86); overflow-y: auto; overscroll-behavior: contain; padding: 56px 20px; display: none; cursor: zoom-out; }
+.bd-lb.is-open { display: block; }
+.bd-lb__inner { width: min(1123px, 100%); margin: 0 auto; background: var(--white); border-radius: 10px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, .4); cursor: default; }
+.bd-lb.is-phone .bd-lb__inner { width: min(450px, 100%); border-radius: 26px; }
+.bd-lb__inner img { display: block; width: 100%; height: auto; }
+.bd-lb__close { position: fixed; top: 14px; right: 18px; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 16px; cursor: pointer; }
+.bd-lb__close:hover, .bd-lb__close:focus-visible { background: var(--blue); color: var(--white); outline: none; }
+html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
 @media (hover: none) {
   .bd-scr__hint .for-mouse { display: none; }
   .bd-scr__hint .for-touch { display: inline; }
   .bd-scr { overscroll-behavior: auto; } /* at the end of a screen the page carries on scrolling */
 }
-@media (max-width: 1100px) { .bd-screens .bd-win--phone { flex-basis: 260px; } }
+@media (max-width: 1240px) {
+  .bd-flowcard { grid-template-columns: 1fr; }
+  .bd-flowcard .bd-screens { justify-content: center; }
+}
 @media (max-width: 800px) {
-  /* phones: screens side by side in a swipe row, each one scrolls up and down inside */
-  .bd-screens { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -22px; padding: 4px 22px 12px; gap: 16px; }
+  /* phones: devices side by side in a swipe row, each screen scrolls up and down inside */
+  .bd-screens { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: -22px; padding: 4px 22px 14px; gap: 16px; justify-content: flex-start !important; align-items: flex-start; }
   .bd-screens::-webkit-scrollbar { display: none; }
-  .bd-screens .bd-win--phone { order: -1; flex: 0 0 74vw; scroll-snap-align: start; }
-  .bd-screens .bd-win--desk { flex: 0 0 88vw; scroll-snap-align: start; }
-  .bd-screens.is-phone-only .bd-win--phone { flex-basis: 80vw; margin-inline: auto; }
-  .bd-scrwrap--desk .bd-scr { height: 58vh; }
-  .bd-scrwrap--phone .bd-scr { height: 68vh; }
+  .bd-device { scroll-snap-align: center; }
+  .bd-device--phone { order: -1; width: 64vw; }
+  .bd-device--desk { width: 84vw; }
+  .bd-screens.is-phone-only .bd-device--phone, .bd-screens.is-desk-only .bd-device--desk { margin-inline: auto; }
+  .bd-scrwrap--desk .bd-scr { height: 52vw; }
+  .bd-scrwrap--phone .bd-scr { height: calc(64vw * 1.9); max-height: 62vh; }
+  .bd-flowcard__how { display: none; }
+  .bd-lb { padding: 56px 10px 20px; }
 }
