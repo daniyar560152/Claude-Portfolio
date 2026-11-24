@@ -74,5 +74,5 @@ This writes all characters and stickers as standalone transparent SVGs to `asset
 ## Personalise
 
 - Name and logo: search for `Daniyar` in `index.html`, `case.html` and `assets/js/case.js`.
-- Email and social links: the contact section in `index.html` (`hello@yourname.com` is a placeholder; it opens a Gmail compose window. "Let's talk" opens WhatsApp).
+- Email and social links: the contact section in `index.html` (`danik560152@gmail.com`; it opens a Gmail compose window. "Let's talk" opens WhatsApp).
 - Projects, metrics and copy: `assets/js/projects.js`. The sample projects and their numbers are illustrative.
