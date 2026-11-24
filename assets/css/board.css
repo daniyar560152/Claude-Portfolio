@@ -335,3 +335,8 @@ html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
 @media (max-width: 700px) {
   .bd-tilerow { flex-direction: column; gap: 12px; }
 }
+
+/* wide monitors: the case content is never wider than 1920px; the section backgrounds still run edge to edge */
+@media (min-width: 1921px) {
+  .bd-sec { padding-left: calc((100% - 1920px) / 2 + var(--b-pad-x)); padding-right: calc((100% - 1920px) / 2 + var(--b-pad-x)); }
+}

@@ -12,7 +12,7 @@
 
   /* ---------- scrollable screen ---------- */
   const SCREENS = {
-    'd-catalog': [1123, 966], 'd-object': [1119, 4427], 'd-programs': [1119, 1564], 'd-programme': [1123, 3597],
+    'd-catalog': [1123, 966], 'd-object': [1119, 4427], 'd-programs': [1434, 2005], 'd-programme': [1123, 3597],
     'm-home': [450, 5408], 'm-catalog': [450, 1873], 'm-object': [450, 8010], 'm-programs': [450, 4953],
   };
   const URLS = {
