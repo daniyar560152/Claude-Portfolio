@@ -17,7 +17,7 @@ so every background is **transparent**, and the pixel computer's eyes follow the
 
 - `index.html`: hero, client marquee, scroll word-fill statement, about, selected work (stacking cards),
   services, process, draggable toolbox, pinned horizontal testimonials, contact.
-- `case.html?p=<slug>`: a case study per project (`housing`, `loan`, `market`, `smartbank`, `medly`, `shoply`), structured the way
+- `case.html?p=<slug>`: a case study per project (`housing`, `loan`, `market`, `smartbank`, `carloan`, `shoply`), structured the way
   senior product designers document their work:
   1. **Overview**: role, timeline, team, platform, deliverables, tools
   2. **TL;DR / Impact**: four headline metrics (animated counters)

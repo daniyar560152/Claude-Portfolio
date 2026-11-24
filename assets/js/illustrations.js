@@ -749,6 +749,74 @@
     return g;
   };
 
+  /* ---------- Car loan (c2c, used cars) icons ---------- */
+  // a little retro sedan, side view
+  PX.car = () => {
+    const g = new Grid(48, 26);
+    g.shape(poly([[13, 9.5], [17, 2.5], [33, 2.5], [38.5, 9.5]]));                       // cabin
+    g.shape(poly([[16.5, 9], [19, 4.5], [24.5, 4.5], [24.5, 9]]), 'dither'); g.shape(poly([[26.5, 9], [26.5, 4.5], [32, 4.5], [35.5, 9]]), 'dither');
+    g.shape(rr(1.5, 9, 45, 10, 3));                                                        // body
+    g.rect(2, 13, 44, 1); g.rect(25, 10, 1, 8); g.rect(29, 12, 3, 1); g.rect(15, 12, 3, 1);
+    g.shape(rr(43, 11, 3, 3, 1), 'ink'); g.shape(rr(2, 11, 2, 3, 0), 'dither');           // lights
+    [[11, 19], [36, 19]].forEach(([x, y]) => { g.shape(ell(x, y, 5.2), 'ink'); g.shape(ell(x, y, 2.6), 'paper'); g.set(x, y, 1); });
+    g.line(0, 25, 47, 25);
+    return g;
+  };
+  // a car key with a fob
+  PX.carKey = () => {
+    const g = new Grid(40, 26);
+    g.shape(rr(1, 3, 18, 20, 5)); g.shape(ell(10, 9, 3), 'ink'); g.shape(rr(5, 14, 10, 5, 1), 'dither'); g.frame(5, 14, 10, 5);
+    g.shape(rr(18, 10, 20, 6, 0)); g.rect(26, 16, 3, 4); g.rect(31, 16, 2, 3); g.rect(35, 16, 3, 5);
+    g.line(19, 12, 37, 12);
+    return g;
+  };
+  // a tow truck for road assistance
+  PX.towTruck = () => {
+    const g = new Grid(48, 28);
+    g.shape(rr(1, 8, 16, 13, 2)); g.shape(rr(4, 10, 8, 5, 1), 'dither'); g.frame(4, 10, 8, 5);
+    g.shape(rr(16, 14, 30, 7, 0)); g.line(18, 14, 38, 2); g.line(19, 14, 39, 2); g.line(38, 2, 42, 9); g.rect(41, 9, 3, 2);
+    g.rect(43, 11, 1, 3);
+    [[8, 22], [26, 22], [38, 22]].forEach(([x, y]) => { g.shape(ell(x, y, 4.2), 'ink'); g.shape(ell(x, y, 1.8), 'paper'); });
+    g.shape(rr(5, 4, 6, 4, 1), 'ink');
+    return g;
+  };
+  // a wrench — car check at a special service station
+  PX.wrench = () => {
+    const g = new Grid(36, 36);
+    g.shape(poly([[8, 25], [25, 8], [29, 12], [12, 29]]));
+    g.shape(ell(28, 8, 7)); g.shape(poly([[26, 1], [35, 10], [31, 13], [24, 6]]), 'clear'); g.frame(0, 0, 0, 0, 0);
+    g.shape(ell(8, 28, 7)); g.shape(ell(8, 28, 2.6), 'ink');
+    g.line(11, 21, 21, 11);
+    return g;
+  };
+  // a speedometer: 2 minutes to a decision
+  PX.gauge = () => {
+    const g = new Grid(40, 28);
+    g.shape(not(ell(20, 24, 19, 21), ell(20, 24, 13, 15)), 'blob'); g.rect(0, 25, 40, 3, 0);
+    g.shape(not(ell(20, 24, 19, 21), ell(20, 24, 16.5, 18.5)), 'dither');
+    [[5, 18], [9, 10], [20, 6], [31, 10], [35, 18]].forEach(([x, y]) => g.rect(x, y, 2, 2));
+    g.line(20, 24, 31, 13); g.line(21, 24, 32, 13); g.shape(ell(20, 24, 3), 'ink');
+    g.rect(0, 25, 40, 1);
+    return g;
+  };
+  // a steering wheel
+  PX.steering = () => {
+    const g = new Grid(36, 36);
+    g.shape(not(ell(18, 18, 17), ell(18, 18, 12.5)), 'ink'); g.shape(not(ell(18, 18, 16), ell(18, 18, 13.5)), 'dither');
+    g.shape(ell(18, 18, 5)); g.shape(ell(18, 18, 2), 'ink');
+    g.rect(5, 17, 9, 3); g.rect(22, 17, 9, 3); g.rect(17, 22, 3, 10);
+    return g;
+  };
+  // a classic Mac showing a car on screen
+  PX.macCar = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    g.shape(poly([[11, 11.5], [13, 8.5], [19, 8.5], [21.5, 11.5]])); g.shape(rr(8.5, 11, 15, 4, 1)); g.shape(ell(12, 15.5, 1.6), 'ink'); g.shape(ell(20, 15.5, 1.6), 'ink');
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -907,6 +975,33 @@
       ${cursor(410, 330, 0.5, -10)}
     `, 'Pixel-art fan of colour swatches and a diamond');
 
+  /* ---------- Car loan characters ---------- */
+  ILL.carLoan = () => svg('0 0 460 400', `
+      ${nameTag(40, 30, 'approved in 2 min ✓')}
+      ${PX.car().svg(22, 120, 8.6)}
+      ${PX.carKey().svg(318, 62, 3.4)}
+      ${sparkle(430, 140, 1.1)}${sparkle(30, 360, .8)}
+      ${cursor(372, 300, 0.55, -10)}
+      ${nameTag(396, 342, 'you', true)}
+    `, 'Pixel-art retro car with a car key, tagged approved in 2 minutes');
+  ILL.macCar = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, 'up to ₸15 m · 2–7 yrs')}
+      ${PX.macCar().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'seller', false)}
+    `, 'Pixel-art classic computer showing a car');
+  ILL.keyTag = () => svg('0 0 460 400', `
+      ${selection(40, 60, 380, 240)}
+      ${nameTag(40, 24, 'first payment from 10%')}
+      ${PX.carKey().svg(60, 90, 9)}
+      ${PX.gauge().svg(250, 310, 3.4)}
+      ${sparkle(430, 80, 1)}
+      ${cursor(400, 250, 0.5, -10)}
+    `, 'Pixel-art car key inside a selection box, with a speedometer');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -952,10 +1047,12 @@
     yurtcard: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.yurt().svg(57, 8, 2.4)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">8 programmes</text></g>`, 'Sticker: eight programmes'),
     pdffree: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 34px 'Anton',Impact,sans-serif">${root.t ? root.t('PDF · 0 ₸') : 'PDF · 0 ₸'}</text>`, 'Sticker: free PDF statement'),
     viptheme: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/>${PX.gem().svg(48, 34, 1.5)}<text x="75" y="106" text-anchor="middle" class="tk" style="font:400 30px 'Anton',Impact,sans-serif">VIP</text>`, 'Sticker: VIP theme'),
+    twomin: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="84" text-anchor="middle" class="tk" style="font:400 36px 'Anton',Impact,sans-serif">${root.t ? root.t('2 MIN') : '2 MIN'}</text><text x="75" y="108" text-anchor="middle" class="tk" style="font-size:15px">${root.t ? root.t('ONLINE ✓') : 'ONLINE ✓'}</text>`, 'Sticker: decision in 2 minutes'),
+    usedcar: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.car().svg(33, 14, 3)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">${root.t ? root.t('used car OK') : 'used car OK'}</text></g>`, 'Sticker: used car'),
     online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan', 'carLoan', 'macCar', 'keyTag'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;
