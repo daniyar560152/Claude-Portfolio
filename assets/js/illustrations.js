@@ -661,6 +661,94 @@
     return g;
   };
 
+  /* ---------- Smartbank (statements + design system) icons ---------- */
+  // a statement: rows with an icon, a name and an amount, and a download badge
+  PX.statement = () => {
+    const g = new Grid(36, 42);
+    g.rect(3, 3, 30, 39, 1); g.shape(poly([[0.5, 0.5], [22, 0.5], [29.5, 8], [29.5, 38.5], [0.5, 38.5]]));
+    g.shape(poly([[21.5, 1], [21.5, 8.5], [29, 8.5]]), 'ink');
+    g.shape(rr(3, 4, 15, 4, 0), 'dither');
+    for (let r = 0; r < 5; r++) { const y = 12 + r * 5; g.frame(3, y, 4, 4); g.rect(9, y, 9 - (r % 2) * 3, 1); g.rect(9, y + 2, 6, 1); g.rect(22 - (r % 3), y + 1, 5 + (r % 3), 1); }
+    g.shape(ell(28, 34, 7), 'ink'); g.shape(ell(28, 34, 5.4), 'paper'); g.rect(27, 30, 2, 6); g.line(25, 34, 28, 37); g.line(31, 34, 28, 37); g.rect(25, 38, 7, 1);
+    return g;
+  };
+  // a phone split into a dark and a light theme, a diamond in the middle
+  PX.themeSplit = () => {
+    const g = new Grid(30, 44);
+    g.rect(2, 2, 28, 42, 1); g.shape(rr(0, 0, 28, 42, 4));
+    g.shape(rr(2.5, 4, 11.5, 34, 1), 'ink'); g.shape(rr(14, 4, 11.5, 34, 1), 'paper'); g.frame(2, 4, 24, 35);
+    g.rect(10, 1, 8, 2, 1);
+    [8, 13, 18].forEach((y, i) => { g.rect(4, y + 10, 7 - i, 1, 2); g.rect(16, y + 10, 7 - i, 1, 1); });
+    g.shape(poly([[10, 8], [18, 8], [21.5, 12], [14, 21], [6.5, 12]])); g.line(7, 12, 21, 12);
+    g.rect(11, 40, 6, 1, 2);
+    return g;
+  };
+  // a fan of colour-token strips
+  PX.swatches = () => {
+    const g = new Grid(40, 36);
+    [0, 1, 2].forEach((i) => {
+      const x = 1 + i * 12, y = 1 + i * 2;
+      g.rect(x + 2, y + 2, 12, 31 - i * 2, 1); g.shape(rr(x, y, 12, 31 - i * 2, 1));
+      g.shape(rr(x + 2, y + 2, 8, 7, 0), ['ink', 'dither', 'ink'][i]);
+      g.shape(rr(x + 2, y + 11, 8, 7, 0), ['dither', 'paper', 'dither'][i]); g.frame(x + 2, y + 11, 8, 7);
+      g.rect(x + 2, y + 21, 6, 1); g.rect(x + 2, y + 24, 4, 1);
+    });
+    return g;
+  };
+  // a window full of tiny interface icons
+  PX.iconGrid = () => {
+    const g = new Grid(38, 36);
+    g.rect(3, 3, 35, 33, 1); g.shape(rr(0, 0, 35, 33, 1)); g.shape(rr(0, 0, 35, 6, 0), 'dither'); g.line(0, 6, 34, 6);
+    const ic = [
+      (x, y) => { g.frame(x, y, 6, 6); g.rect(x + 2, y + 2, 2, 2); },
+      (x, y) => { g.line(x, y + 5, x + 5, y); g.line(x + 2, y, x + 5, y); g.line(x + 5, y, x + 5, y + 3); },
+      (x, y) => { g.shape(ell(x + 3, y + 3, 3)); g.set(x + 3, y + 3, 1); },
+      (x, y) => { g.rect(x, y + 2, 6, 1); g.rect(x + 2, y, 1, 6); g.rect(x + 3, y, 1, 6); g.rect(x, y + 3, 6, 1); },
+      (x, y) => { g.shape(poly([[x + 3, y], [x + 6.2, y + 6], [x - 0.2, y + 6]]), 'ink'); },
+      (x, y) => { g.frame(x, y + 1, 6, 5); g.rect(x, y + 1, 6, 2); },
+      (x, y) => { g.shape(ell(x + 3, y + 2.5, 2.4), 'ink'); g.rect(x + 1, y + 5, 4, 1); },
+      (x, y) => { g.line(x, y + 3, x + 2, y + 5); g.line(x + 2, y + 5, x + 6, y + 1); g.line(x, y + 4, x + 2, y + 6); },
+      (x, y) => { g.rect(x, y, 6, 6); g.rect(x + 1, y + 1, 4, 4, 2); g.rect(x + 2, y + 2, 2, 2); },
+    ];
+    ic.forEach((f, i) => f(4 + (i % 3) * 10, 10 + Math.floor(i / 3) * 8));
+    return g;
+  };
+  // two bank cards, fanned
+  PX.cardFan = () => {
+    const g = new Grid(44, 34);
+    g.shape(poly([[2, 12], [30, 2], [37, 20], [9, 30]]), 'dither'); g.line(2, 12, 30, 2); g.line(30, 2, 37, 20); g.line(37, 20, 9, 30); g.line(9, 30, 2, 12);
+    g.rect(10, 13, 33, 21, 1); g.shape(rr(8, 11, 33, 21, 2)); g.rect(9, 16, 31, 3);
+    g.shape(rr(12, 22, 7, 5, 1), 'ink'); g.rect(14, 23, 3, 3, 2);
+    g.shape(ell(33, 26.5, 2.6), 'ink'); g.shape(ell(36, 26.5, 2.6), 'dither'); g.rect(22, 27, 7, 1);
+    return g;
+  };
+  // one transaction row: icon, name + type, amount + bonus
+  PX.txRow = () => {
+    const g = new Grid(46, 22);
+    g.rect(2, 2, 44, 20, 1); g.shape(rr(0, 0, 44, 20, 3));
+    g.shape(rr(3, 4, 12, 12, 2), 'dither'); g.shape(rr(5.5, 8, 6, 5, 1), 'ink'); g.rect(11, 9, 2, 3); g.set(7, 6, 1); g.set(10, 6, 1);
+    g.rect(18, 6, 11, 2); g.rect(18, 12, 8, 1);
+    g.rect(32, 6, 9, 2); g.rect(34, 12, 7, 1); g.rect(30, 12, 2, 1);
+    return g;
+  };
+  // a VIP diamond
+  PX.gem = () => {
+    const g = new Grid(36, 28);
+    g.shape(poly([[8, 1], [28, 1], [35, 9], [18, 27], [1, 9]])); g.line(1, 9, 35, 9);
+    g.line(8, 1, 12, 9); g.line(28, 1, 24, 9); g.line(18, 1, 12, 9); g.line(18, 1, 24, 9); g.line(12, 9, 18, 26); g.line(24, 9, 18, 26);
+    g.shape(poly([[12.5, 9.5], [23.5, 9.5], [18, 24]]), 'dither'); g.rect(5, 3, 2, 1, 1); g.rect(29, 3, 2, 1, 1);
+    return g;
+  };
+  // a classic Mac showing a statement list
+  PX.macStatement = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    for (let r = 0; r < 3; r++) { const y = 8 + r * 3.6; g.rect(9, y, 2, 2); g.rect(12, y, 6 - (r % 2) * 2, 1); g.rect(20, y, 3, 1); }
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+
   // any pixel icon as a standalone transparent svg, optionally with a name tag under it
   ILL.icon = (name, tag = '') => {
     const g = PX[name](), s = 5;
@@ -793,6 +881,32 @@
       ${nameTag(384, 422, 'you', true)}
     `, 'Pixel-art for-sale sign on a post, showing a house and a percent sign');
 
+  /* ---------- Smartbank characters ---------- */
+  ILL.statementMac = () => svg('0 0 440 480', `
+      ${nameTag(70, 20, '12 months · PDF')}
+      ${PX.macStatement().svg(92, 70, 8)}
+      ${sparkle(392, 120, 1.1)}${sparkle(40, 320, .8)}
+      ${cursor(350, 340, 0.55, -10)}
+      ${nameTag(372, 380, 'you', true)}
+      ${cursor(30, 160, 0.5, -10)}
+      ${nameTag(4, 198, 'bonus +30%', false)}
+    `, 'Pixel-art classic computer showing a bank statement');
+  ILL.themeSwitch = () => svg('0 0 440 470', `
+      ${selection(110, 50, 236, 352)}
+      ${nameTag(110, 14, 'Black VIP / White VIP')}
+      ${PX.themeSplit().svg(112, 52, 8)}
+      ${sparkle(400, 100, 1.1)}${sparkle(40, 330, .8)}
+      ${cursor(330, 330, 0.55, -10)}
+      ${nameTag(354, 372, '4 themes', true)}
+    `, 'Pixel-art phone half dark and half light, with a diamond');
+  ILL.tokenFan = () => svg('0 0 460 420', `
+      ${PX.swatches().svg(40, 60, 8.4)}
+      ${nameTag(250, 24, '76 tokens / theme')}
+      ${PX.gem().svg(330, 250, 3.2)}
+      ${sparkle(70, 50, 1)}
+      ${cursor(410, 330, 0.5, -10)}
+    `, 'Pixel-art fan of colour swatches and a diamond');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>
@@ -836,10 +950,12 @@
     // Baspana Market set
     newbuild: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 36px 'Anton',Impact,sans-serif">${root.t ? root.t('NEW BUILD!') : 'NEW BUILD!'}</text>`, 'Sticker: new build'),
     yurtcard: () => st('-12 -12 236 160', `<g transform="rotate(-4 105 66)"><rect class="p" x="0" y="0" width="210" height="132" rx="16"/>${PX.yurt().svg(57, 8, 2.4)}<text x="105" y="120" text-anchor="middle" class="tk" style="font-size:18px">8 programmes</text></g>`, 'Sticker: eight programmes'),
+    pdffree: () => st('0 0 230 90', `<rect class="k" x="4" y="4" width="222" height="82" rx="41"/><text x="115" y="58" text-anchor="middle" class="tx" style="font:400 34px 'Anton',Impact,sans-serif">${root.t ? root.t('PDF · 0 ₸') : 'PDF · 0 ₸'}</text>`, 'Sticker: free PDF statement'),
+    viptheme: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/>${PX.gem().svg(48, 34, 1.5)}<text x="75" y="106" text-anchor="middle" class="tk" style="font:400 30px 'Anton',Impact,sans-serif">VIP</text>`, 'Sticker: VIP theme'),
     online50: () => st('0 0 150 150', `<circle class="k" cx="75" cy="75" r="70"/><circle class="p" cx="75" cy="75" r="56" style="stroke-dasharray:4 8"/><text x="75" y="80" text-anchor="middle" class="tk" style="font:400 40px 'Anton',Impact,sans-serif">−50%</text><text x="75" y="104" text-anchor="middle" class="tk" style="font-size:15px">ONLINE ✓</text>`, 'Sticker: online mortgage discount'),
   };
 
-  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign'];
+  ILL.characters = ['cursorKid', 'penPal', 'framePeek', 'juggler', 'commenter', 'layers', 'researcher', 'macHome', 'houseFrame', 'idCheck', 'allSet', 'calcFrame', 'macPay', 'unlocked', 'paidOff', 'ticketTray', 'coinStack', 'blockFrame', 'macCatalog', 'planCheck', 'homeSign', 'statementMac', 'themeSwitch', 'tokenFan'];
 
   root.ILL = ILL;
   if (typeof module !== 'undefined' && module.exports) module.exports = ILL;

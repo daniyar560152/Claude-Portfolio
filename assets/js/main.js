@@ -48,7 +48,7 @@
               </div>
               <div class="wcard__tags">${p.tools.slice(0, 4).map((t) => `<span class="tag">${t}</span>`).join('')}</div>
             </div>
-            <div class="wcard__sticker" data-sticker="${stickers[i % stickers.length]}"></div>
+            <div class="wcard__sticker" data-sticker="${p.cardSticker || stickers[i % stickers.length]}"></div>
           </div>
         </div>
       </a>`).join('');
