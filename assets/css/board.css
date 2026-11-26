@@ -294,9 +294,6 @@
 .bd-scr:focus-visible { box-shadow: inset 0 0 0 3px var(--blue); }
 .bd-scr__bar { position: absolute; top: 8px; bottom: 8px; right: 4px; width: 4px; border-radius: 4px; background: rgba(17, 17, 17, .12); pointer-events: none; overflow: hidden; }
 .bd-scr__bar::after { content: ''; position: absolute; left: 0; right: 0; top: 0; height: calc(var(--p, 0) * 100%); min-height: 14%; background: var(--blue); border-radius: 4px; transition: height .1s linear; }
-.bd-scr__hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); background: var(--ink); color: var(--white); padding: 7px 12px; border-radius: 99px; pointer-events: none; white-space: nowrap; transition: opacity .3s; box-shadow: 0 6px 16px rgba(0, 0, 0, .18); font-size: 11px; }
-.bd-scrwrap.is-active .bd-scr__hint { opacity: 0; }
-.bd-scr__hint .for-touch { display: none; }
 /* full-size viewer */
 .bd-lb { position: fixed; inset: 0; z-index: 9000; background: rgba(17, 17, 17, .86); overflow-y: auto; overscroll-behavior: contain; padding: 56px 20px; display: none; cursor: zoom-out; }
 .bd-lb.is-open { display: block; }
@@ -306,10 +303,6 @@
 .bd-lb__close { position: fixed; top: 14px; right: 18px; width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 16px; cursor: pointer; }
 .bd-lb__close:hover, .bd-lb__close:focus-visible { background: var(--blue); color: var(--white); outline: none; }
 html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
-@media (hover: none) {
-  .bd-scr__hint .for-mouse { display: none; }
-  .bd-scr__hint .for-touch { display: inline; }
-}
 @media (max-width: 1100px) {
   .bd-stages { grid-template-columns: minmax(0, 1fr); }
   .bd-stage--phone { order: -1; }
@@ -496,7 +489,7 @@ html.bd-lb-open, html.bd-lb-open body { overflow: hidden; }
 /* ---------- readability on case pages: Inter instead of DM Mono, nothing under 16px ----------
    Kept as they were: the "full screen" buttons, the "click to scroll" hints and the small number badges. */
 [data-page="case"] { --f-mono: 'Inter', 'Inter Tight', system-ui, -apple-system, sans-serif; }
-[data-page="case"] :is(.bd-full, .bd-scr__hint) { font-family: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
+[data-page="case"] .bd-full { font-family: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace; }
 .bd .bd-mono, .bd .bd-arrow-li, .bd .bd-table { font-size: 17px; line-height: 1.6; letter-spacing: 0; }
 .bd .bd-mono-s, .bd .smb-cjm__note, .bd .smb-parts li, .bd .smb-bonusbox__row, .bd .smb-token code, .bd .smb-token b,
 .bd .smb-row small, .bd .smb-pattern__blk, .bd .smb-pattern__tabs i, .bd .bd-table--tickets td { font-size: 16px; line-height: 1.55; letter-spacing: 0; }

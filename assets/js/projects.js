@@ -237,12 +237,12 @@
     { from: '2022', to: '2024', company: 'Eurasian Bank', role: 'Product designer', ill: 'caEurasian',
       summary: 'The design system, card products, car loans, the Smartbank redesign and changing a car’s owner online.',
       did: ['Design system', 'Card products', 'Car loans', 'Smartbank redesign', 'Change of owner'], cases: ['smartbank', 'carloan', 'rereg'] },
+    { from: '2023', to: '', company: 'Window', role: 'Product designer', ill: 'caWindow',
+      summary: 'Alongside the bank: a mobile banking app for a startup aimed at the Russian market.',
+      did: ['Mobile banking app', 'Startup', 'Russian market'], cases: [] },
     { from: '2024', to: 'now', company: 'Otbasy Bank', role: 'Senior product designer', ill: 'caOtbasy',
       summary: 'Loans, the Baspana Market redesign, the state housing queue, rent subsidies and a better mobile app.',
       did: ['Loans', 'Baspana Market', 'Housing queue', 'Rent subsidy', 'Mobile app'], cases: ['loan', 'market', 'housing'] },
-    { from: '2025', to: '', company: 'Window', role: 'Product designer', ill: 'caWindow',
-      summary: 'Alongside the bank: a mobile banking app for a startup aimed at the Russian market.',
-      did: ['Mobile banking app', 'Startup', 'Russian market'], cases: [] },
   ];
 
   const ru = root.LANG === 'ru';

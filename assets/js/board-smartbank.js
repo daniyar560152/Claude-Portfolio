@@ -319,7 +319,6 @@
         <img src="${IMG}${file}.webp" alt="${esc(T(alt))}" width="${w}" height="${h}" loading="lazy" decoding="async">
       </div>
       <i class="bd-scr__bar" aria-hidden="true"></i>
-      <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('Click to scroll the screen')}</span><span class="for-touch">${T('Tap to scroll the screen')}</span></span>
     </div>`;
   };
   const productPattern = [['Card', 'Top up the card'], ['Deposit', 'Top up the deposit'], ['Loan', 'Make the monthly payment']];

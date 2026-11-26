@@ -23,7 +23,6 @@
         <img src="${IMG}${file}.webp" alt="${esc(T(alt))}" width="${w}" height="${h}" loading="lazy" decoding="async">
       </div>
       <i class="bd-scr__bar" aria-hidden="true"></i>
-      <span class="bd-scr__hint bd-label" aria-hidden="true"><span class="for-mouse">${T('Click to scroll the screen')}</span><span class="for-touch">${T('Tap to scroll the screen')}</span></span>
     </div>`;
   };
   const full = (file, alt) => `<button class="bd-full" type="button" data-smb-zoom="${IMG}${file}.webp" data-phone data-alt="${esc(T(alt))}" aria-label="${esc(T('Open full size'))}: ${esc(T(alt))}"><span aria-hidden="true">⤢</span>${T('Full screen')}</button>`;
