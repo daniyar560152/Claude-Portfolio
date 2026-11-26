@@ -1187,6 +1187,159 @@
       ${nameTag(378, 202, 'buyer', false)}
     `, 'Pixel-art face in a scan frame with a padlock on a chain');
 
+  /* ---------- career route: animated retro icons ----------
+     Each icon is rigged from separate pixel parts (body, hanger, wheels, shutters…) wrapped in
+     <g class="ca-*">, so CSS can move every part on its own (see .ca-* in style.css). */
+  const part = (cls, inner, style = '') => `<g class="${cls}"${style ? ` style="${style}"` : ''}>${inner}</g>`;
+  const CA = {};
+  CA.mac = () => {
+    const g = new Grid(32, 40);
+    g.shape(rr(2, 32, 28, 7, 1)); g.shape(rr(1, 0, 30, 34, 3)); g.line(2, 33, 29, 33);
+    g.shape(rr(5, 4, 22, 17, 2)); g.frame(7, 6, 18, 13, 1);
+    g.rect(17, 25, 9, 2, 1); g.frame(6, 26, 4, 4, 1); g.line(4, 36, 27, 36);
+    return g;
+  };
+  CA.bag = () => {
+    const g = new Grid(12, 13);
+    g.shape(rr(0.5, 4.5, 11, 8, 1)); g.line(4, 5, 4, 2).line(4, 1, 7, 1).line(7, 2, 7, 5); g.set(4, 1, 0); g.set(7, 1, 0); g.line(5, 0, 6, 0);
+    return g;
+  };
+  CA.hanger = () => {
+    const g = new Grid(27, 14);
+    g.line(13, 5, 13, 3).line(13, 3, 14, 2).line(14, 1, 16, 1).line(17, 2, 17, 3);
+    g.line(13, 5, 1, 12).line(13, 5, 25, 12).line(1, 12, 25, 12).line(13, 6, 2, 12).line(13, 6, 24, 12);
+    return g;
+  };
+  CA.window = (kind) => {
+    const g = new Grid(40, 30);
+    g.shape(rr(0.5, 0.5, 39, 29, 0));
+    [2, 4].forEach((y) => g.line(2, y, 37, y)); g.rect(14, 1, 12, 5, 2); g.line(0, 7, 39, 7); g.frame(3, 2, 4, 4);
+    if (kind === 'landing') { g.rect(4, 10, 32, 7, 1); g.rect(8, 12, 18, 1, 2); g.rect(4, 20, 20, 2, 1); g.rect(4, 24, 14, 2, 1); g.frame(28, 20, 8, 6); }
+    if (kind === 'crm') { for (let y = 10; y <= 25; y += 5) { g.line(3, y, 36, y); g.rect(4, y + 2, 6, 1); g.rect(14, y + 2, 10, 1); g.rect(29, y + 2, 5, 1); } }
+    if (kind === 'app') { g.shape(rr(14, 9, 12, 19, 2)); g.rect(16, 12, 8, 4, 1); g.rect(16, 18, 8, 1); g.rect(16, 21, 6, 1); }
+    return g;
+  };
+  CA.bubble = (flip, lines) => {
+    const g = new Grid(34, 20);
+    const tail = flip ? poly([[26, 12], [31, 12], [32, 19]]) : poly([[3, 12], [8, 12], [2, 19]]);
+    g.shape(any(rr(0.5, 0.5, 33, 13, 3), tail));
+    lines.forEach(([x, w], i) => g.rect(x, 4 + i * 4, w, 2, 1));
+    return g;
+  };
+  CA.shield = () => {
+    const g = new Grid(24, 28);
+    g.shape(poly([[12, 0.5], [23.5, 4.5], [22, 17], [12, 27.5], [2, 17], [0.5, 4.5]]));
+    g.shape(poly([[12, 3.5], [20.5, 6.5], [19.5, 16], [12, 24], [4.5, 16], [3.5, 6.5]]), 'dither');
+    g.shape(rr(7, 9, 10, 9, 2), 'paper'); g.line(9, 13, 11, 15).line(11, 15, 15, 11).line(9, 14, 11, 16).line(11, 16, 15, 12);
+    return g;
+  };
+  CA.car = () => {
+    const g = new Grid(46, 20);
+    g.shape(any(rr(0.5, 8.5, 45, 9, 2), poly([[8, 9], [14, 1.5], [31, 1.5], [37, 9]])));
+    g.shape(poly([[11, 8.5], [15.5, 3.5], [21.5, 3.5], [21.5, 8.5]]), 'dither'); g.shape(poly([[23.5, 8.5], [23.5, 3.5], [29.5, 3.5], [34, 8.5]]), 'dither');
+    g.line(22, 9, 22, 16); g.rect(42, 10, 2, 2, 1); g.rect(2, 10, 2, 2, 1); g.line(25, 12, 28, 12);
+    return g;
+  };
+  CA.wheel = () => {
+    const g = new Grid(11, 11);
+    g.shape(ell(5.5, 5.5, 5.3), 'ink'); g.shape(ell(5.5, 5.5, 3.2), 'paper'); g.line(5, 3, 5, 7).line(3, 5, 7, 5); g.set(5, 5, 1);
+    return g;
+  };
+  CA.card = () => {
+    const g = new Grid(30, 19);
+    g.shape(rr(0.5, 0.5, 29, 18, 2)); g.rect(1, 3, 28, 3, 1);
+    g.shape(rr(3.5, 8.5, 6, 5, 1), 'dither'); g.rect(13, 9, 12, 1); g.rect(13, 12, 8, 1); g.rect(3, 15, 16, 1);
+    return g;
+  };
+  CA.tiles = () => {
+    const g = new Grid(22, 22);
+    g.shape(rr(0.5, 0.5, 9, 9, 2)); g.shape(rr(12.5, 0.5, 9, 9, 4.5), 'dither'); g.shape(rr(0.5, 12.5, 9, 9, 0), 'ink'); g.shape(poly([[17, 12.5], [21.5, 21.5], [12.5, 21.5]]));
+    return g;
+  };
+  CA.house = () => {
+    const g = new Grid(42, 38);
+    g.shape(rr(28.5, 3.5, 5, 10, 0), 'ink');
+    g.shape(rr(5.5, 17.5, 31, 20, 0)); g.shape(poly([[21, 0.5], [41.5, 18.5], [0.5, 18.5]]));
+    g.line(4, 17, 21, 2).line(38, 17, 21, 2);
+    g.shape(rr(17.5, 25.5, 8, 12, 1), 'dither'); g.set(24, 31, 2);
+    g.frame(8, 22, 7, 7); g.frame(28, 22, 7, 7);
+    return g;
+  };
+  CA.ticket = () => {
+    const g = new Grid(18, 22);
+    g.shape(not(rr(0.5, 0.5, 17, 21, 1), any(ell(0, 11, 2.5), ell(18, 11, 2.5))));
+    g.rect(4, 4, 10, 2, 1); g.rect(4, 8, 7, 1); for (let x = 3; x < 16; x += 2) g.set(x, 11, 1); g.rect(4, 14, 4, 4, 1); g.rect(10, 14, 4, 4, 1);
+    return g;
+  };
+  CA.key = () => {
+    const g = new Grid(12, 24);
+    g.shape(ell(6, 5, 5.5, 5)); g.shape(ell(6, 5, 2, 1.8), 'clear'); g.frame(4, 3, 5, 5); g.rect(5, 10, 3, 13, 1); g.rect(8, 16, 3, 2, 1); g.rect(8, 20, 2, 2, 1);
+    return g;
+  };
+  CA.phone = () => {
+    const g = new Grid(26, 44);
+    g.shape(rr(0.5, 0.5, 25, 43, 4)); g.shape(rr(2.5, 4.5, 21, 33, 1)); g.rect(10, 2, 6, 1, 1); g.frame(11, 39, 4, 3);
+    g.rect(5, 8, 10, 2, 1); g.rect(5, 13, 16, 7, 1); g.rect(7, 15, 7, 1, 2); for (let i = 0; i < 3; i++) { g.frame(5, 23 + i * 4, 3, 3); g.rect(10, 24 + i * 4, 9 - i * 2, 1); }
+    return g;
+  };
+  CA.shutter = (left) => {
+    const g = new Grid(11, 34);
+    g.shape(rr(0.5, 0.5, 10, 33, 0));
+    for (let y = 3; y < 33; y += 3) g.line(1, y, 9, y);
+    g.rect(left ? 8 : 1, 15, 2, 4, 1);
+    return g;
+  };
+  CA.coin = () => {
+    const g = new Grid(12, 12);
+    g.shape(ell(6, 6, 5.6)); g.shape(ell(6, 6, 3.6), 'dither'); g.rect(5, 3, 2, 6, 2); g.rect(4, 3, 4, 1, 2);
+    return g;
+  };
+
+  ILL.caFashion = () => svg('0 0 320 270', `
+      ${CA.mac().svg(16, 30, 5.4)}
+      ${part('ca-bob', CA.bag().svg(16 + 10 * 5.4, 30 + 6.5 * 5.4, 5.4))}
+      ${part('ca-swing', CA.hanger().svg(200, 34, 4.2))}
+      ${part('ca-blink', nameTag(160, 206, '{ } full-stack'))}
+      ${part('ca-twinkle', sparkle(290, 150, .9))}
+      ${part('ca-wander', cursor(236, 120, 0.5, -8))}
+    `, 'Animated retro Macintosh with a shopping bag on screen and a swinging coat hanger');
+  ILL.caFreelance = () => svg('0 0 320 270', `
+      ${part('ca-pop ca-d0', CA.window('landing').svg(10, 16, 4.6))}
+      ${part('ca-pop ca-d1', CA.window('crm').svg(110, 70, 4.6))}
+      ${part('ca-pop ca-d2', CA.window('app').svg(60, 130, 4.6))}
+      ${part('ca-wander', cursor(250, 200, 0.55, -10))}
+      ${part('ca-twinkle', sparkle(292, 40, 1))}
+    `, 'Animated retro windows popping up one by one: a landing page, a CRM table and an app');
+  ILL.caQex = () => svg('0 0 320 270', `
+      ${part('ca-pop ca-d0', CA.bubble(false, [[4, 22], [4, 14]]).svg(16, 20, 4.4))}
+      ${part('ca-pop ca-d1', CA.bubble(true, [[8, 22], [16, 14]]).svg(80, 104, 4.4))}
+      ${part('ca-pop ca-d2', nameTag(18, 214, 'AI ✦ typing…'))}
+      ${part('ca-pulse', CA.shield().svg(214, 120, 3.8))}
+      ${part('ca-twinkle', sparkle(270, 64, 1.2))}
+    `, 'Animated retro chat bubbles with an AI tag and a pulsing security shield');
+  ILL.caEurasian = () => svg('0 0 320 270', `
+      ${part('ca-float', CA.card().svg(160, 18, 4.6))}
+      ${part('ca-pulse', CA.tiles().svg(24, 26, 4))}
+      ${part('ca-drive', `${CA.car().svg(28, 128, 5.6)}${part('ca-spin', CA.wheel().svg(28 + 5 * 5.6, 128 + 12.5 * 5.6, 5.6))}${part('ca-spin', CA.wheel().svg(28 + 29 * 5.6, 128 + 12.5 * 5.6, 5.6))}`)}
+      ${part('ca-twinkle', sparkle(292, 120, .9))}
+    `, 'Animated retro bank card, design-system tiles and a car driving with spinning wheels');
+  ILL.caOtbasy = () => svg('0 0 320 270', `
+      ${CA.house().svg(20, 40, 5.4)}
+      ${part('ca-blink', `<rect class="k" x="${20 + 9 * 5.4}" y="${40 + 23 * 5.4}" width="${5 * 5.4}" height="${5 * 5.4}"/>`)}
+      ${part('ca-blink ca-d1', `<rect class="k" x="${20 + 29 * 5.4}" y="${40 + 23 * 5.4}" width="${5 * 5.4}" height="${5 * 5.4}"/>`)}
+      ${part('ca-ticket', CA.ticket().svg(256, 70, 3.4))}
+      ${part('ca-swing', CA.key().svg(262, 160, 3.4))}
+      ${part('ca-twinkle', sparkle(40, 30, .9))}
+    `, 'Animated retro house with lit windows, a queue ticket and a swinging key');
+  ILL.caWindow = () => svg('0 0 320 270', `
+      ${CA.phone().svg(100, 12, 5.6)}
+      ${part('ca-shutter-l', CA.shutter(true).svg(100 + 2.5 * 5.6, 12 + 4.5 * 5.6, 5.6))}
+      ${part('ca-shutter-r', CA.shutter(false).svg(100 + 13 * 5.6, 12 + 4.5 * 5.6, 5.6))}
+      ${part('ca-coin', CA.coin().svg(232, 40, 4))}
+      ${part('ca-coin ca-d1', CA.coin().svg(26, 120, 4))}
+      ${part('ca-twinkle', sparkle(270, 214, 1))}
+    `, 'Animated retro phone whose window shutters open on a banking app, with coins');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>

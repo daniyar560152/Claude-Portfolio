@@ -56,22 +56,26 @@
 
   function renderRoute() {
     const stopsEl = $('[data-route-stops]'), panesEl = $('[data-route-panes]');
-    if (!stopsEl || !PROJECTS) return;
-    const list = PROJECTS.map((p, i) => ({ p, i })).sort((a, b) => a.p.year - b.p.year || b.i - a.i).map((x) => x.p);
+    const list = window.CAREER;
+    if (!stopsEl || !list) return;
     const n = list.length;
-    stopsEl.innerHTML = list.map((p, k) => `<button class="route__stop" type="button" style="left:${(k / (n - 1)) * 100}%" aria-label="${p.year} · ${p.title.join(' ')}"><i></i><span>${p.year}</span><em>${p.title[0]}</em></button>`).join('');
-    panesEl.innerHTML = list.map((p) => {
-      const m = p.impact[0];
+    const bySlug = {};
+    (PROJECTS || []).forEach((p) => { bySlug[p.slug] = p; });
+    stopsEl.innerHTML = list.map((c, k) => `<button class="route__stop" type="button" style="left:${(k / (n - 1)) * 100}%" aria-label="${c.from} · ${c.company}"><i></i><span>${c.from}</span><em>${c.company}</em></button>`).join('');
+    panesEl.innerHTML = list.map((c) => {
+      const years = c.to ? `${c.from}–<wbr>${c.to}` : c.from;
+      const cases = c.cases.map((slug) => bySlug[slug]).filter(Boolean);
       return `<div class="route__pane">
-        <div class="route__art" data-ill="${p.ill}"></div>
+        <div class="route__art" data-ill="${c.ill}"></div>
         <div class="route__info">
-          <p class="route__meta">${p.year} · ${p.client}</p>
-          <h3 class="display route__name">${p.title[0]} <span class="serif">${p.title[1]}</span></h3>
-          <p class="route__short">${p.short}</p>
+          <p class="route__meta">${c.company}</p>
+          <h3 class="display route__name">${c.role}</h3>
+          <p class="route__short">${c.summary}</p>
+          <ul class="route__did">${c.did.map((d) => `<li>${d}</li>`).join('')}</ul>
         </div>
         <div class="route__side">
-          ${m ? `<div class="route__metric"><b>${m.prefix || ''}${m.value}${m.suffix}</b><span>${m.label}</span></div>` : ''}
-          <a class="route__more" href="${window.caseUrl(p.slug)}" data-transition data-cursor="View">Read the case →</a>
+          <div class="route__metric"><b>${years}</b></div>
+          ${cases.length ? `<ul class="route__cases">${cases.map((p) => `<li><a href="${window.caseUrl(p.slug)}" data-transition data-cursor="View">${p.title[0]} <span>${p.title[1]}</span> →</a></li>`).join('')}</ul>` : ''}
         </div>
       </div>`;
     }).join('');

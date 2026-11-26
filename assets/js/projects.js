@@ -223,9 +223,32 @@
     },
   ];
 
+  // career route on the home page; `cases` link to the selected work above
+  const CAREER = [
+    { from: '2018', to: '2019', company: 'Fashioncare', role: 'Full-stack developer', ill: 'caFashion',
+      summary: 'Built the company’s CRM and its online shop, from the screens to the database.',
+      did: ['CRM', 'Shopping website', 'Front end + back end'], cases: [] },
+    { from: '2019', to: '2020', company: 'Freelance', role: 'UX/UI designer & front-end developer', ill: 'caFreelance',
+      summary: 'Designed and built for clients: landing pages, CRM systems and mobile app designs.',
+      did: ['Landing pages', 'CRM systems', 'App designs'], cases: [] },
+    { from: '2020', to: '2022', company: 'QEX', role: 'UX/UI designer', ill: 'caQex',
+      summary: 'Designed VOL, a corporate messenger with AI, and Resist, an app for a private security company.',
+      did: ['VOL · corporate messenger with AI', 'Resist · private security app'], cases: [] },
+    { from: '2022', to: '2024', company: 'Eurasian Bank', role: 'Product designer', ill: 'caEurasian',
+      summary: 'The design system, card products, car loans, the Smartbank redesign and changing a car’s owner online.',
+      did: ['Design system', 'Card products', 'Car loans', 'Smartbank redesign', 'Change of owner'], cases: ['smartbank', 'carloan', 'rereg'] },
+    { from: '2024', to: 'now', company: 'Otbasy Bank', role: 'Senior product designer', ill: 'caOtbasy',
+      summary: 'Loans, the Baspana Market redesign, the state housing queue, rent subsidies and a better mobile app.',
+      did: ['Loans', 'Baspana Market', 'Housing queue', 'Rent subsidy', 'Mobile app'], cases: ['loan', 'market', 'housing'] },
+    { from: '2025', to: '', company: 'Window', role: 'Product designer', ill: 'caWindow',
+      summary: 'Alongside the bank: a mobile banking app for a startup aimed at the Russian market.',
+      did: ['Mobile banking app', 'Startup', 'Russian market'], cases: [] },
+  ];
+
   const ru = root.LANG === 'ru';
   // on Russian pages every display string goes through the dictionary (ids, colours and asset keys stay as they are)
   root.PROJECTS = ru && root.deepT ? root.deepT(PROJECTS, ['slug', 'color', 'ill', 'board', 'coverStickers', 'screens', 'no', 'year', 'tools']) : PROJECTS;
+  root.CAREER = ru && root.deepT ? root.deepT(CAREER, ['from', 'ill', 'cases']) : CAREER;
   // Links. Static builds (scripts/build-static.js) override these with one file per project and language.
   if (!root.caseUrl) root.caseUrl = (slug) => (ru ? 'case-ru.html?p=' : 'case.html?p=') + slug;
   if (!root.altCaseUrl) root.altCaseUrl = (slug) => (ru ? 'case.html?p=' : 'case-ru.html?p=') + slug;
