@@ -7,7 +7,7 @@
    - Click anywhere to slap a sticker (drag / click to peel)
    - Split-text reveals, scroll word-fill, counters, parallax, clip reveals
    - Stacking work cards, velocity marquee, rotating badge,
-     WORD|tile|WORD rows, draggable toolbox pile, pinned horizontal quotes
+     WORD|tile|WORD rows, draggable toolbox pile, career route line, fix-the-mess toy
    ========================================================= */
 (function () {
   const { gsap, ScrollTrigger, ILL, PROJECTS } = window;
@@ -46,12 +46,62 @@
               <div class="wcard__metrics">
                 ${p.impact.slice(0, 2).map((m) => `<div class="wcard__metric"><b>${m.prefix || ''}${m.value}${m.suffix}</b><span>${m.label}</span></div>`).join('')}
               </div>
-              <div class="wcard__tags">${p.tools.slice(0, 4).map((t) => `<span class="tag">${t}</span>`).join('')}</div>
+              ${(() => { const t = p.tools.filter((x) => !/^fig(ma|jam)$/i.test(x)).slice(0, 4); return t.length ? `<div class="wcard__tags">${t.map((x) => `<span class="tag">${x}</span>`).join('')}</div>` : ''; })()}
             </div>
             <div class="wcard__sticker" data-sticker="${p.cardSticker || stickers[i % stickers.length]}"></div>
           </div>
         </div>
       </a>`).join('');
+  }
+
+  function renderRoute() {
+    const stopsEl = $('[data-route-stops]'), panesEl = $('[data-route-panes]');
+    if (!stopsEl || !PROJECTS) return;
+    const list = PROJECTS.map((p, i) => ({ p, i })).sort((a, b) => a.p.year - b.p.year || b.i - a.i).map((x) => x.p);
+    const n = list.length;
+    stopsEl.innerHTML = list.map((p, k) => `<button class="route__stop" type="button" style="left:${(k / (n - 1)) * 100}%" aria-label="${p.year} · ${p.title.join(' ')}"><i></i><span>${p.year}</span><em>${p.title[0]}</em></button>`).join('');
+    panesEl.innerHTML = list.map((p) => {
+      const m = p.impact[0];
+      return `<div class="route__pane">
+        <div class="route__art" data-ill="${p.ill}"></div>
+        <div class="route__info">
+          <p class="route__meta">${p.year} · ${p.client}</p>
+          <h3 class="display route__name">${p.title[0]} <span class="serif">${p.title[1]}</span></h3>
+          <p class="route__short">${p.short}</p>
+        </div>
+        <div class="route__side">
+          ${m ? `<div class="route__metric"><b>${m.prefix || ''}${m.value}${m.suffix}</b><span>${m.label}</span></div>` : ''}
+          <a class="route__more" href="${window.caseUrl(p.slug)}" data-transition data-cursor="View">Read the case →</a>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  function initFix() {
+    const tr = (s) => (window.t ? window.t(s) : s);
+    $$('[data-fix]').forEach((stage) => {
+      const sec = stage.closest('section');
+      const btn = $('.fix__btn', sec);
+      const swap = (on) => $$('[data-on]', sec).forEach((el) => {
+        if (!el.dataset.off) el.dataset.off = el.textContent;
+        el.textContent = on ? tr(el.dataset.on) : el.dataset.off;
+      });
+      $$('[data-fix-toggle]', sec).forEach((b) => b.addEventListener('click', () => {
+        const on = !stage.classList.contains('is-fixed');
+        stage.classList.toggle('is-fixed', on);
+        swap(on);
+        if (btn) btn.textContent = tr(on ? 'Make a mess again' : 'Fix this mess');
+      }));
+      if (!finePointer || reduce) return;
+      const chips = $$('.fix__chip', stage);
+      stage.addEventListener('mousemove', (e) => {
+        if (stage.classList.contains('is-fixed')) return;
+        const r = stage.getBoundingClientRect();
+        const mx = (e.clientX - r.left) / r.width - 0.5, my = (e.clientY - r.top) / r.height - 0.5;
+        chips.forEach((c) => { const d = +c.dataset.depth || 10; c.style.translate = `${(mx * d).toFixed(1)}px ${(my * d).toFixed(1)}px`; });
+      });
+      stage.addEventListener('mouseleave', () => chips.forEach((c) => { c.style.translate = ''; }));
+    });
   }
 
   function injectIllustrations(root = document) {
@@ -405,7 +455,7 @@
     };
     document.addEventListener('click', (e) => {
       if (e.button !== 0 || e.defaultPrevented) return;
-      if (e.target.closest('a, button, input, textarea, select, label, .tool, .sticker, [data-pile], .nav, .badge, .sticker-hud, .phone, .desk, .qcard, .bd-stage, .bd-lb')) return;
+      if (e.target.closest('a, button, input, textarea, select, label, .tool, .sticker, [data-pile], .nav, .badge, .sticker-hud, .phone, .desk, .bd-stage, .bd-lb, .fix__stage, .route__board')) return;
       if (String(window.getSelection && window.getSelection()).length) return;
       const el = document.createElement('div');
       el.className = 'sticker';
@@ -561,14 +611,32 @@
       window.addEventListener('resize', () => { if (Math.abs(innerWidth - rw) > 60) { rw = innerWidth; tools.forEach((t) => gsap.set(t, { x: 0, y: 0 })); layout(); } });
     });
 
-    // pinned horizontal testimonials (desktop)
-    mm.add('(min-width: 821px)', () => {
-      $$('[data-hscroll]').forEach((sec) => {
-        const track = $('[data-htrack]', sec);
-        const dist = () => Math.max(0, track.scrollWidth - innerWidth + 40);
-        gsap.to(track, { x: () => -dist(), ease: 'none', scrollTrigger: { trigger: sec, start: 'top top', end: () => '+=' + dist(), pin: true, scrub: 0.8, invalidateOnRefresh: true } });
-        $$('.qcard', track).forEach((c, i) => gsap.set(c, { rotation: i % 2 ? 1.5 : -1.5 }));
+    // career route: pinned on desktop, the dot travels with the scroll and opens each stop
+    $$('[data-route]').forEach((sec) => {
+      const stops = $$('.route__stop', sec), panes = $$('.route__pane', sec), n = stops.length;
+      if (!n) return;
+      const dot = $('.route__dot', sec), fill = $('.route__fill', sec);
+      let cur = -1;
+      const show = (i) => {
+        if (i === cur) return; cur = i;
+        stops.forEach((s, k) => { s.classList.toggle('is-active', k === i); s.classList.toggle('is-past', k < i); });
+        panes.forEach((p, k) => p.classList.toggle('is-active', k === i));
+      };
+      const setP = (p) => {
+        if (dot) dot.style.left = p * 100 + '%';
+        if (fill) fill.style.transform = `scaleX(${p})`;
+        show(Math.min(n - 1, Math.round(p * (n - 1))));
+      };
+      setP(0);
+      let st = null;
+      mm.add('(min-width: 821px)', () => {
+        st = ScrollTrigger.create({ trigger: sec, start: 'top top', end: () => '+=' + n * innerHeight * 0.45, pin: true, scrub: true, onUpdate: (self) => setP(self.progress) });
+        return () => { st = null; setP(0); };
       });
+      stops.forEach((s, k) => s.addEventListener('click', () => {
+        if (st) scrollToTarget(st.start + (st.end - st.start) * (k / (n - 1)) + 2);
+        else setP(k / (n - 1));
+      }));
     });
 
     initNavTheme();
@@ -605,6 +673,7 @@
 
   /* ---------------- boot ---------------- */
   renderWorkCards();
+  renderRoute();
   // masked email: the page shows a label, the address is stored reversed and only put together here, for the Gmail compose window
   $$('[data-mail]').forEach((a) => { a.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + a.dataset.mail.split('').reverse().join(''); });
   if (typeof window.renderPage === 'function') window.renderPage();
@@ -618,6 +687,7 @@
   initMagnetic();
   initScramble();
   initStickers();
+  initFix();
 
   // hide hero text before the loader finishes so the intro can reveal it
   const heroScope = $('.hero') || $('.cs-hero');

@@ -1187,6 +1187,25 @@
       ${nameTag(378, 202, 'buyer', false)}
     `, 'Pixel-art face in a scan frame with a padlock on a chain');
 
+  // sitting tabby cat, front view; pupils drawn separately so they follow the cursor
+  PX.cat = () => {
+    const g = new Grid(46, 44);
+    g.shape(poly([[33, 38], [41, 35], [44, 27], [43, 20], [40, 17], [37, 19], [40, 23], [40, 28], [36, 33], [31, 35]]));
+    g.shape(ell(22, 32, 15, 10.5), 'ink'); g.shape(ell(22, 32, 14, 9.5), 'dither'); g.shape(ell(22, 33, 8.5, 8.5), 'paper');
+    g.shape(poly([[10, 11], [11, 1], [19, 7]])); g.shape(poly([[25, 7], [33, 1], [34, 11]]));
+    g.shape(poly([[12, 8], [12.5, 4], [16, 7]]), 'dither'); g.shape(poly([[28, 7], [31.5, 4], [32, 8]]), 'dither');
+    g.shape(ell(22, 15.5, 12.5, 10));
+    g.line(20, 7, 20, 9).line(22, 6, 22, 9).line(24, 7, 24, 9);
+    g.rect(21, 18, 3, 1).set(22, 19, 1); g.set(22, 20, 1); g.line(21, 21, 20, 20).line(23, 21, 24, 20);
+    g.line(13, 18, 3, 16).line(13, 20, 3, 21).line(31, 18, 41, 16).line(31, 20, 41, 21);
+    g.shape(rr(14.5, 38, 6, 5, 2)); g.shape(rr(23.5, 38, 6, 5, 2));
+    g.line(17, 40, 17, 42).line(26, 40, 26, 42);
+    return g;
+  };
+  PX.catEyes = (x, y, s) =>
+    `<g class="pupil"><rect class="k" x="${x + 15 * s}" y="${y + 12 * s}" width="${3 * s}" height="${3 * s}" shape-rendering="crispEdges"/><rect class="k" x="${x + 26 * s}" y="${y + 12 * s}" width="${3 * s}" height="${3 * s}" shape-rendering="crispEdges"/></g>`;
+  ILL.messCat = () => svg('0 0 280 268', `${PX.cat().svg(2, 2, 6)}${PX.catEyes(2, 2, 6)}`, 'Pixel-art tabby cat sitting and watching the cursor');
+
   /* ---------- stickers (click-to-stick toy & decorations) ---------- */
   const st = (vb, body, label) => svg(vb, body, label).replace('class="ill"', 'class="ill sticker-svg"');
   const pxSticker = (icon, w, h, s, label, tag) =>

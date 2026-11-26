@@ -172,6 +172,35 @@
       </div>
     </section>
 
+    <!-- FIX THE MESS: press the key, the chaos lines up -->
+    <section class="fix" id="fix" data-theme="light">
+      <div class="wrap fix__grid">
+        <div class="fix__copy">
+          <p class="fix__no">Product design clean-up</p>
+          <h2 class="display fix__title">Don't let a <span class="blue">messy product</span> <span class="serif">weigh you</span> down</h2>
+          <p class="fix__lead">Seventeen button styles, three menus called Settings, and a step where everyone gives up. I untangle the flows, components and copy, then prove it with numbers.</p>
+          <button class="vbtn fix__btn" type="button" data-fix-toggle>Fix this mess</button>
+        </div>
+        <div class="fix__stage" data-fix>
+          <div class="fix__floor" aria-hidden="true"></div>
+          <div class="fix__chip" style="--x:8%;--y:6%;--r:-9deg;--i:0" data-depth="18"><b data-on="Fixed">Critical</b><span data-on="1 button, 3 states">17 button styles</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:46%;--y:2%;--r:7deg;--i:1" data-depth="-14"><b data-on="Fixed">Blocker</b><span data-on="One clear next step">Where do I click?</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:30%;--y:22%;--r:-4deg;--i:2" data-depth="24"><b data-on="Fixed">Urgent</b><span data-on="One simple menu">Settings › Settings › Settings</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:2%;--y:34%;--r:11deg;--i:3" data-depth="-20"><b data-on="Fixed">Lost</b><span data-on="Step 3 merged into step 2">Everyone quits at step 3</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:52%;--y:40%;--r:-12deg;--i:4" data-depth="12"><b data-on="Fixed">Bug?</b><span data-on="Tested with real users">Nobody tested it</span><i aria-hidden="true"></i></div>
+          <div class="fix__keys">
+            <span class="fix__key" aria-hidden="true">⌘</span>
+            <span class="fix__key" aria-hidden="true">Z</span>
+            <button class="fix__key fix__key--big" type="button" data-fix-toggle data-cursor="Press">Fix this</button>
+          </div>
+          <div class="fix__cat">
+            <p class="fix__say" data-on="All fixed. Nap time.">Who made 17 buttons?</p>
+            <div data-ill="messCat"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- PROCESS: Vana WORD | tile | WORD -->
     <section id="process" class="sec--white" data-theme="light" style="padding-bottom:clamp(90px,10vw,160px)">
       <div class="prow" data-prow>
@@ -277,15 +306,20 @@
       </div>
     </section>
 
-    <!-- TESTIMONIALS -->
-    <section class="quotes" data-theme="light" data-hscroll>
-      <div class="quotes__pin">
-        <div class="quotes__head"><p class="kicker">Kind words from</p><h2 class="display">Real <span class="serif blue">teammates</span></h2></div>
-        <div class="quotes__track" data-htrack>
-          <figure class="qcard"><blockquote>“The clearest piece of product work we shipped this year — it paid for the whole team's quarter in six weeks.”</blockquote><footer><span class="av" style="--c-soft:var(--yellow)" data-ill="commenter"></span><span>Head of Product<br />Pocket Bank</span></footer></figure>
-          <figure class="qcard"><blockquote>“Turned ‘which button do I use?’ into a question nobody asks anymore.”</blockquote><footer><span class="av" style="--c-soft:var(--pink)" data-ill="layers"></span><span>Engineering Manager<br />Orbit Analytics</span></footer></figure>
-          <figure class="qcard"><blockquote>“He called our clients himself, and the questions they asked us at the car registration centre simply stopped.”</blockquote><footer><span class="av" style="--c-soft:var(--mint)" data-ill="researcher"></span><span>Product Owner, car loans<br />Eurasian Bank</span></footer></figure>
-          <figure class="qcard"><blockquote>“After his tests we stopped arguing about features — we just watched people use them.”</blockquote><footer><span class="av" style="--c-soft:var(--lilac)" data-ill="juggler"></span><span>Teammate<br />Mobile bank 2025</span></footer></figure>
+    <!-- CAREER ROUTE: a dot travels along the line through every shipped case -->
+    <section class="route" id="route" data-theme="light" data-route>
+      <div class="route__pin">
+        <div class="wrap route__head">
+          <p class="route__no">Career route</p>
+          <h2 class="route__title"><span>From a queue at the registration centre</span> to decisions online in two minutes.</h2>
+        </div>
+        <div class="wrap">
+          <div class="route__board">
+            <div class="route__end"><b class="display">Start</b><span>2022</span></div>
+            <div class="route__line"><div class="route__rail"><i class="route__fill"></i></div><span class="route__dot" aria-hidden="true"></span><div class="route__stops" data-route-stops></div></div>
+            <div class="route__end route__end--r"><b class="display">Now</b><span>2026</span></div>
+            <div class="route__panes" data-route-panes></div>
+          </div>
         </div>
       </div>
     </section>
