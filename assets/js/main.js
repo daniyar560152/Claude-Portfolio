@@ -86,12 +86,27 @@
         if (!el.dataset.off) el.dataset.off = el.textContent;
         el.textContent = on ? tr(el.dataset.on) : el.dataset.off;
       });
-      $$('[data-fix-toggle]', sec).forEach((b) => b.addEventListener('click', () => {
-        const on = !stage.classList.contains('is-fixed');
+      const set = (on) => {
+        if (on === stage.classList.contains('is-fixed')) return;
         stage.classList.toggle('is-fixed', on);
         swap(on);
         if (btn) btn.textContent = tr(on ? 'Make a mess again' : 'Fix this mess');
+      };
+      const tap = (key) => { if (!key) return; key.classList.add('is-down'); setTimeout(() => key.classList.remove('is-down'), 160); };
+      $$('[data-fix-toggle]', sec).forEach((b) => b.addEventListener('click', () => {
+        if (b === btn) tap($('.kb__key--fix', stage));
+        set(!stage.classList.contains('is-fixed'));
       }));
+      // ⌘ / Z keycaps, or a real ⌘Z / Ctrl+Z while the section is on screen, undo the fix
+      $$('[data-fix-undo]', sec).forEach((b) => b.addEventListener('click', () => set(false)));
+      document.addEventListener('keydown', (e) => {
+        if (!(e.metaKey || e.ctrlKey) || e.key.toLowerCase() !== 'z' || !stage.classList.contains('is-fixed')) return;
+        const r = stage.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > innerHeight || e.target.closest('input, textarea, [contenteditable]')) return;
+        e.preventDefault();
+        $$('[data-fix-undo]', sec).forEach(tap);
+        set(false);
+      });
       if (!finePointer || reduce) return;
       const chips = $$('.fix__chip', stage);
       stage.addEventListener('mousemove', (e) => {

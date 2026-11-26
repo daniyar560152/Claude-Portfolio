@@ -172,30 +172,38 @@
       </div>
     </section>
 
-    <!-- FIX THE MESS: press the key, the chaos lines up -->
+    <!-- FIX THE MESS: press the key, the chaos lines up and the cat goes to sleep -->
     <section class="fix" id="fix" data-theme="light">
-      <div class="wrap fix__grid">
-        <div class="fix__copy">
-          <p class="fix__no">Product design clean-up</p>
+      <div class="wrap">
+        <div class="fix__head">
           <h2 class="display fix__title">Don't let a <span class="blue">messy product</span> <span class="serif">weigh you</span> down</h2>
-          <p class="fix__lead">Seventeen button styles, three menus called Settings, and a step where everyone gives up. I untangle the flows, components and copy, then prove it with numbers.</p>
-          <button class="vbtn fix__btn" type="button" data-fix-toggle>Fix this mess</button>
+          <div class="fix__side">
+            <p class="fix__lead">Seventeen button styles, three menus called Settings, and a step where everyone gives up. I untangle the flows, components and copy, then prove it with numbers.</p>
+            <button class="vbtn fix__btn" type="button" data-fix-toggle>Fix this mess</button>
+          </div>
         </div>
         <div class="fix__stage" data-fix>
           <div class="fix__floor" aria-hidden="true"></div>
-          <div class="fix__chip" style="--x:8%;--y:6%;--r:-9deg;--i:0" data-depth="18"><b data-on="Fixed">Critical</b><span data-on="1 button, 3 states">17 button styles</span><i aria-hidden="true"></i></div>
-          <div class="fix__chip" style="--x:46%;--y:2%;--r:7deg;--i:1" data-depth="-14"><b data-on="Fixed">Blocker</b><span data-on="One clear next step">Where do I click?</span><i aria-hidden="true"></i></div>
-          <div class="fix__chip" style="--x:30%;--y:22%;--r:-4deg;--i:2" data-depth="24"><b data-on="Fixed">Urgent</b><span data-on="One simple menu">Settings › Settings › Settings</span><i aria-hidden="true"></i></div>
-          <div class="fix__chip" style="--x:2%;--y:34%;--r:11deg;--i:3" data-depth="-20"><b data-on="Fixed">Lost</b><span data-on="Step 3 merged into step 2">Everyone quits at step 3</span><i aria-hidden="true"></i></div>
-          <div class="fix__chip" style="--x:52%;--y:40%;--r:-12deg;--i:4" data-depth="12"><b data-on="Fixed">Bug?</b><span data-on="Tested with real users">Nobody tested it</span><i aria-hidden="true"></i></div>
-          <div class="fix__keys">
-            <span class="fix__key" aria-hidden="true">⌘</span>
-            <span class="fix__key" aria-hidden="true">Z</span>
-            <button class="fix__key fix__key--big" type="button" data-fix-toggle data-cursor="Press">Fix this</button>
-          </div>
           <div class="fix__cat">
+            <img class="fix__cat-img fix__cat-img--work" src="assets/img/fix/cat-work.webp" width="1081" height="941" alt="A tabby cat drawn in blue dots, typing on a laptop at a desk" />
+            <img class="fix__cat-img fix__cat-img--sleep" src="assets/img/fix/cat-sleep.webp" width="1200" height="548" alt="The same cat asleep on the closed laptop" loading="lazy" />
             <p class="fix__say" data-on="All fixed. Nap time.">Who made 17 buttons?</p>
-            <div data-ill="messCat"></div>
+          </div>
+          <div class="fix__chip" style="--x:0%;--y:0%;--r:-7deg;--i:0" data-depth="18"><b data-on="Fixed">Critical</b><span data-on="1 button, 3 states">17 button styles</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:44%;--y:0%;--r:7deg;--i:1" data-depth="-14"><b data-on="Fixed">Blocker</b><span data-on="One clear next step">Where do I click?</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:60%;--y:20%;--r:-5deg;--i:2" data-depth="24"><b data-on="Fixed">Urgent</b><span data-on="One simple menu">Settings › Settings › Settings</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:0%;--y:46%;--r:10deg;--i:3" data-depth="-20"><b data-on="Fixed">Lost</b><span data-on="Step 3 merged into step 2">Everyone quits at step 3</span><i aria-hidden="true"></i></div>
+          <div class="fix__chip" style="--x:38%;--y:62%;--r:-11deg;--i:4" data-depth="12"><b data-on="Fixed">Bug?</b><span data-on="Tested with real users">Nobody tested it</span><i aria-hidden="true"></i></div>
+          <div class="kb" aria-label="Keyboard">
+            <div class="kb__row">
+              <span class="kb__key kb__key--fn" aria-hidden="true"><small>esc</small></span>
+              <button class="kb__key kb__key--mod" type="button" data-fix-undo title="Undo"><b>⌘</b><small>command</small></button>
+              <button class="kb__key" type="button" data-fix-undo title="Undo"><b>Z</b></button>
+              <span class="kb__key kb__key--fn" aria-hidden="true"><small>delete</small></span>
+            </div>
+            <div class="kb__row">
+              <button class="kb__key kb__key--fix" type="button" data-fix-toggle data-cursor="Press"><b>Fix this</b><small>⏎</small></button>
+            </div>
           </div>
         </div>
       </div>
