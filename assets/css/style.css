@@ -31,7 +31,7 @@
 
   --f-display: 'Anton', 'Impact', 'Arial Narrow', sans-serif;
   --f-serif: 'Instrument Serif', 'Times New Roman', serif;
-  --f-mono: 'DM Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --f-mono: 'Inter', 'Inter Tight', system-ui, -apple-system, sans-serif;
   --f-sans: 'Inter Tight', 'Helvetica Neue', Arial, sans-serif;
   --f-script: 'Yellowtail', 'Brush Script MT', cursive;
 
@@ -738,3 +738,9 @@ section { position: relative; }
 .screens > .screen-wrap:nth-child(2) { z-index: 2; }
 .screens > .screen-wrap:nth-child(3) { z-index: 1; }
 .hmw { margin-top: clamp(70px, 8vw, 120px); }
+
+/* ---------- Readability: Inter mono, 16px minimum ---------- */
+:root { --f-mono: 'Inter', 'Inter Tight', system-ui, -apple-system, sans-serif; }
+.mono { font-size: 17px !important; }
+.vbtn, .contact__links { font-size: 17px !important; }
+.label, .mac-tag, .mac-size, .hint, .wcard__short, .wcard__metric span, .tag, .scard__list, .prow__num, .mini, .sticky-note, .skills ul, .qcard footer, .foot, .crumbs, .cs-label b, .loader__foot, .cursor__label { font-size: 16px !important; }
