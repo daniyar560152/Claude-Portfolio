@@ -8,6 +8,8 @@
  *   node scripts/build-static.js            → dist/index.html is a normal full page
  *   node scripts/build-static.js --fragment → dist/index.html has no <html>/<head>/<body>
  *                                             wrapper (for hosts that add their own skeleton)
+ *   node scripts/build-static.js --ru-default → the site opens in Russian: index.html is the Russian
+ *                                             home and the English one is en.html (used for GitHub Pages)
  * The Russian pages (index-ru.html, case-*-ru.html) are always full pages; they are generated
  * from the English ones by scripts/make-ru.js, which this script runs first.
  */
@@ -17,6 +19,7 @@ const path = require('path');
 const root = path.join(__dirname, '..');
 const dist = path.join(root, 'dist');
 const fragment = process.argv.includes('--fragment');
+const ruDefault = process.argv.includes('--ru-default') && !fragment;
 require('./make-ru.js'); // refresh index-ru.html / case-ru.html
 const PROJECTS = require(path.join(root, 'assets', 'js', 'projects.js'));
 
@@ -74,4 +77,14 @@ for (const p of PROJECTS) {
   }
 }
 
-console.log(`Built dist/ (${fragment ? 'fragment' : 'full'} index + index-ru + ${PROJECTS.length * 2} case pages)`);
+// --ru-default: the site address opens the Russian home (index.html); the English one moves to en.html
+if (ruDefault) {
+  const swap = (s) => s.replace(/index\.html/g, '\u0000EN\u0000').replace(/index-ru\.html/g, 'index.html').replace(/\u0000EN\u0000/g, 'en.html');
+  for (const f of fs.readdirSync(dist).filter((f) => f.endsWith('.html'))) write(f, swap(fs.readFileSync(path.join(dist, f), 'utf8')));
+  fs.renameSync(path.join(dist, 'index.html'), path.join(dist, 'en.html'));
+  fs.renameSync(path.join(dist, 'index-ru.html'), path.join(dist, 'index.html'));
+  // old links to index-ru.html keep working
+  write('index-ru.html', '<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=index.html"><link rel="canonical" href="index.html"><script>location.replace(\'index.html\' + location.hash)</script>\n');
+}
+
+console.log(`Built dist/ (${fragment ? 'fragment' : 'full'} index + index-ru + ${PROJECTS.length * 2} case pages${ruDefault ? ', Russian home at index.html, English at en.html' : ''})`);
